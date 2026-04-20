@@ -9,6 +9,7 @@
     "preview": "bunx --bun vite preview",
     "prepare:hero-assets": "node scripts/prepare-hero-demo-assets.mjs",
     "prepare:want-this-assets": "node scripts/prepare-want-this-assets.mjs",
+    "prepare:want-this-assets:cleanup": "node scripts/prepare-want-this-assets.mjs --delete-originals",
     "prepare:assets": "bun run prepare:hero-assets && bun run prepare:want-this-assets",
     "prepare:deploy": "node scripts/prepare-static-deploy.mjs",
     "build:deploy": "bun run prepare:assets && bun run build && bun run prepare:deploy"

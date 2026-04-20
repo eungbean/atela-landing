@@ -6,5 +6,12 @@ window.atelaWantThisGallery = Object.freeze([
     "src": "/assets/want-this/optimized/balenciaga.mp4",
     "poster": "/assets/want-this/optimized/balenciaga.poster.avif",
     "alt": "ATELA want-this gallery video 1"
+  },
+  {
+    "id": "chamo",
+    "type": "video",
+    "src": "/assets/want-this/optimized/chamo.mp4",
+    "poster": "/assets/want-this/optimized/chamo.poster.avif",
+    "alt": "ATELA want-this gallery video 2"
   }
 ]);

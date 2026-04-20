@@ -20,6 +20,8 @@
   - `bunx --bun vite build`
   - `bunx --bun vite preview`
   - `bun run prepare:hero-assets`
+  - `bun run prepare:want-this-assets`
+  - `bun run prepare:want-this-assets:cleanup`
   - `bun run build:deploy`
 
 ## Expected Build Behavior
@@ -98,12 +100,22 @@
 - `components/Showcase.jsx`
   - Showcase hook section inserted before `Marketplace`.
   - Presents example content types that lead into the Expert Marketplace section.
+  - Reads `assets/want-this/manifest.js` when present so the gallery can be driven by folder contents instead of hard-coded cards.
+- `assets/want-this/`
+  - Raw drop zone for Showcase gallery source files.
+  - Supports `png`, `jpg`, `jpeg`, `webp`, `avif`, and `mp4` inputs.
+- `scripts/prepare-want-this-assets.mjs`
+  - Optimizes `assets/want-this/` inputs into `assets/want-this/optimized/`.
+  - Regenerates `assets/want-this/manifest.js` for the live `Showcase` loop.
+  - Keeps already-optimized gallery items in the manifest when new source files are added later.
+  - Preserves raw originals by default.
+  - Deletes raw originals only when run with the explicit cleanup mode.
 - `assets/hero-demo/`
-  - Optimized Hero media tracked in the repo, plus optional temporary local source media while preparing new packs.
+  - Source folders and generated optimized Hero media.
 - `assets/workflow/`
   - Local workflow placeholder stills captured from the current Presti reference videos.
 - `scripts/prepare-hero-demo-assets.mjs`
-  - Reads temporary local Hero source media and generates the optimized AVIF / MP4 outputs that the repo actually keeps.
+  - Normalizes Hero asset folders and generates optimized AVIF / MP4 outputs.
 - `main.js`
   - Legacy file from an older implementation.
   - It is not part of the currently rendered `index.html` flow and should not be used as the source of truth for the active page.
@@ -168,14 +180,13 @@
 
 - Each pack lives in:
   - `assets/hero-demo/<pack-id>/`
-- Temporary local source filenames accepted by the prep script:
+- Raw input filenames expected:
   - `source.(png|jpg|jpeg)`
   - `angle.(png|jpg|jpeg)`
   - `bg.(png|jpg|jpeg)`
   - `bg_lighting.(png|jpg|jpeg)`
   - `bg_variation.(png|jpg|jpeg)`
   - `video.mp4` optional
-- These raw source files are not expected to stay in the repo after optimization; public commits should keep the generated outputs instead.
 - Accepted alias filenames:
   - `drg_bg.*` -> `bg`
   - `bg_light.*` -> `bg_lighting`
@@ -192,7 +203,6 @@
   - `bg_lighting.avif`
   - `bg_variation.avif`
   - `video.optimized.mp4` when `video.mp4` exists
-- The optimized outputs are the files the repo is expected to keep and publish.
 - The active Hero reads the generated files, not the raw PNG/JPG inputs.
 - Video cards are conditionally rendered:
   - If a pack has no optimized video source, the `Video` card is omitted.
@@ -228,16 +238,22 @@
 - Avoid editing `_Index.html` unless the user explicitly asks for legacy page changes.
 - Avoid editing files inside `ATELA Design System/` unless the user explicitly asks to sync or borrow from the reference system.
 - If you add or replace Hero media:
-  1. Put raw files into `assets/hero-demo/<pack-id>/` locally
+  1. Put raw files into `assets/hero-demo/<pack-id>/`
   2. Run `bun run prepare:hero-assets`
-  3. Delete the temporary raw PNG/JPG and `video.mp4` files before commit
-  4. Update `components/HeroDemoAssets.js` if pack IDs or display names changed
-  5. Verify in the browser
+  3. Update `components/HeroDemoAssets.js` if pack IDs or display names changed
+  4. Verify in the browser
+- If you add or replace Showcase gallery media:
+  1. Put raw files into `assets/want-this/`
+  2. Run `bun run prepare:want-this-assets`
+  3. Verify that `assets/want-this/manifest.js` and `assets/want-this/optimized/` were regenerated
+  4. Verify the `Showcase` loop in the browser
+  5. Only if you explicitly want to remove the source files, run `bun run prepare:want-this-assets:cleanup`
 
 ## Validation Workflow
 
 - Minimum validation after Hero/media/layout changes:
   - `bun run prepare:hero-assets` when asset inputs changed
+  - `bun run prepare:want-this-assets` when `assets/want-this/` changed
   - `bunx --bun vite build`
 - Minimum validation before public deploy:
   - `bun run build:deploy`

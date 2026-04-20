@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, statSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, extname, join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -10,6 +10,7 @@ const manifestPath = join(wantThisDir, 'manifest.js');
 
 const supportedImageExts = new Set(['.png', '.jpg', '.jpeg', '.webp', '.avif']);
 const supportedVideoExts = new Set(['.mp4']);
+const shouldDeleteOriginals = process.argv.includes('--delete-originals');
 
 function run(command, args) {
   execFileSync(command, args, { stdio: 'inherit' });
@@ -137,6 +138,51 @@ function toPublicPath(fileName) {
   return `/assets/want-this/optimized/${fileName}`;
 }
 
+function readOptimizedEntries() {
+  if (!existsSync(optimizedDir)) return [];
+
+  const optimizedFiles = readdirSync(optimizedDir, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && !entry.name.startsWith('.'))
+    .map((entry) => entry.name)
+    .sort((left, right) => left.localeCompare(right, 'en'));
+
+  const entries = [];
+
+  for (const fileName of optimizedFiles) {
+    const lowerFileName = fileName.toLowerCase();
+
+    if (lowerFileName.endsWith('.poster.avif')) continue;
+
+    if (lowerFileName.endsWith('.mp4')) {
+      const id = fileName.slice(0, -'.mp4'.length);
+      const posterName = `${id}.poster.avif`;
+      const posterPath = join(optimizedDir, posterName);
+
+      entries.push({
+        id,
+        type: 'video',
+        src: toPublicPath(fileName),
+        poster: existsSync(posterPath) ? toPublicPath(posterName) : undefined,
+        alt: `ATELA want-this gallery video ${entries.length + 1}`,
+      });
+      continue;
+    }
+
+    if (lowerFileName.endsWith('.avif')) {
+      const id = fileName.slice(0, -'.avif'.length);
+
+      entries.push({
+        id,
+        type: 'image',
+        src: toPublicPath(fileName),
+        alt: `ATELA want-this gallery image ${entries.length + 1}`,
+      });
+    }
+  }
+
+  return entries;
+}
+
 function buildManifest(entries) {
   const serialized = JSON.stringify(entries, null, 2);
 
@@ -147,9 +193,23 @@ function buildManifest(entries) {
   ].join('\n');
 }
 
+function normalizeAltText(entries) {
+  return entries.map((entry, index) => ({
+    ...entry,
+    alt:
+      entry.type === 'video'
+        ? `ATELA want-this gallery video ${index + 1}`
+        : `ATELA want-this gallery image ${index + 1}`,
+  }));
+}
+
 function main() {
   mkdirSync(wantThisDir, { recursive: true });
   mkdirSync(optimizedDir, { recursive: true });
+
+  const galleryEntries = new Map(
+    readOptimizedEntries().map((entry) => [entry.id, entry])
+  );
 
   const rawFiles = readdirSync(wantThisDir, { withFileTypes: true })
     .filter((entry) => entry.isFile() && !entry.name.startsWith('.'))
@@ -160,17 +220,19 @@ function main() {
     })
     .sort((left, right) => left.localeCompare(right, 'en'));
 
-  const usedSlugs = new Set();
-  const manifestEntries = rawFiles.map((fileName, index) => {
+  const existingIds = new Set(galleryEntries.keys());
+  const rawAssignedIds = new Set();
+  const originalsToDelete = [];
+  for (const [index, fileName] of rawFiles.entries()) {
     const inputPath = join(wantThisDir, fileName);
     const ext = extname(fileName).toLowerCase();
     const baseName = fileName.slice(0, -ext.length);
     let slug = sanitizeBaseName(baseName, index);
 
-    while (usedSlugs.has(slug)) {
+    while (rawAssignedIds.has(slug) || (!existingIds.has(slug) && galleryEntries.has(slug))) {
       slug = `${slug}-${String(index + 1).padStart(2, '0')}`;
     }
-    usedSlugs.add(slug);
+    rawAssignedIds.add(slug);
 
     if (supportedVideoExts.has(ext)) {
       const videoOutput = `${slug}.mp4`;
@@ -184,14 +246,18 @@ function main() {
       console.log(
         `[want-this] ${fileName} -> ${posterOutput}${posterChanged ? ' (updated)' : ' (cached)'}`
       );
+      if (shouldDeleteOriginals) {
+        originalsToDelete.push(fileName);
+      }
 
-      return {
+      galleryEntries.set(slug, {
         id: slug,
         type: 'video',
         src: toPublicPath(videoOutput),
         poster: toPublicPath(posterOutput),
         alt: `ATELA want-this gallery video ${index + 1}`,
-      };
+      });
+      continue;
     }
 
     const imageOutput = `${slug}.avif`;
@@ -200,17 +266,34 @@ function main() {
     console.log(
       `[want-this] ${fileName} -> ${imageOutput}${imageChanged ? ' (updated)' : ' (cached)'}`
     );
+    if (shouldDeleteOriginals) {
+      originalsToDelete.push(fileName);
+    }
 
-    return {
+    galleryEntries.set(slug, {
       id: slug,
       type: 'image',
       src: toPublicPath(imageOutput),
       alt: `ATELA want-this gallery image ${index + 1}`,
-    };
-  });
+    });
+  }
+
+  const manifestEntries = normalizeAltText(Array.from(galleryEntries.values()));
 
   writeFileSync(manifestPath, buildManifest(manifestEntries));
   console.log(`[want-this] wrote manifest with ${manifestEntries.length} asset(s)`);
+
+  if (!shouldDeleteOriginals) {
+    console.log('[want-this] preserved original source files');
+    return;
+  }
+
+  for (const fileName of originalsToDelete) {
+    const inputPath = join(wantThisDir, fileName);
+    if (!existsSync(inputPath)) continue;
+    unlinkSync(inputPath);
+    console.log(`[want-this] removed original ${fileName}`);
+  }
 }
 
 main();

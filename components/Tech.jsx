@@ -12,67 +12,71 @@ function Tech() {
     {
       id: 'beauty',
       title: '뷰티 패키지',
-      subtitle: '라벨 · 패키지 디테일',
-      thumb: '/assets/hero-demo/drg/bg.avif',
+      subtitle: '제품명 · 라벨 · 패키지 정보',
+      thumb: '/assets/comparisons/2/atela.avif',
       comparisons: [
         {
           id: 'nb2',
           brandLines: ['Nanobanana Pro'],
-          image: '/assets/hero-demo/drg/bg_variation.avif',
+          image: '/assets/comparisons/2/nb2.avif',
+          detailImage: '/assets/comparisons/2/nb2.detail.avif',
           mainPosition: '50% 50%',
           detailSide: 'left',
           notePrefix: 'Nanobanana Pro.',
-          note: '무드는 맞아도 패키지 표면의 작은 라벨 정보나 브랜드 디테일은 흐려지기 쉽습니다.',
+          note: '분위기는 맞아도 제품명, 하단 정보, 패키지 표면 디테일은 작아지거나 흐려지기 쉽습니다.',
           details: [
-            { position: '36% 60%', scale: 3.0, alt: 'Nanobanana Pro beauty package detail' },
-            { position: '62% 54%', scale: 2.9, alt: 'Nanobanana Pro beauty texture detail' },
+            { position: '50% 73%', scale: 6.4, alt: 'Nanobanana Pro beauty product name detail' },
+            { position: '45% 80%', scale: 9.2, alt: 'Nanobanana Pro beauty label detail' },
           ],
         },
         {
           id: 'atela',
           brandLines: ['ATELA'],
-          image: '/assets/hero-demo/drg/bg.avif',
+          image: '/assets/comparisons/2/atela.avif',
+          detailImage: '/assets/comparisons/2/atela.detail.avif',
           mainPosition: '50% 50%',
           detailSide: 'right',
           notePrefix: 'ATELA.',
-          note: 'ATELA는 패키지 라벨, 표면 질감, 제품명처럼 구매 판단에 중요한 정보를 더 또렷하게 유지하는 결과를 목표로 합니다.',
+          note: 'ATELA는 제품명, 라인명, 용량 표기처럼 구매 판단에 중요한 패키지 정보를 더 선명하게 유지하는 데 집중합니다.',
           details: [
-            { position: '39% 58%', scale: 3.0, alt: 'ATELA beauty package detail' },
-            { position: '63% 56%', scale: 2.85, alt: 'ATELA beauty texture detail' },
+            { position: '60% 61%', scale: 5.0, alt: 'ATELA beauty product name detail' },
+            { position: '52% 75%', scale: 5.0, alt: 'ATELA beauty lower label detail' },
           ],
         },
       ],
     },
     {
-      id: 'living',
-      title: '리빙 / 홈데코',
-      subtitle: '소재감 · 각도 · 디테일',
-      thumb: '/assets/hero-demo/lamp/bg.avif',
+      id: 'beverage',
+      title: '음료 패키지',
+      subtitle: '로고 · 한글 제품명 · 패키지 텍스트',
+      thumb: '/assets/comparisons/3/atela.avif',
       comparisons: [
         {
           id: 'nb2',
           brandLines: ['Nanobanana Pro'],
-          image: '/assets/hero-demo/lamp/bg_variation.avif',
-          mainPosition: '52% 46%',
+          image: '/assets/comparisons/3/nb2.avif',
+          detailImage: '/assets/comparisons/3/nb2.detail.avif',
+          mainPosition: '50% 50%',
           detailSide: 'left',
           notePrefix: 'Nanobanana Pro.',
-          note: '리빙 카테고리에서는 실루엣은 살아도 소재 결, 모서리 라인, 작은 구조 디테일이 쉽게 뭉개질 수 있습니다.',
+          note: '전체 무드는 맞아도 로고 형태, 영문·한글 제품명, 하단 표기 같은 패키지 정보는 쉽게 흔들릴 수 있습니다.',
           details: [
-            { position: '54% 28%', scale: 3.0, alt: 'Nanobanana Pro lamp shade detail' },
-            { position: '49% 76%', scale: 3.05, alt: 'Nanobanana Pro lamp base detail' },
+            { position: '55% 44%', scale: 8.0, alt: 'Nanobanana Pro beverage logo detail' },
+            { position: '50% 74%', scale: 5.4, alt: 'Nanobanana Pro beverage label detail' },
           ],
         },
         {
           id: 'atela',
           brandLines: ['ATELA'],
-          image: '/assets/hero-demo/lamp/bg.avif',
+          image: '/assets/comparisons/3/atela.avif',
+          detailImage: '/assets/comparisons/3/atela.detail.avif',
           mainPosition: '50% 50%',
           detailSide: 'right',
           notePrefix: 'ATELA.',
-          note: 'ATELA는 소재감과 구조가 중요한 리빙 제품에서 쉐이드 결, 베이스 형태, 엣지 라인까지 안정적으로 유지하는 방향에 집중합니다.',
+          note: 'ATELA는 로고 곡선, 제품명, 하단 한글 표기처럼 브랜드 식별에 중요한 디테일을 안정적으로 유지하는 데 집중합니다.',
           details: [
-            { position: '54% 28%', scale: 2.95, alt: 'ATELA lamp shade detail' },
-            { position: '48% 76%', scale: 3.0, alt: 'ATELA lamp base detail' },
+            { position: '55% 40%', scale: 8, alt: 'ATELA beverage logo detail' },
+            { position: '50% 66%', scale: 5.0, alt: 'ATELA beverage label detail' },
           ],
         },
       ],
@@ -140,7 +144,7 @@ function ComparisonPanel({ comparison }) {
       {comparison.details.map((detail, index) => (
         <div key={index} className="tech-compare-detail">
           <img
-            src={comparison.image}
+            src={comparison.detailImage || comparison.image}
             alt={detail.alt}
             loading="lazy"
             decoding="async"

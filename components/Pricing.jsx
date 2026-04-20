@@ -119,7 +119,6 @@ function Pricing() {
               <div className="price-side market pricing-market-receipt">
                 <div className="price-side-head pricing-market-head">
                   <h3 style={{color:'#0A0A0A', margin: 0}}>{copy.marketTitle}</h3>
-                  <p className="pricing-market-subtitle">{copy.marketSubtitle}</p>
                 </div>
                 <div className="market-price-card">
                   {copy.marketRows.map((row, index) => (
