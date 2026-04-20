@@ -45,4 +45,5 @@ Current ATELA landing page workspace built with `index.html` plus script-tag Rea
   - `bun install --frozen-lockfile`
   - `bun run build:deploy`
   - `dist` output
-  - SPA-style rewrite to `index.html` so locale-first paths like `/ko/pricing` resolve correctly
+  - locale-route rewrites to `index.html` for `/`, `/ko`, `/en`, and locale-first section paths like `/ko/pricing`
+  - static asset requests such as `/assets/*`, `/components/*`, and `/vendor/*` are left untouched
