@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>Nav</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; background: var(--atela-ink); display: grid; gap: 0; }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background: var(--n-50); color: var(--atela-ink); border-bottom: 1px solid var(--border); }
+  .nav.ink { background: var(--atela-ink); color: #fff; border-color: #1f1f1f; }
+  .links { display: flex; gap: 22px; font-size: 14px; font-weight: 600; }
+  .links a { border: 0; opacity: 0.8; }
+  .links a:hover { opacity: 1; color: var(--atela-lime-deep); }
+  .nav.ink .links a:hover { color: var(--atela-lime); }
+  .cta { display: flex; gap: 8px; align-items: center; }
+  .btn { border: 0; border-radius: 999px; padding: 10px 18px; font-family: var(--font-sans); font-weight: 700; font-size: 13px; cursor: pointer; }
+  .btn.l { background: var(--atela-lime); color: var(--atela-ink); }
+  .btn.g { background: transparent; color: inherit; }
+  .logo { font-weight: 900; letter-spacing: -0.04em; font-size: 22px; display: flex; align-items: center; gap: 6px; }
+  .logo::after { content: ""; width: 8px; height: 8px; background: #C6FF3D; border-radius: 2px; }
+</style></head>
+<body>
+  <nav class="nav">
+    <div class="logo">ATELA</div>
+    <div class="links"><a href="#">제품</a><a href="#">가격</a><a href="#">갤러리</a><a href="#">고객사례</a><a href="#">문서</a></div>
+    <div class="cta"><button class="btn g">로그인</button><button class="btn l">무료로 시작 →</button></div>
+  </nav>
+  <nav class="nav ink">
+    <div class="logo">ATELA</div>
+    <div class="links"><a href="#" style="color:inherit">제품</a><a href="#" style="color:inherit">가격</a><a href="#" style="color:inherit">갤러리</a><a href="#" style="color:inherit">고객사례</a><a href="#" style="color:inherit">문서</a></div>
+    <div class="cta"><button class="btn g" style="color:#fff">로그인</button><button class="btn l">무료로 시작 →</button></div>
+  </nav>
+</body></html>

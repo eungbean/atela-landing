@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="description" content="한국어 텍스트와 브랜드 디테일을 보존하는 AI 크리에이티브 플랫폼.">
+<title>ATELA · 한국어가 깨지지 않는 AI 크리에이티브 플랫폼</title>
+<script src="/components/AtelaLocale.js"></script>
+<script src="/components/AtelaCopy.js"></script>
+<link rel="stylesheet" href="/styles/extensions.css">
+<style>
+  /* force light color-scheme so Safari/Chrome dark mode doesn't repaint form/button colors */
+  :root { color-scheme: light; }
+  html { scroll-behavior: smooth; }
+  #root { visibility: hidden; }
+  body { background: var(--atela-ink); color: #fff; }
+  /* Defensive: explicit button/input colors so UA dark mode can't override */
+  .atela-btn-primary { background: #C6FF3D !important; color: #0A0A0A !important; }
+  .atela-btn-on-ink { background: #FFFFFF !important; color: #0A0A0A !important; }
+  .atela-btn-ink { background: #0A0A0A !important; color: #FFFFFF !important; }
+  .atela-btn-outline { background: transparent !important; color: #0A0A0A !important; border-color: #0A0A0A !important; }
+  .atela-hero { padding-top: 72px; padding-bottom: 80px; }
+  .atela-logos { overflow: hidden; }
+  .atela-logos-title {
+    margin-bottom: 18px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.22em !important;
+  }
+  .atela-logos-marquee {
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .atela-logos-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: atela-logo-scroll 30s linear infinite;
+  }
+  .atela-logo-set {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex: 0 0 auto;
+    padding-right: 18px;
+  }
+  .atela-logo-item {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-width: max-content;
+    padding: 12px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+  }
+  @keyframes atela-logo-scroll {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+  @media (max-width: 768px) {
+    .atela-logos-track { animation-duration: 24s; }
+    .atela-logo-item {
+      padding: 10px 18px;
+      font-size: 15px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .atela-logos-track { animation: none; }
+  }
+  /* compare table: a tag inside .compare-row shouldn't underline (no a tags here; but a safety) */
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="/vendor/react.development.js"></script>
+<script src="/vendor/react-dom.development.js"></script>
+<script src="/vendor/babel.min.js"></script>
+
+<script type="text/babel" src="/components/Nav.jsx"></script>
+<script src="/components/HeroDemoAssets.js"></script>
+<script type="text/babel" src="/components/Hero.jsx"></script>
+<script type="text/babel" src="/components/LogoCloud.jsx"></script>
+<script type="text/babel" src="/components/Stats.jsx"></script>
+<script type="text/babel" src="/components/Tech.jsx"></script>
+<script type="text/babel" src="/components/Integrations.jsx"></script>
+<script type="text/babel" src="/components/Showcase.jsx"></script>
+<script type="text/babel" src="/components/Marketplace.jsx"></script>
+<script type="text/babel" src="/components/Compare.jsx"></script>
+<script type="text/babel" src="/components/CaseStudy.jsx"></script>
+<script type="text/babel" src="/components/Pricing.jsx"></script>
+<script type="text/babel" src="/components/FinalCta.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "heroVariant": "split",
+  "accent": "#C6FF3D",
+  "showCompare": true
+}/*EDITMODE-END*/;
+
+function getPersistedTweaks() {
+  try {
+    const stored = JSON.parse(localStorage.getItem('atela-brands-tweaks') || '{}');
+    return {
+      heroVariant: stored.heroVariant ?? TWEAK_DEFAULTS.heroVariant,
+      accent: stored.accent ?? TWEAK_DEFAULTS.accent
+    };
+  } catch {
+    return {
+      heroVariant: TWEAK_DEFAULTS.heroVariant,
+      accent: TWEAK_DEFAULTS.accent
+    };
+  }
+}
+
+function App() {
+  const [tweaks, setTweaks] = React.useState(() => ({
+    ...TWEAK_DEFAULTS,
+    ...getPersistedTweaks()
+  }));
+
+  React.useEffect(() => {
+    localStorage.setItem('atela-brands-tweaks', JSON.stringify({
+      heroVariant: tweaks.heroVariant,
+      accent: tweaks.accent
+    }));
+  }, [tweaks.heroVariant, tweaks.accent]);
+
+  // Propagate accent globally via CSS variable override
+  React.useEffect(() => {
+    document.documentElement.style.setProperty('--atela-lime', tweaks.accent);
+  }, [tweaks.accent]);
+
+  React.useEffect(() => {
+    if (window.atelaSyncPageMeta) {
+      window.atelaSyncPageMeta();
+    }
+  }, []);
+
+  return (
+    <>
+      <Nav/>
+      <Hero variant={tweaks.heroVariant} accent={tweaks.accent}/>
+      <LogoCloud/>
+      <Stats/>
+      <Tech/>
+      <Integrations/>
+      <Showcase/>
+      <Marketplace/>
+      {tweaks.showCompare && <Compare/>}
+      <CaseStudy/>
+      <Pricing/>
+      <FinalCta/>
+      <Footer/>
+    </>
+  );
+}
+
+const rootEl = document.getElementById('root');
+rootEl.innerHTML = '';
+ReactDOM.createRoot(rootEl).render(<App/>);
+rootEl.style.visibility = 'visible';
+window.requestAnimationFrame(() => {
+  window.requestAnimationFrame(() => {
+    if (window.atelaApplyCurrentRoute) {
+      window.atelaApplyCurrentRoute({ behavior: 'auto' });
+    }
+  });
+});
+</script>
+
+
+</body></html>

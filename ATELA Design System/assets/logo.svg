@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56" fill="none">
+  
+  <g fill="currentColor">
+    
+    <path d="M2 48 L18 4 H28 L44 48 H33.4 L30.8 40 H15.2 L12.6 48 H2 Z M18.2 30.8 H27.8 L23 16.6 L18.2 30.8 Z"></path>
+    
+    <path d="M46 4 H82 V13 H69.5 V48 H58.5 V13 H46 V4 Z"></path>
+    
+    <path d="M86 4 H118 V13 H97 V22.5 H115 V31 H97 V39 H118.5 V48 H86 V4 Z"></path>
+    
+    <path d="M122 4 H133 V39 H153 V48 H122 V4 Z"></path>
+    
+    <path d="M155 48 L171 4 H181 L197 48 H186.4 L183.8 40 H168.2 L165.6 48 H155 Z M171.2 30.8 H180.8 L176 16.6 L171.2 30.8 Z"></path>
+  </g>
+  
+  <circle cx="209" cy="44" r="6" fill="#C6FF3D"></circle>
+</svg>

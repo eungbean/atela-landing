@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>Buttons</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 24px; background: var(--n-50); display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .ink { background: var(--atela-ink); padding: 18px; border-radius: 14px; }
+  .btn { border: 1.5px solid transparent; border-radius: 999px; padding: 12px 22px; font-family: var(--font-sans); font-weight: 700; font-size: 14px; cursor: pointer; transition: all 200ms var(--ease-out); letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary { background: var(--atela-lime); color: var(--atela-ink); }
+  .btn-primary:hover { background: var(--atela-lime-bright); }
+  .btn-ink { background: var(--atela-ink); color: #fff; }
+  .btn-ink:hover { background: #1f1f1f; }
+  .btn-outline { background: transparent; color: var(--atela-ink); border-color: var(--atela-ink); }
+  .btn-outline:hover { background: var(--atela-ink); color: #fff; }
+  .btn-ghost { background: transparent; color: var(--atela-ink); border: 0; padding: 12px 14px; }
+  .btn-ghost:hover { color: var(--atela-lime-deep); }
+  .btn-on-ink { background: #fff; color: var(--atela-ink); }
+  .btn-on-ink:hover { background: var(--atela-lime); }
+  .btn-sm { padding: 8px 14px; font-size: 13px; }
+</style></head>
+<body>
+  <div class="row">
+    <button class="btn btn-primary">무료로 시작하기 →</button>
+    <button class="btn btn-ink">데모 신청</button>
+  </div>
+  <div class="row">
+    <button class="btn btn-outline">자세히 보기</button>
+    <button class="btn btn-ghost">로그인 →</button>
+  </div>
+  <div class="row ink" style="grid-column: span 2;">
+    <button class="btn btn-primary">무료로 시작하기</button>
+    <button class="btn btn-on-ink">요금 보기</button>
+    <button class="btn btn-sm" style="background:transparent;border:1.5px solid #fff;color:#fff">Secondary · sm</button>
+  </div>
+</body></html>

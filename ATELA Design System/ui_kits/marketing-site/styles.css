@@ -1,0 +1,170 @@
+/* ATELA Marketing Site — component styles */
+@import url('../../colors_and_type.css');
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--atela-ink); color: #fff; font-family: var(--font-sans); }
+
+.atela-container { max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px); }
+
+/* ---------- Nav ---------- */
+.atela-nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,10,0.78); backdrop-filter: blur(16px); border-bottom: 1px solid #1f1f1f; }
+.atela-nav-inner { max-width: 1280px; margin: 0 auto; padding: 16px clamp(20px,4vw,56px); display: flex; align-items: center; justify-content: space-between; }
+.atela-logo { font-weight: 900; letter-spacing: -0.04em; font-size: 22px; color: #fff; border: 0; display: inline-flex; align-items: center; gap: 6px; }
+.atela-logo-dot { width: 8px; height: 8px; background: var(--atela-lime); border-radius: 2px; display: inline-block; margin-left: 4px; }
+.atela-nav-links { display: flex; gap: 28px; }
+.atela-nav-links a { color: #fff; opacity: 0.75; border: 0; font-size: 14px; font-weight: 600; transition: opacity var(--dur-2) var(--ease-out); }
+.atela-nav-links a:hover { opacity: 1; color: var(--atela-lime); }
+.atela-nav-cta { display: flex; gap: 10px; align-items: center; }
+
+/* ---------- Buttons ---------- */
+.atela-btn-primary, .atela-btn-ink, .atela-btn-outline, .atela-btn-ghost, .atela-btn-on-ink {
+  display: inline-flex; align-items: center; gap: 8px; border-radius: 999px;
+  padding: 14px 24px; font-weight: 700; font-size: 14px; border: 1.5px solid transparent;
+  font-family: var(--font-sans); cursor: pointer; transition: all var(--dur-2) var(--ease-out);
+  text-decoration: none; letter-spacing: -0.01em;
+}
+.atela-btn-primary.sm, .atela-btn-ink.sm { padding: 10px 18px; font-size: 13px; }
+.atela-btn-primary { background: var(--atela-lime); color: var(--atela-ink); }
+.atela-btn-primary:hover { background: var(--atela-lime-bright); transform: translateY(-1px); }
+.atela-btn-ink { background: var(--atela-ink); color: #fff; border-color: var(--atela-ink); }
+.atela-btn-ink:hover { background: #1f1f1f; }
+.atela-btn-outline { background: transparent; color: var(--atela-ink); border-color: var(--atela-ink); }
+.atela-btn-outline:hover { background: var(--atela-ink); color: #fff; }
+.atela-btn-ghost { background: transparent; color: inherit; border: 0; padding: 14px 16px; }
+.atela-btn-ghost:hover { color: var(--atela-lime); }
+.atela-btn-on-ink { background: #fff; color: var(--atela-ink); }
+.atela-btn-on-ink:hover { background: var(--atela-lime); }
+
+.atela-eyebrow { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--fg-2); }
+.atela-eyebrow.small { font-size: 11px; }
+.atela-h2 { font-size: clamp(32px, 4vw, 56px); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; margin: 12px 0 0; color: var(--atela-ink); text-wrap: balance; }
+.atela-display { font-size: clamp(48px, 7.2vw, 112px); font-weight: 800; line-height: 0.96; letter-spacing: -0.035em; margin: 16px 0 24px; text-wrap: balance; }
+.atela-display.giant { font-size: clamp(56px, 9vw, 148px); }
+.atela-mark { background: var(--atela-lime); color: var(--atela-ink); padding: 0.05em 0.18em 0.15em; border-radius: 6px; display: inline-block; line-height: 1; }
+.atela-lead { font-size: clamp(16px, 1.3vw, 20px); line-height: 1.5; color: #ccc; max-width: 520px; margin: 0 0 32px; }
+
+.atela-section-head { margin-bottom: 48px; }
+.atela-section-head.center { text-align: center; }
+
+/* ---------- Hero ---------- */
+.atela-hero { padding: 80px clamp(20px,4vw,56px) 100px; position: relative; overflow: hidden; }
+.atela-hero.ink { background: var(--atela-ink); color: #fff; }
+.atela-hero.ink .atela-h2 { color: #fff; }
+.atela-hero-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+.atela-hero-cta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+.atela-hero-cta.center { justify-content: center; }
+.atela-hero-meta { display: flex; gap: 24px; color: #888; font-size: 13px; font-family: var(--font-mono); }
+.atela-hero-meta b { color: var(--atela-lime); font-weight: 700; }
+
+.hero-type .atela-hero-type-inner { max-width: 1100px; margin: 0 auto; text-align: center; padding: 40px 0; }
+.hero-type u { text-decoration-thickness: 6px; text-underline-offset: 8px; }
+
+.fullbleed .atela-hero-full-inner { max-width: 1280px; margin: 0 auto; padding: 80px 0; }
+
+/* Before/After card in hero */
+.atela-hero-visual { position: relative; }
+.atela-ba { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.atela-ba-before, .atela-ba-after { position: relative; display: flex; flex-direction: column; gap: 8px; }
+.atela-ba-img { aspect-ratio: 3/4; border-radius: 20px; overflow: hidden; position: relative; display: grid; place-items: center; }
+.atela-ba-tag { position: absolute; top: 16px; left: 16px; padding: 6px 10px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.04em; color: #fff; z-index: 2; }
+.atela-ba-caption { font-size: 11px; color: #888; font-family: var(--font-mono); }
+
+.atela-hero-chips { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.chip { padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); color: #fff; font-size: 12px; font-weight: 600; }
+.chip.on { background: var(--atela-lime); color: var(--atela-ink); }
+
+/* Placeholder product */
+.atela-product { width: 65%; aspect-ratio: 1; border-radius: 16px; display: grid; place-items: center; position: relative; }
+.atela-product.hero-after { filter: saturate(1.1) contrast(1.05); }
+.atela-product.simple { width: 50%; }
+.atela-product.case { width: 60%; background: #fff; }
+.atela-bottle { width: 30%; height: 70%; background: linear-gradient(180deg, #1a1a1a, #0a0a0a); border-radius: 12px 12px 24px 24px; position: relative; box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+.atela-bottle.tall { height: 85%; width: 26%; }
+.atela-bottle::before { content: ""; position: absolute; top: 8%; left: 20%; width: 16%; height: 50%; background: rgba(255,255,255,0.15); border-radius: 4px; }
+.atela-bottle.sparkle::after { content: ""; position: absolute; top: -12px; left: 50%; width: 18px; height: 18px; background: radial-gradient(circle, #fff, transparent 70%); opacity: 0.9; }
+
+/* ---------- Logo cloud ---------- */
+.atela-logos { background: var(--atela-ink); padding: 40px 0 60px; border-bottom: 1px solid #1f1f1f; }
+.atela-logos-title { text-align: center; color: #888; font-size: 13px; letter-spacing: 0.04em; margin: 0 0 24px; font-weight: 600; }
+.atela-logos-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px 40px; align-items: center; }
+.atela-logo-item { color: #ccc; font-weight: 800; letter-spacing: -0.02em; font-size: 18px; opacity: 0.6; transition: opacity 200ms; }
+.atela-logo-item:hover { opacity: 1; color: var(--atela-lime); }
+
+/* ---------- Features ---------- */
+.atela-features { background: var(--n-50); color: var(--atela-ink); padding: 120px 0; }
+.atela-feat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.atela-feat { background: #fff; border: 1px solid var(--border); border-radius: 24px; padding: 32px; transition: all 200ms var(--ease-out); }
+.atela-feat:hover { border-color: var(--atela-ink); transform: translateY(-2px); }
+.atela-feat-swatch { width: 64px; height: 64px; border-radius: 14px; margin-bottom: 20px; }
+.atela-feat h3 { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin: 8px 0 10px; }
+.atela-feat p { font-size: 15px; color: var(--fg-2); margin: 0; }
+
+/* ---------- Before/After section ---------- */
+.atela-ba-section { background: var(--atela-ink); padding: 120px 0; }
+.atela-ba-slider { position: relative; max-width: 900px; margin: 0 auto; aspect-ratio: 16/10; border-radius: 28px; overflow: hidden; border: 1px solid #1f1f1f; }
+.atela-ba-image { position: absolute; inset: 0; display: grid; place-items: center; }
+.atela-ba-image.after { z-index: 2; }
+.atela-ba-handle { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--atela-lime); z-index: 3; transform: translateX(-1px); pointer-events: none; }
+.atela-ba-knob { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 44px; height: 44px; border-radius: 999px; background: var(--atela-lime); color: var(--atela-ink); display: grid; place-items: center; font-weight: 800; box-shadow: 0 8px 24px rgba(198,255,61,0.35); }
+.atela-ba-range { position: absolute; inset: 0; z-index: 4; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; }
+
+/* ---------- Stats ---------- */
+.atela-stats { background: var(--atela-lime); color: var(--atela-ink); padding: 80px 0; }
+.atela-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.atela-stat { border-left: 2px solid var(--atela-ink); padding-left: 20px; }
+.atela-stat-n { font-size: clamp(40px, 5vw, 72px); font-weight: 800; letter-spacing: -0.035em; line-height: 1; }
+.atela-stat-l { font-size: 14px; font-weight: 600; margin-top: 8px; }
+
+/* ---------- Case study ---------- */
+.atela-case { background: var(--n-50); color: var(--atela-ink); padding: 120px 0; }
+.atela-case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.atela-case-visual { aspect-ratio: 4/5; border-radius: 28px; position: relative; overflow: hidden; display: grid; place-items: center; }
+.atela-case-image { width: 100%; height: 100%; display: grid; place-items: center; }
+.atela-case-badge { position: absolute; bottom: 20px; left: 20px; background: var(--atela-ink); color: #fff; padding: 8px 14px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.atela-case-copy h2 { margin-bottom: 20px; }
+.atela-case-copy .hl { background: var(--atela-lime); padding: 0 0.15em; border-radius: 4px; }
+.atela-case-copy p { font-size: 16px; line-height: 1.6; color: var(--fg-2); }
+.atela-case-copy blockquote { margin: 24px 0; padding: 20px 24px; border-left: 3px solid var(--atela-ink); font-size: 18px; font-weight: 600; letter-spacing: -0.015em; }
+.atela-case-copy blockquote cite { display: block; margin-top: 12px; font-size: 13px; color: var(--fg-3); font-weight: 500; font-style: normal; }
+
+/* ---------- Pricing ---------- */
+.atela-pricing { background: var(--atela-ink); color: #fff; padding: 120px 0; }
+.atela-pricing .atela-h2 { color: #fff; }
+.atela-price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.atela-price { background: #141414; border: 1px solid #2a2a2a; border-radius: 24px; padding: 32px; position: relative; }
+.atela-price.dark { background: var(--atela-lime); color: var(--atela-ink); border-color: var(--atela-lime); }
+.atela-price h3 { font-size: 22px; font-weight: 800; margin: 0 0 20px; }
+.atela-price-amt { font-size: 48px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin-bottom: 24px; }
+.atela-price-amt .cur { font-size: 24px; vertical-align: super; margin-right: 4px; }
+.atela-price-amt .per { font-size: 16px; font-weight: 600; opacity: 0.6; margin-left: 4px; }
+.atela-price ul { list-style: none; padding: 0; margin: 0 0 24px; }
+.atela-price li { padding: 8px 0; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.atela-price.dark li { border-color: rgba(0,0,0,0.1); }
+.atela-price-badge { position: absolute; top: -12px; left: 24px; background: var(--atela-ink); color: var(--atela-lime); padding: 6px 12px; border-radius: 999px; font-size: 11px; font-weight: 800; letter-spacing: 0.05em; }
+
+/* ---------- Final CTA + Footer ---------- */
+.atela-final { background: var(--n-50); padding: 80px 0 120px; color: var(--atela-ink); }
+.atela-final-card { background: var(--atela-lime); border-radius: 32px; padding: 80px clamp(24px, 5vw, 64px); text-align: center; color: var(--atela-ink); }
+.atela-final-card .atela-mark { background: var(--atela-ink); color: var(--atela-lime); }
+.atela-final-card p { font-size: 16px; color: var(--atela-ink); opacity: 0.75; margin: 0 0 24px; }
+
+.atela-footer { background: #0A0A0A; color: #888; padding: 80px 0 32px; }
+.atela-footer-grid { display: grid; grid-template-columns: 1.2fr repeat(3, 1fr); gap: 40px; padding-bottom: 48px; border-bottom: 1px solid #1f1f1f; }
+.atela-footer h5 { color: #fff; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 16px; }
+.atela-footer a { display: block; color: #888; font-size: 14px; padding: 6px 0; border: 0; }
+.atela-footer a:hover { color: var(--atela-lime); }
+.atela-footer-bottom { display: flex; justify-content: space-between; padding-top: 24px; font-size: 12px; color: #666; flex-wrap: wrap; gap: 12px; }
+
+/* ---------- Tweaks panel ---------- */
+.tweaks-panel { position: fixed; right: 20px; bottom: 20px; background: #141414; color: #fff; border: 1px solid #2a2a2a; border-radius: 16px; padding: 16px; min-width: 260px; z-index: 1000; font-family: var(--font-sans); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+.tweaks-panel h4 { margin: 0 0 12px; font-size: 14px; font-weight: 800; letter-spacing: -0.01em; display: flex; justify-content: space-between; }
+.tweaks-panel label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin: 10px 0 6px; }
+.tweaks-panel .seg { display: flex; gap: 4px; background: #0a0a0a; padding: 3px; border-radius: 999px; }
+.tweaks-panel .seg button { flex: 1; background: transparent; color: #fff; border: 0; padding: 6px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: var(--font-sans); }
+.tweaks-panel .seg button.on { background: var(--atela-lime); color: #0a0a0a; }
+
+@media (max-width: 900px) {
+  .atela-hero-grid, .atela-feat-grid, .atela-price-grid, .atela-case-grid, .atela-stats-grid, .atela-footer-grid { grid-template-columns: 1fr; }
+  .atela-stats-grid { grid-template-columns: 1fr 1fr; }
+  .atela-nav-links { display: none; }
+}

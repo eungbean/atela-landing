@@ -1,0 +1,17 @@
+{
+  "name": "atela-landing-clone",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bunx --bun vite",
+    "build": "bunx --bun vite build",
+    "preview": "bunx --bun vite preview",
+    "prepare:hero-assets": "node scripts/prepare-hero-demo-assets.mjs",
+    "prepare:deploy": "node scripts/prepare-static-deploy.mjs",
+    "build:deploy": "bun run build && bun run prepare:deploy"
+  },
+  "devDependencies": {
+    "vite": "5.4.19"
+  }
+}

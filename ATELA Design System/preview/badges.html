@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>Badges + Tags</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 24px; background: var(--n-50); display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-start; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: -0.005em; }
+  .b-lime { background: var(--atela-lime); color: var(--atela-ink); }
+  .b-ink { background: var(--atela-ink); color: #fff; }
+  .b-outline { background: transparent; color: var(--atela-ink); border: 1px solid var(--atela-ink); }
+  .b-mag { background: #FF3DA8; color: #fff; }
+  .b-violet { background: #6B3DFF; color: #fff; }
+  .b-soft { background: var(--n-100); color: var(--fg-1); }
+  .b-new { background: var(--atela-ink); color: #C6FF3D; }
+  .b-ok { background: #E6FFE8; color: #096B3A; }
+  .dot { width: 6px; height: 6px; border-radius: 999px; background: currentColor; }
+</style></head>
+<body>
+  <span class="badge b-lime">NEW</span>
+  <span class="badge b-ink">Pro</span>
+  <span class="badge b-outline">Beta</span>
+  <span class="badge b-mag">Before</span>
+  <span class="badge b-violet">After</span>
+  <span class="badge b-soft">카테고리 · 패션</span>
+  <span class="badge b-new"><span class="dot"></span>실시간 생성 중</span>
+  <span class="badge b-ok">생성 완료 · 24장</span>
+</body></html>

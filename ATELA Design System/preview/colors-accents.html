@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>Accents + Status</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 24px; background: var(--n-50); font-family: var(--font-sans); }
+  h3 { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3); margin: 0 0 10px; font-weight: 600; }
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+  .s { aspect-ratio: 1.6; border-radius: 12px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; }
+  .s .k { font-weight: 700; font-size: 12px; }
+  .s .v { font-family: var(--font-mono); font-size: 10px; opacity: 0.75; }
+</style></head>
+<body>
+  <h3>Editorial Accents</h3>
+  <div class="row">
+    <div class="s" style="background:#FF3DA8;color:#fff"><div class="k">Magenta</div><div class="v">#FF3DA8</div></div>
+    <div class="s" style="background:#6B3DFF;color:#fff"><div class="k">Violet</div><div class="v">#6B3DFF</div></div>
+    <div class="s" style="background:#E8D5B0;color:#0A0A0A"><div class="k">Tan</div><div class="v">#E8D5B0</div></div>
+    <div class="s" style="background:#F2ECD8;color:#0A0A0A"><div class="k">Cream</div><div class="v">#F2ECD8</div></div>
+  </div>
+  <h3>Status</h3>
+  <div class="row">
+    <div class="s" style="background:#1AE07E;color:#0A0A0A"><div class="k">OK</div><div class="v">#1AE07E</div></div>
+    <div class="s" style="background:#FFB020;color:#0A0A0A"><div class="k">Warn</div><div class="v">#FFB020</div></div>
+    <div class="s" style="background:#FF4D4D;color:#fff"><div class="k">Error</div><div class="v">#FF4D4D</div></div>
+    <div class="s" style="background:#3DA8FF;color:#fff"><div class="k">Info</div><div class="v">#3DA8FF</div></div>
+  </div>
+</body></html>

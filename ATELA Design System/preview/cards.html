@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>Cards</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 24px; background: var(--n-50); display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .card { border: 1px solid var(--border); border-radius: 20px; padding: 20px; background: #fff; }
+  .card.dark { background: var(--atela-ink); color: #fff; border-color: var(--atela-ink); }
+  .card.lime { background: var(--atela-lime); border-color: var(--atela-ink); color: var(--atela-ink); }
+  .card .eyebrow { color: var(--fg-3); font-size: 11px; }
+  .card h3 { margin: 8px 0 4px; font-size: 22px; letter-spacing: -0.02em; }
+  .card p { margin: 0; font-size: 13px; color: var(--fg-2); }
+  .card.dark p { color: #bbb; }
+  .card.lime p { color: #142a00; }
+  .stat { font-weight: 800; font-size: 44px; letter-spacing: -0.03em; line-height: 1; }
+</style></head>
+<body>
+  <div class="card">
+    <div class="eyebrow">FEATURE</div>
+    <h3>AI 모델 샷</h3>
+    <p>한국인 모델 300+, 룩북 스타일 자동 매칭.</p>
+  </div>
+  <div class="card dark">
+    <div class="stat" style="color:#C6FF3D">93%</div>
+    <p style="margin-top:8px">촬영 시간 감축, 전 브랜드 평균.</p>
+  </div>
+  <div class="card lime">
+    <div class="stat">3분</div>
+    <p style="margin-top:8px">상품 1개 → 이미지 50장까지.</p>
+  </div>
+  <div class="card">
+    <div class="eyebrow">CASE STUDY</div>
+    <h3>무신사 입점 브랜드 A</h3>
+    <p>촬영비 82% 절감, 주간 업로드 7배 증가.</p>
+  </div>
+</body></html>
