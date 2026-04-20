@@ -496,7 +496,7 @@
       },
       stats: {
         items: [
-          { n: '15.2x', l: 'Hangul rendering accuracy', s: 'vs. Google Nanobanana Pro' },
+          { n: '15.2x', l: 'Text rendering accuracy', s: 'vs. Google Nanobanana Pro' },
           { n: '4 min', l: 'New launch → 50 images', s: 'Webhook sync' },
           { n: '199', l: 'AI expert pool', s: '6 specialties' },
           { n: '2 days', l: 'Average delivery time', s: 'Project turnaround' },
@@ -504,7 +504,7 @@
       },
       tech: {
         eyebrow: 'TECH · TEXT & DETAIL PRESERVATION',
-        titleLines: ['Commercial content creation', 'that preserves Hangul and detail'],
+        titleLines: ['Commercial content creation', 'that preserves text and detail'],
         lede: 'A product image cannot just look good. Brand copy, logos, embroidery, engravings, and packaging text all affect conversion, and they need to stay intact. ',
         ledeStrong: 'Built on patented technology and published research, ATELA keeps brand assets and product detail sharp all the way through.',
         comparisons: [
@@ -515,7 +515,7 @@
             mainPosition: '50% 52%',
             detailSide: 'left',
             notePrefix: 'Nanobanana Pro.',
-            note: 'Even when the scene looks convincing, small details that drive conversion, like Hangul banners, brand logos, and product engravings, tend to drift.',
+            note: 'Even when the scene looks convincing, small details that drive conversion, like text overlays, brand logos, and product engravings, tend to drift.',
             details: [
               { position: '78% 58%', scale: 3.35, alt: 'Nanobanana Pro jacket logo detail' },
               { position: '31% 47%', scale: 3.05, alt: 'Nanobanana Pro tumbler detail' },
@@ -528,7 +528,7 @@
             mainPosition: '50% 48%',
             detailSide: 'right',
             notePrefix: 'ATELA.',
-            note: 'ATELA is built to keep the small details that create brand trust, from Hangul banners and logos to embroidery and engravings, clear and intact.',
+            note: 'ATELA is built to keep the small details that create brand trust, from text overlays and logos to embroidery and engravings, clear and intact.',
             details: [
               { position: '39% 84%', scale: 3.2, alt: 'ATELA jacket logo detail' },
               { position: '91% 60%', scale: 3.1, alt: 'ATELA tumbler engraving detail' },
@@ -794,10 +794,10 @@
         secondaryCta: 'Talk to sales ↗',
       },
       footer: {
-        description: 'AI creative platform built to preserve Korean text, logos, and product detail. Team from Yonsei Univ. CV Lab. Seoul, South Korea.',
+        description: 'AI creative platform built to preserve text, logos, and product detail. Team from Yonsei Univ. CV Lab. Seoul, South Korea.',
         platformTitle: 'Platform',
         platformLinks: {
-          tech: 'Korean AI',
+          tech: 'Text AI',
           marketplace: 'Experts',
         },
         companyTitle: 'Company',
