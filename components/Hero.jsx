@@ -563,9 +563,12 @@ function AtelaHeroDemo() {
         </h1>
 
         <p className="demo-hero-subtitle">
-          {copy.subtitleLines[0]}
-          <br/>
-          {copy.subtitleLines[1]}
+          {copy.subtitleLines.map((line, index) => (
+            <React.Fragment key={`${line}-${index}`}>
+              {index > 0 ? <br/> : null}
+              {line}
+            </React.Fragment>
+          ))}
         </p>
 
         <a
