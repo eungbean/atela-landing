@@ -124,8 +124,8 @@
             notePrefix: 'Nanobanana Pro.',
             note: 'Even when the scene looks convincing, small details that drive conversion, like text overlays, brand logos, and product engravings, tend to drift.',
             details: [
-              { position: '78% 58%', scale: 3.35, alt: 'Nanobanana Pro jacket logo detail' },
-              { position: '31% 47%', scale: 3.05, alt: 'Nanobanana Pro tumbler detail' },
+              { position: '37% 47%', scale: 10, alt: 'Nanobanana Pro tumbler detail' },
+              { position: '71% 54%', scale: 12, alt: 'Nanobanana Pro jacket logo detail' },
             ],
           },
           {
@@ -137,8 +137,8 @@
             notePrefix: 'ATELA.',
             note: 'ATELA is built to keep the small details that create brand trust, from text overlays and logos to embroidery and engravings, clear and intact.',
             details: [
-              { position: '39% 84%', scale: 3.2, alt: 'ATELA jacket logo detail' },
-              { position: '91% 60%', scale: 3.1, alt: 'ATELA tumbler engraving detail' },
+              { position: '100% 78%', scale: 3.5, alt: 'ATELA tumbler engraving detail' },
+              { position: '40% 98%', scale: 5, alt: 'ATELA jacket logo detail' },
             ],
           },
         ],
