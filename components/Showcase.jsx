@@ -1,6 +1,26 @@
 function Showcase() {
   const copy = window.atelaGetCopySection('showcase');
   const titleLines = Array.isArray(copy.titleLines) ? copy.titleLines : [copy.title];
+  const manifestItems = Array.isArray(window.atelaWantThisGallery) ? window.atelaWantThisGallery : [];
+  const galleryItems = manifestItems.length
+    ? manifestItems
+    : copy.cards.map((card) => ({
+        id: card.id,
+        type: 'image',
+        src: card.image,
+        alt: card.alt,
+      }));
+  const loopItems = [];
+  const minimumLoopLength = Math.max(galleryItems.length, 6);
+
+  if (galleryItems.length) {
+    for (let index = 0; index < minimumLoopLength; index += 1) {
+      loopItems.push({
+        ...galleryItems[index % galleryItems.length],
+        loopId: `${galleryItems[index % galleryItems.length].id}-loop-${index}`,
+      });
+    }
+  }
 
   return (
     <section id="showcase" className="atela-showcase">
@@ -27,13 +47,27 @@ function Showcase() {
                 className="showcase-loop-group"
                 aria-hidden={groupIndex === 1}
               >
-                {copy.cards.map((card, cardIndex) => (
+                {loopItems.map((item, cardIndex) => (
                   <figure
-                    key={`${groupIndex}-${card.id}`}
+                    key={`${groupIndex}-${item.loopId}`}
                     className="showcase-loop-item"
                     style={{ '--showcase-order': cardIndex + 1 }}
+                    aria-label={item.type === 'video' ? item.alt : undefined}
                   >
-                    <img src={card.image} alt={card.alt} loading="lazy" decoding="async" />
+                    {item.type === 'video' ? (
+                      <video
+                        src={item.src}
+                        poster={item.poster}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <img src={item.src} alt={item.alt} loading="lazy" decoding="async" />
+                    )}
                   </figure>
                 ))}
               </div>

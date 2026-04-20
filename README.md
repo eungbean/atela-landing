@@ -7,7 +7,7 @@ Current ATELA landing page workspace built with `index.html` plus script-tag Rea
 - `bunx --bun vite`
 - `bunx --bun vite build`
 - `bunx --bun vite preview`
-- `bun run prepare:hero-assets` when you have local raw Hero source media
+- `bun run prepare:hero-assets`
 - `bun run build:deploy`
 
 ## Active Files
@@ -39,12 +39,11 @@ Current ATELA landing page workspace built with `index.html` plus script-tag Rea
 
 - Recommended default: GitHub repo + Vercel deployment
 - Use `bun run build:deploy` for production output
-- The repository tracks optimized Hero outputs such as `*.avif` and `video.optimized.mp4`; raw Hero source media stays local and is gitignored
-- `scripts/prepare-static-deploy.mjs` copies `components/`, `vendor/`, `assets/`, and `styles/` into `dist/` because this landing still serves non-module scripts directly from the filesystem
-- the deploy prep step also rewrites built `index.html` back to `/styles/extensions.css`, so production does not depend on a Vite-generated hashed CSS asset path
+- `scripts/prepare-static-deploy.mjs` copies `components/`, `vendor/`, `assets/`, `styles/`, and `favicon.svg` into `dist/` because this landing still serves non-module scripts directly from the filesystem
+- The built favicon link is normalized back to `/favicon.svg` so the deployed site uses a stable root icon path
+- The deploy prep also rewrites the built stylesheet link back to `/styles/extensions.css` so the Babel/script-tag app does not lose styling when `dist/assets/` is reused for source media
 - `vercel.json` is configured for:
   - `bun install --frozen-lockfile`
   - `bun run build:deploy`
   - `dist` output
-  - locale-route rewrites to `index.html` for `/`, `/ko`, `/en`, and locale-first section paths like `/ko/pricing`
-  - static asset requests such as `/assets/*`, `/components/*`, and `/vendor/*` are left untouched
+  - locale-only rewrites to `index.html` so paths like `/ko/pricing` resolve correctly without swallowing static files such as `/favicon.svg`

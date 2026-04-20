@@ -8,8 +8,10 @@
     "build": "bunx --bun vite build",
     "preview": "bunx --bun vite preview",
     "prepare:hero-assets": "node scripts/prepare-hero-demo-assets.mjs",
+    "prepare:want-this-assets": "node scripts/prepare-want-this-assets.mjs",
+    "prepare:assets": "bun run prepare:hero-assets && bun run prepare:want-this-assets",
     "prepare:deploy": "node scripts/prepare-static-deploy.mjs",
-    "build:deploy": "bun run build && bun run prepare:deploy"
+    "build:deploy": "bun run prepare:assets && bun run build && bun run prepare:deploy"
   },
   "devDependencies": {
     "vite": "5.4.19"
