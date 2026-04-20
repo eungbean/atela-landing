@@ -40,8 +40,8 @@ Current ATELA landing page workspace built with `index.html` plus script-tag Rea
 - Recommended default: GitHub repo + Vercel deployment
 - Use `bun run build:deploy` for production output
 - The repository tracks optimized Hero outputs such as `*.avif` and `video.optimized.mp4`; raw Hero source media stays local and is gitignored
-- `scripts/prepare-static-deploy.mjs` copies `components/`, `vendor/`, and `assets/` into `dist/` because this landing still serves non-module scripts directly from the filesystem
-- when copying `assets/`, it must preserve the Vite-generated hashed CSS files already written into `dist/assets/`
+- `scripts/prepare-static-deploy.mjs` copies `components/`, `vendor/`, `assets/`, and `styles/` into `dist/` because this landing still serves non-module scripts directly from the filesystem
+- the deploy prep step also rewrites built `index.html` back to `/styles/extensions.css`, so production does not depend on a Vite-generated hashed CSS asset path
 - `vercel.json` is configured for:
   - `bun install --frozen-lockfile`
   - `bun run build:deploy`
