@@ -18,7 +18,10 @@ for (const dirName of passthroughDirs) {
     throw new Error(`Missing required deploy directory: ${dirName}`);
   }
 
-  rmSync(targetDir, { recursive: true, force: true });
+  // Preserve Vite-generated files in dist/assets, such as hashed CSS bundles.
+  if (dirName !== 'assets') {
+    rmSync(targetDir, { recursive: true, force: true });
+  }
   cpSync(sourceDir, targetDir, { recursive: true });
   console.log(`[deploy] copied ${dirName}/ -> dist/${dirName}/`);
 }
