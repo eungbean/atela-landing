@@ -291,11 +291,35 @@ function Hero() {
   return <AtelaHeroDemo/>;
 }
 
+function useHeroStartFlowComplete() {
+  const getIsComplete = () => Boolean(window.ATELA_AUTH?.isSignedIn?.());
+  const [isComplete, setIsComplete] = React.useState(getIsComplete);
+
+  React.useEffect(() => {
+    const syncState = (event) => {
+      const nextValue = event?.detail?.isSignedIn;
+      setIsComplete(Boolean(nextValue ?? window.ATELA_AUTH?.isSignedIn?.()));
+    };
+
+    window.addEventListener('atela:auth-state-change', syncState);
+    return () => {
+      window.removeEventListener('atela:auth-state-change', syncState);
+    };
+  }, []);
+
+  return isComplete;
+}
+
 function AtelaHeroDemo() {
   const copy = window.atelaGetCopySection('hero');
+  const authCopy = window.atelaGetCopySection('auth');
   const currentLocale = window.atelaGetCurrentLocale ? window.atelaGetCurrentLocale() : 'ko';
   const buildSectionUrl = window.atelaBuildSectionUrl || ((sectionId) => `#${sectionId}`);
   const handleSectionNavigation = window.atelaHandleSectionNavigation;
+  const openStartFlow = window.atelaOpenStartFlow;
+  const trackCtaClick = window.atelaTrackCtaClick;
+  const trackUiInteraction = window.atelaTrackUiInteraction;
+  const isStartFlowComplete = useHeroStartFlowComplete();
   const [activePackId, setActivePackId] = React.useState(HERO_DEMO_DEFAULT_PACK_ID);
   const [flowState, setFlowState] = React.useState(() => ({
     inputProgress: typeof window !== 'undefined' && window.innerWidth <= HERO_FLOW_BREAKPOINT ? 1 : 0,
@@ -552,6 +576,49 @@ function AtelaHeroDemo() {
     { id: 'variation', output: activePack.outputs.variation, title: HERO_CARD_TITLES.variation },
     { id: 'lifestyle', output: activePack.outputs.lifestyle, title: HERO_CARD_TITLES.lifestyle },
   ];
+  const ctaLabel = isStartFlowComplete ? (authCopy?.completedCta || copy.cta) : copy.cta;
+  const completedIcon = isStartFlowComplete ? (
+    <span className="atela-cta-complete-check" aria-hidden="true">
+      <svg viewBox="0 0 16 16" focusable="false">
+        <path d="M3.5 8.5 6.5 11.5 12.5 4.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    </span>
+  ) : null;
+  const handleHeroCtaClick = (event) => {
+    if (trackCtaClick) {
+      trackCtaClick({
+        sectionId: 'demo',
+        ctaId: 'hero_start',
+        ctaLabel,
+        destination: buildSectionUrl('tech'),
+        is_start_flow_complete: isStartFlowComplete,
+      });
+    }
+
+    if (openStartFlow) {
+      event.preventDefault();
+      if (isStartFlowComplete) return;
+      openStartFlow({ source: 'hero' });
+      return;
+    }
+
+    if (handleSectionNavigation) {
+      handleSectionNavigation(event, 'tech');
+    }
+  };
+  const handlePackSelection = (pack) => {
+    if (trackUiInteraction) {
+      trackUiInteraction({
+        sectionId: 'demo',
+        interactionId: 'hero_pack_select',
+        interactionType: 'select',
+        interactionLabel: pack.name,
+        interactionValue: pack.id,
+      });
+    }
+
+    setActivePackId(pack.id);
+  };
 
   return (
     <section className="demo-hero" id="demo">
@@ -574,10 +641,11 @@ function AtelaHeroDemo() {
         <a
           className="demo-hero-button"
           href={buildSectionUrl('tech')}
-          onClick={handleSectionNavigation ? (event) => handleSectionNavigation(event, 'tech') : undefined}
+          onClick={handleHeroCtaClick}
+          aria-disabled={isStartFlowComplete || undefined}
         >
-          {copy.cta}
-          <span className="demo-hero-button-arrow">↗</span>
+          {ctaLabel}
+          {isStartFlowComplete ? completedIcon : <span className="demo-hero-button-arrow">↗</span>}
         </a>
       </div>
 
@@ -688,7 +756,7 @@ function AtelaHeroDemo() {
                   style={buildSourceItemStyle(inputProgress, packIndex, isCompactLayout)}
                   onMouseEnter={() => setActivePackId(pack.id)}
                   onFocus={() => setActivePackId(pack.id)}
-                  onClick={() => setActivePackId(pack.id)}
+                  onClick={() => handlePackSelection(pack)}
                 >
                   {activePack.id === pack.id && !isCompactLayout ? (
                     <ConnectorHandle

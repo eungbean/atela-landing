@@ -5,7 +5,11 @@ dist/
 .vercel/
 .netlify/
 *.log
+.env.local
+.env.*.local
+.claude/
 
 # Local/exported artifacts that are not part of the active landing source
 ATELA LANDING BY CLAUDE.html
 ATELA LANDING BY CLAUDE_files/
+.gstack/

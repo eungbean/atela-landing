@@ -14,8 +14,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="description" content="텍스트와 로고 선명도를 지키며 상세페이지, 광고, 숏폼, 마켓플레이스 비주얼을 운영하는 AI Agentic Agency for Brands.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <title>ATELA · 브랜드를 위한 에이전틱 크리에이티브 팀</title>
+<meta name="atela-clerk-publishable-key" content="%VITE_CLERK_PUBLISHABLE_KEY%">
+<script src="/components/AtelaAnalytics.js"></script>
 <script src="/components/AtelaLocale.js"></script>
 <script src="/components/AtelaCopy.js"></script>
+<script src="/components/AtelaAuth.js"></script>
 <link rel="stylesheet" href="/styles/extensions.css">
 <style>
   /* force light color-scheme so Safari/Chrome dark mode doesn't repaint form/button colors */
@@ -184,6 +187,9 @@ window.requestAnimationFrame(() => {
   window.requestAnimationFrame(() => {
     if (window.atelaApplyCurrentRoute) {
       window.atelaApplyCurrentRoute({ behavior: 'auto' });
+    }
+    if (window.atelaStartAnalytics) {
+      window.atelaStartAnalytics({ trigger: 'initial_load' });
     }
   });
 });

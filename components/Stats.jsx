@@ -3,7 +3,7 @@ function Stats() {
   const copy = window.atelaGetCopySection('stats');
   const stats = copy.items;
   return (
-    <section className="atela-stats">
+    <section id="stats" className="atela-stats">
       <div className="atela-container">
         <div className="atela-stats-grid">
           {stats.map((s,i) => (

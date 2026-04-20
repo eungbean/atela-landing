@@ -1,4 +1,4 @@
-// Expert Marketplace — on-demand AI specialists.
+// Orchestration stage — ATELA's agentic creative system.
 const MARKETPLACE_SPECIALTY_ROWS = [
   [
     { id: 'ad-creative', label: 'Ad Creative', bg: '#DAF277', fg: '#16210F' },
@@ -52,7 +52,7 @@ function getMarketplaceAccentTextColor(color) {
   return ['#C6FF3D', '#E8D5B0', '#FFB020'].includes(color) ? '#0A0A0A' : '#fff';
 }
 
-function getMarketplaceExpertRole(spec) {
+function getMarketplaceAgentLabel(spec) {
   if (!spec) return 'Expert';
   return spec.split('·')[0].trim();
 }
@@ -60,7 +60,7 @@ function getMarketplaceExpertRole(spec) {
 function Marketplace() {
   const copy = window.atelaGetCopySection('marketplace');
   const currentLocale = window.atelaGetCurrentLocale ? window.atelaGetCurrentLocale() : 'ko';
-  const experts = copy.experts.slice(0, MARKETPLACE_EXPERT_LAYOUT.length);
+  const agents = (copy.agents || []).slice(0, MARKETPLACE_EXPERT_LAYOUT.length);
   const motionPills = copy.motionPills || MARKETPLACE_SPECIALTY_ROWS.flat().map((item) => item.label);
   let motionPillIndex = 0;
   const specialtyRows = MARKETPLACE_SPECIALTY_ROWS.map((row) => (
@@ -75,8 +75,8 @@ function Marketplace() {
     })
   ));
   const motionAriaLabel = currentLocale === 'ko'
-    ? 'ATELA 전문가 매칭 모션 그래픽'
-    : 'ATELA expert matching motion graphic';
+    ? 'ATELA 에이전트 오케스트레이션 모션 그래픽'
+    : 'ATELA agent orchestration motion graphic';
 
   return (
     <section id="marketplace" className="atela-market">
@@ -175,11 +175,11 @@ function Marketplace() {
               </div>
 
               <div className="market-motion-layer market-motion-layer-right" aria-hidden="true">
-                {experts.map((expert, index) => {
+                {agents.map((agent, index) => {
                   const layout = MARKETPLACE_EXPERT_LAYOUT[index];
                   return (
                     <div
-                      key={expert.n}
+                      key={agent.n}
                       className="market-motion-expert"
                       style={{
                         left: layout.x,
@@ -190,13 +190,13 @@ function Marketplace() {
                       <span
                         className="market-motion-expert-avatar"
                         style={{
-                          background: expert.color,
-                          color: getMarketplaceAccentTextColor(expert.color),
+                          background: agent.color,
+                          color: getMarketplaceAccentTextColor(agent.color),
                         }}
                       >
-                        {expert.h}
+                        {agent.h}
                       </span>
-                      <span className="market-motion-expert-role">{getMarketplaceExpertRole(expert.spec)}</span>
+                      <span className="market-motion-expert-role">{getMarketplaceAgentLabel(agent.spec)}</span>
                     </div>
                   );
                 })}

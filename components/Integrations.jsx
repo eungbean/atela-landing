@@ -1,9 +1,23 @@
 // Workflow for ecommerce brands — left selector, centered result preview, right KPI panel.
 function Integrations() {
   const copy = window.atelaGetCopySection('integrations');
+  const trackUiInteraction = window.atelaTrackUiInteraction;
   const [activeChallengeId, setActiveChallengeId] = React.useState(copy.challenges[0]?.id);
   const activeChallenge =
     copy.challenges.find((item) => item.id === activeChallengeId) || copy.challenges[0];
+  const handleChallengeSelect = (item) => {
+    if (trackUiInteraction) {
+      trackUiInteraction({
+        sectionId: 'workflow',
+        interactionId: 'workflow_challenge_select',
+        interactionType: 'select',
+        interactionLabel: item.label,
+        interactionValue: item.id,
+      });
+    }
+
+    setActiveChallengeId(item.id);
+  };
 
   return (
     <section id="workflow" className="atela-integ">
@@ -32,7 +46,7 @@ function Integrations() {
                 key={item.id}
                 type="button"
                 className={`workflow-selector-item${item.id === activeChallenge.id ? ' is-active' : ''}`}
-                onClick={() => setActiveChallengeId(item.id)}
+                onClick={() => handleChallengeSelect(item)}
                 onMouseEnter={() => setActiveChallengeId(item.id)}
                 onFocus={() => setActiveChallengeId(item.id)}
                 aria-pressed={item.id === activeChallenge.id ? 'true' : 'false'}

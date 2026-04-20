@@ -51,6 +51,14 @@ Future edits should reinforce service, workflow, and team language over tool-fir
 - `bun run prepare:want-this-assets:cleanup`
 - `bun run build:deploy`
 
+## Clerk Launch Sign-In
+
+- This landing opens Clerk's JavaScript sign-in overlay from the shared `무료로 시작하기` / `Start free` CTA.
+- Add `VITE_CLERK_PUBLISHABLE_KEY=pk_test_...` to `.env.local` before running Vite locally or building for deploy.
+- In Clerk, use the `JavaScript` quickstart for this workspace because the live app is mounted from `index.html`, not a bundled React entry.
+- Enable Google as a social connection in the Clerk Dashboard. If you want a Google-only flow, disable other sign-in methods and keep Google enabled for both sign-up and sign-in.
+- Before public launch, make sure the Google OAuth app connected to Clerk is switched from `Testing` to `In production`.
+
 ## Asset Workflow
 
 ### Hero assets

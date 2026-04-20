@@ -247,6 +247,13 @@
 
     updateRouteSnapshot();
     scrollToSection(sectionId, 'smooth');
+
+    if (typeof window.atelaTrackRouteChange === 'function') {
+      window.atelaTrackRouteChange({
+        sectionId: sectionId || 'home',
+        trigger: 'section_navigation',
+      });
+    }
   }
 
   window.atelaGetRouteState = getRouteState;
@@ -259,7 +266,13 @@
   window.atelaApplyCurrentRoute = applyRoutePosition;
 
   window.addEventListener('popstate', () => {
-    window.requestAnimationFrame(() => applyRoutePosition({ behavior: 'auto' }));
+    window.requestAnimationFrame(() => {
+      applyRoutePosition({ behavior: 'auto' });
+
+      if (typeof window.atelaTrackRouteChange === 'function') {
+        window.atelaTrackRouteChange({ trigger: 'browser_navigation' });
+      }
+    });
   });
 
   normalizeEntry();

@@ -1,5 +1,7 @@
 function CaseStudy() {
   const copy = window.atelaGetCopySection('caseStudy');
+  const trackCtaClick = window.atelaTrackCtaClick;
+  const titlePrefixLines = String(copy.titlePrefix || '').split('\n');
   return (
     <section id="cases" className="atela-case">
       <div className="atela-container">
@@ -12,7 +14,15 @@ function CaseStudy() {
           </div>
           <div className="atela-case-copy">
             <span className="atela-eyebrow">{copy.eyebrow}</span>
-            <h2 className="atela-h2">{copy.titlePrefix} <span className="hl">{copy.titleHighlight}</span></h2>
+            <h2 className="atela-h2">
+              {titlePrefixLines.map((line, index) => (
+                <React.Fragment key={`${line}-${index}`}>
+                  {index > 0 ? <br/> : null}
+                  {line}
+                </React.Fragment>
+              ))}{' '}
+              <span className="hl">{copy.titleHighlight}</span>
+            </h2>
             <p>{copy.body}</p>
             <blockquote>
               "{copy.quote}"
@@ -23,7 +33,18 @@ function CaseStudy() {
                 <div key={stat.label}><b>{stat.value}</b><span>{stat.label}</span></div>
               ))}
             </div>
-            <a className="atela-btn-outline" href="#">{copy.cta}</a>
+            <a
+              className="atela-btn-outline"
+              href="#"
+              onClick={() => trackCtaClick && trackCtaClick({
+                sectionId: 'cases',
+                ctaId: 'case_study_primary',
+                ctaLabel: copy.cta,
+                destination: '#',
+              })}
+            >
+              {copy.cta}
+            </a>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ function LogoCloud() {
   const copy = window.atelaGetCopySection('logoCloud');
   const logos = ['MUSINSA', '29CM', 'COUPANG', 'OLIVE YOUNG', 'KAKAO', 'SMART STORE', 'GENTLE MONSTER', "AGE 20'S"];
   return (
-    <section className="atela-logos">
+    <section id="logos" className="atela-logos">
       <div className="atela-container">
         <p className="atela-logos-title">{copy.title}</p>
         <div className="atela-logos-marquee" aria-label={copy.ariaLabel}>

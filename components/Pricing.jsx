@@ -15,11 +15,10 @@ function renderPricingAmount(price, extraClassName = '') {
   );
 }
 
-// Pricing — primary AI tools subscription with an add-on expert receipt reveal.
+// Pricing — simplified public structure for sprint, retainer, and enterprise.
 function Pricing() {
   const copy = window.atelaGetCopySection('pricing');
   const storyRef = React.useRef(null);
-  const [billingPeriod, setBillingPeriod] = React.useState('annual');
 
   React.useEffect(() => {
     let frameId = 0;
@@ -59,42 +58,21 @@ function Pricing() {
         <div className="atela-section-head center">
           <span className="atela-eyebrow" style={{color:'#C6FF3D'}}>{copy.eyebrow}</span>
           <h2 className="atela-h2" style={{color:'#fff'}}>{copy.title}</h2>
+          {copy.subtitle ? <p className="pricing-section-copy">{copy.subtitle}</p> : null}
         </div>
 
         <div ref={storyRef} className="pricing-story">
           <div className="pricing-tools-stage">
             <div className="price-side price-side-tools">
-              <div className="price-side-head price-side-head-tools">
-                <div className="pricing-billing-bar">
-                  <div className="pricing-billing-toggle" role="tablist" aria-label={copy.billingAriaLabel}>
-                    <button
-                      type="button"
-                      className={`pricing-billing-option${billingPeriod === 'monthly' ? ' is-active' : ''}`}
-                      aria-pressed={billingPeriod === 'monthly' ? 'true' : 'false'}
-                      onClick={() => setBillingPeriod('monthly')}
-                    >
-                      {copy.billingMonthly}
-                    </button>
-                    <button
-                      type="button"
-                      className={`pricing-billing-option${billingPeriod === 'annual' ? ' is-active' : ''}`}
-                      aria-pressed={billingPeriod === 'annual' ? 'true' : 'false'}
-                      onClick={() => setBillingPeriod('annual')}
-                    >
-                      {copy.billingAnnual}
-                    </button>
-                  </div>
-                  <span className="pricing-billing-badge">{copy.billingBadge}</span>
-                </div>
-              </div>
               <div className="price-tier-grid price-tier-grid-primary">
-                {copy.toolsTiers.map((tier) => {
-                  const activePrice = tier.prices[billingPeriod];
+                {copy.plans.map((tier) => {
+                  const activePrice = tier.price;
 
                   return (
                     <div key={tier.name} className={`atela-price${tier.dark ? ' dark' : ''}${tier.featured ? ' featured' : ''}`}>
                     {tier.badge ? <span className="atela-price-badge">{tier.badge}</span> : null}
                     <h3>{tier.name}</h3>
+                    {tier.summary ? <p className="atela-price-summary">{tier.summary}</p> : null}
                     <div className="atela-price-stack">
                       {activePrice.originalAmount ? renderPricingAmount({
                         prefix: activePrice.originalPrefix || activePrice.prefix,
@@ -119,6 +97,7 @@ function Pricing() {
               <div className="price-side market pricing-market-receipt">
                 <div className="price-side-head pricing-market-head">
                   <h3 style={{color:'#0A0A0A', margin: 0}}>{copy.marketTitle}</h3>
+                  {copy.marketSubtitle ? <p className="pricing-side-copy pricing-side-copy-ink">{copy.marketSubtitle}</p> : null}
                 </div>
                 <div className="market-price-card">
                   {copy.marketRows.map((row, index) => (

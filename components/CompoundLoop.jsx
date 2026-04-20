@@ -1,11 +1,20 @@
 function CompoundChannelVisual(props) {
   var glyph = props.glyph;
   var tone = props.tone;
+  var title = props.title;
   return /*#__PURE__*/React.createElement("div", {
     className: "atela-compound-channel-visual tone-".concat(tone)
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "atela-compound-channel-top"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "atela-compound-channel-glyph"
-  }, glyph), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null));
+    className: "atela-compound-channel-title-overlay"
+  }, title), /*#__PURE__*/React.createElement("span", {
+    className: "atela-compound-channel-glyph",
+    "aria-hidden": "true"
+  }, glyph)), /*#__PURE__*/React.createElement("div", {
+    className: "atela-compound-channel-lines",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null)));
 }
 
 function CompoundMetricKpi(props) {
@@ -370,14 +379,15 @@ function CompoundLoop() {
   var modelCards = copy.modelCards;
   var v1Cards = copy.v1Cards;
   var optimizedCards = copy.optimizedCards;
-  var outputCards = copy.outputCards;
+  var subHighlight = copy.subHighlight;
+  var subBody = copy.subBody;
   var wrapperRef = React.useRef(null);
   var sectionRef = React.useRef(null);
   var spacerRef = React.useRef(null);
   var trackRef = React.useRef(null);
   var svgRef = React.useRef(null);
   var colRefs = React.useRef([]);
-  var featuredCols = React.useRef(new Set([3, 5]));
+  var featuredCols = React.useRef(new Set([3, 4]));
 
   React.useEffect(function () {
     var wrapper = wrapperRef.current;
@@ -394,22 +404,19 @@ function CompoundLoop() {
       width: 228,
       gap: 392
     }, {
-      width: 392,
-      gap: 210
+      width: 360,
+      gap: 190
     }, {
       width: 236,
       gap: 150
-    }, {
-      width: 236,
-      gap: 290
     }, {
       width: 244,
       gap: 210
     }, {
       width: 236,
-      gap: 248
+      gap: 290
     }, {
-      width: 264,
+      width: 236,
       gap: 0
     }];
     if (!wrapper || !section || !spacer || !track || !svg) return;
@@ -456,10 +463,10 @@ function CompoundLoop() {
       var centers = columnCenters();
       var start = centers[0] || 0;
       var end = centers[centers.length - 1] || 0;
-      var entryRange = columnRange(0, 2);
-      var exitRange = columnRange(5, 7);
-      var entryOffset = entryRange ? fitRange(entryRange, sectionWidth, 0.04, 40, 72, 0.08, 64, 140) + 104 : Math.max(280, Math.min(sectionWidth * 0.28, 400)) - start;
-      var exitOffset = exitRange ? fitRange(exitRange, sectionWidth, 0.14, 140, 220, 0.04, 40, 84) : Math.max(sectionWidth * 0.64, sectionWidth - 420) - end;
+      var exitRange = columnRange(6, 6);
+      var entryAnchor = sectionWidth * 0.5;
+      var entryOffset = entryAnchor - start;
+      var exitOffset = exitRange ? fitRange(exitRange, sectionWidth, 0.22, 220, 340, 0.12, 120, 220) : Math.max(sectionWidth * 0.58, sectionWidth - 520) - end;
       var travel = Math.max(0, entryOffset - exitOffset);
       return {
         centers: centers,
@@ -478,7 +485,7 @@ function CompoundLoop() {
       }
       measureLayout();
       var travel = desktopMetrics(section.clientWidth).travel;
-      var extra = Math.max(window.innerHeight * 0.34, 280);
+      var extra = Math.max(window.innerHeight * 0.48, 420);
       spacer.style.height = "".concat(Math.ceil(travel + extra), "px");
     }
 
@@ -559,11 +566,10 @@ function CompoundLoop() {
       var fan = track.querySelector('[data-node="fan1"]');
       var stack = track.querySelector('[data-stack="content"]');
       var channels = Array.from(track.querySelectorAll('[data-node="content"]'));
-      var perfData = track.querySelector('[data-node="variant"]');
-      var variants = track.querySelector('[data-node="perf"]');
+      var perfData = track.querySelector('[data-node="performance"]');
       var modelNodes = Array.from(track.querySelectorAll('[data-node="model"]'));
       var ideation = track.querySelector('[data-node="ideation"]');
-      var output = track.querySelector('[data-node="output"]');
+      var variants = track.querySelector('[data-node="variants"]');
 
       drawCurve(svg, pointFromSide(input, 'right', bounds), pointFromSide(fan, 'left', bounds), 0, progress);
       channels.forEach(function (node) {
@@ -572,14 +578,13 @@ function CompoundLoop() {
       channels.forEach(function (node) {
         return drawCurve(svg, pointFromStack(node, 'right', stack, bounds), pointFromSide(perfData, 'left', bounds), 2, progress);
       });
-      drawCurve(svg, pointFromSide(perfData, 'right', bounds), pointFromSide(variants, 'left', bounds), 3, progress);
       modelNodes.forEach(function (node) {
-        return drawCurve(svg, pointFromSide(variants, 'right', bounds), pointFromSide(node, 'left', bounds), 4, progress);
+        return drawCurve(svg, pointFromSide(perfData, 'right', bounds), pointFromSide(node, 'left', bounds), 3, progress);
       });
       modelNodes.forEach(function (node) {
-        return drawCurve(svg, pointFromSide(node, 'right', bounds), pointFromSide(ideation, 'left', bounds), 5, progress);
+        return drawCurve(svg, pointFromSide(node, 'right', bounds), pointFromSide(ideation, 'left', bounds), 4, progress);
       });
-      drawCurve(svg, pointFromSide(ideation, 'right', bounds), pointFromSide(output, 'left', bounds), 6, progress);
+      drawCurve(svg, pointFromSide(ideation, 'right', bounds), pointFromSide(variants, 'left', bounds), 5, progress);
     }
 
     function updateDesktop() {
@@ -607,7 +612,7 @@ function CompoundLoop() {
       colRefs.current.forEach(function (col, index) {
         if (!col) return;
         var emphasis = Math.max(0, 1 - Math.abs(centers[index] + offset - sectionWidth / 2) / focusWidth);
-        var targetScale = featuredCols.current.has(index) ? 1.16 : 1.08;
+        var targetScale = index === 4 ? 1 : featuredCols.current.has(index) ? 1.16 : 1.08;
         var scale = 0.92 + emphasis * (targetScale - 0.92);
         var opacity = 0.32 + 0.68 * emphasis;
         col.style.transform = "scale(".concat(scale.toFixed(3), ")");
@@ -616,11 +621,9 @@ function CompoundLoop() {
       });
 
       var v1 = colRefs.current[1];
-      var variantsCol = colRefs.current[4];
-      var outputCol = colRefs.current[7];
+      var variantsCol = colRefs.current[6];
       if (v1) v1.style.setProperty('--fan-t', fanProgress(0).toFixed(3));
-      if (variantsCol) variantsCol.style.setProperty('--fan-t', fanProgress(3).toFixed(3));
-      if (outputCol) outputCol.style.setProperty('--fan-t', fanProgress(6).toFixed(3));
+      if (variantsCol) variantsCol.style.setProperty('--fan-t', fanProgress(5).toFixed(3));
       drawDesktopLinks(progress);
     }
 
@@ -658,7 +661,14 @@ function CompoundLoop() {
           <h2 className="atela-compound-headline">
             {copy.headlineLead} <em>{copy.headlineEmphasis}</em>
           </h2>
-          <p className="atela-compound-sub">{copy.sub}</p>
+          <p className="atela-compound-sub">
+            {subHighlight || subBody ? (
+              <>
+                {subHighlight ? <strong className="atela-compound-sub-highlight">{subHighlight}</strong> : null}
+                {subBody ? <span className="atela-compound-sub-rest">{subBody}</span> : null}
+              </>
+            ) : copy.sub}
+          </p>
         </div>
 
         <div className="atela-compound-desk">
@@ -672,12 +682,14 @@ function CompoundLoop() {
                 }}
                 className="atela-compound-col atela-compound-col-input"
               >
-                <div className="atela-compound-colhead">{copy.labels.creative}</div>
+                <div className="atela-compound-colhead atela-compound-colhead-brief">{copy.labels.creative}</div>
                 <div className="atela-compound-input-card" data-node="input" data-card>
                   <div className="atela-compound-input-shell">
-                    <span className="atela-compound-input-kicker">{copy.inputKicker}</span>
-                    <strong className="atela-compound-input-title">{copy.briefTitle}</strong>
-                    <p className="atela-compound-input-copy">{copy.briefCopy}</p>
+                    <div className="atela-compound-input-body">
+                      {copy.inputKicker ? <span className="atela-compound-input-kicker">{copy.inputKicker}</span> : null}
+                      <strong className="atela-compound-input-title">{copy.briefTitle}</strong>
+                      <p className="atela-compound-input-copy">{copy.briefCopy}</p>
+                    </div>
                     <div className="atela-compound-input-tags">
                       {copy.inputTags.map(function (tag) {
                         return <span key={tag}>{tag}</span>;
@@ -722,11 +734,7 @@ function CompoundLoop() {
                     return (
                       <div key={card.title} className="atela-compound-channel-card" data-node="content" data-card>
                         <div className="atela-compound-channel-media">
-                          <CompoundChannelVisual glyph={card.glyph} tone={card.tone} />
-                        </div>
-                        <div className="atela-compound-channel-body">
-                          <div className="atela-compound-channel-title">{card.title}</div>
-                          <div className="atela-compound-channel-desc">{card.desc}</div>
+                          <CompoundChannelVisual glyph={card.glyph} tone={card.tone} title={card.title} />
                         </div>
                       </div>
                     );
@@ -741,7 +749,7 @@ function CompoundLoop() {
                 className="atela-compound-col atela-compound-col-data"
               >
                 <div className="atela-compound-colhead">{copy.labels.performance}</div>
-                <div className="atela-compound-perf-card" data-node="variant" data-card>
+                <div className="atela-compound-perf-card" data-node="performance" data-card>
                   <div className="atela-compound-perf-grid">
                     <div className="atela-compound-perf-box">
                       <CompoundMetricKpi copy={metrics} />
@@ -762,35 +770,6 @@ function CompoundLoop() {
               <div
                 ref={function ref(node) {
                   colRefs.current[4] = node;
-                }}
-                className="atela-compound-col atela-compound-col-variants"
-              >
-                <div className="atela-compound-colhead">{copy.labels.variants}</div>
-                <div className="atela-compound-variant-wrap">
-                  <div className="atela-compound-variant-base" data-node="perf" data-card>
-                    <div className="atela-compound-variant-pulse" />
-                    <div className="atela-compound-variant-grid">
-                      <span />
-                      <span />
-                      <span />
-                      <span />
-                    </div>
-                  </div>
-                  <div className="atela-compound-fan atela-compound-fan-small atela-compound-fan-overlay">
-                    {optimizedCards.map(function (card, index) {
-                      return (
-                        <div key={"".concat(card.kicker, "-").concat(index)} className="atela-compound-fan-card">
-                          <CompoundThumb card={card} />
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-
-              <div
-                ref={function ref(node) {
-                  colRefs.current[5] = node;
                 }}
                 className="atela-compound-col atela-compound-col-model"
               >
@@ -814,7 +793,7 @@ function CompoundLoop() {
 
               <div
                 ref={function ref(node) {
-                  colRefs.current[6] = node;
+                  colRefs.current[5] = node;
                 }}
                 className="atela-compound-col atela-compound-col-ideation"
               >
@@ -835,33 +814,30 @@ function CompoundLoop() {
 
               <div
                 ref={function ref(node) {
-                  colRefs.current[7] = node;
+                  colRefs.current[6] = node;
                 }}
-                className="atela-compound-col atela-compound-col-output"
+                className="atela-compound-col atela-compound-col-variants"
               >
-                <div className="atela-compound-output-label atela-compound-output-label-final">
-                  {copy.outputLabelLines.map(function (line, index) {
-                    return (
-                      <React.Fragment key={"".concat(line, "-").concat(index)}>
-                        {index > 0 ? <br /> : null}
-                        {line}
-                      </React.Fragment>
-                    );
-                  })}
-                </div>
-                <div className="atela-compound-fan">
-                  {outputCards.map(function (card, index) {
-                    return (
-                      <div
-                        key={"".concat(card.kicker, "-").concat(index)}
-                        className="atela-compound-fan-card"
-                        data-node={index === 0 ? 'output' : undefined}
-                        data-card={index === 0 ? true : undefined}
-                      >
-                        <CompoundThumb card={card} />
-                      </div>
-                    );
-                  })}
+                <div className="atela-compound-colhead">{copy.labels.variants}</div>
+                <div className="atela-compound-variant-wrap">
+                  <div className="atela-compound-variant-base" data-node="variants" data-card>
+                    <div className="atela-compound-variant-pulse" />
+                    <div className="atela-compound-variant-grid">
+                      <span />
+                      <span />
+                      <span />
+                      <span />
+                    </div>
+                  </div>
+                  <div className="atela-compound-fan atela-compound-fan-small atela-compound-fan-overlay">
+                    {optimizedCards.map(function (card, index) {
+                      return (
+                        <div key={"".concat(card.kicker, "-").concat(index)} className="atela-compound-fan-card">
+                          <CompoundThumb card={card} />
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
@@ -870,22 +846,17 @@ function CompoundLoop() {
 
         <div className="atela-compound-mobile">
           <div className="atela-compound-mobile-grid">
-            <article className="atela-compound-mobile-card">
-              <h3>{copy.mobileCards[0].title}</h3>
-              <p>{copy.mobileCards[0].body}</p>
-            </article>
-            <article className="atela-compound-mobile-card">
-              <h3>{copy.mobileCards[1].title}</h3>
-              <p>{copy.mobileCards[1].body}</p>
-            </article>
-            <article className="atela-compound-mobile-card">
-              <h3>{copy.mobileCards[2].title}</h3>
-              <p>{copy.mobileCards[2].body}</p>
-            </article>
-            <article className="atela-compound-mobile-card is-highlight">
-              <h3>{copy.mobileCards[3].title}</h3>
-              <p>{copy.mobileCards[3].body}</p>
-            </article>
+            {copy.mobileCards.map(function (card, index) {
+              return (
+                <article
+                  key={card.title}
+                  className={"atela-compound-mobile-card".concat(index === copy.mobileCards.length - 1 ? ' is-highlight' : '')}
+                >
+                  <h3>{card.title}</h3>
+                  <p>{card.body}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
