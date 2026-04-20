@@ -99,11 +99,11 @@
   - Showcase hook section inserted before `Marketplace`.
   - Presents example content types that lead into the Expert Marketplace section.
 - `assets/hero-demo/`
-  - Source folders and generated optimized Hero media.
+  - Optimized Hero media tracked in the repo, plus optional temporary local source media while preparing new packs.
 - `assets/workflow/`
   - Local workflow placeholder stills captured from the current Presti reference videos.
 - `scripts/prepare-hero-demo-assets.mjs`
-  - Normalizes Hero asset folders and generates optimized AVIF / MP4 outputs.
+  - Reads temporary local Hero source media and generates the optimized AVIF / MP4 outputs that the repo actually keeps.
 - `main.js`
   - Legacy file from an older implementation.
   - It is not part of the currently rendered `index.html` flow and should not be used as the source of truth for the active page.
@@ -168,13 +168,14 @@
 
 - Each pack lives in:
   - `assets/hero-demo/<pack-id>/`
-- Raw input filenames expected:
+- Temporary local source filenames accepted by the prep script:
   - `source.(png|jpg|jpeg)`
   - `angle.(png|jpg|jpeg)`
   - `bg.(png|jpg|jpeg)`
   - `bg_lighting.(png|jpg|jpeg)`
   - `bg_variation.(png|jpg|jpeg)`
   - `video.mp4` optional
+- These raw source files are not expected to stay in the repo after optimization; public commits should keep the generated outputs instead.
 - Accepted alias filenames:
   - `drg_bg.*` -> `bg`
   - `bg_light.*` -> `bg_lighting`
@@ -191,6 +192,7 @@
   - `bg_lighting.avif`
   - `bg_variation.avif`
   - `video.optimized.mp4` when `video.mp4` exists
+- The optimized outputs are the files the repo is expected to keep and publish.
 - The active Hero reads the generated files, not the raw PNG/JPG inputs.
 - Video cards are conditionally rendered:
   - If a pack has no optimized video source, the `Video` card is omitted.
@@ -226,10 +228,11 @@
 - Avoid editing `_Index.html` unless the user explicitly asks for legacy page changes.
 - Avoid editing files inside `ATELA Design System/` unless the user explicitly asks to sync or borrow from the reference system.
 - If you add or replace Hero media:
-  1. Put raw files into `assets/hero-demo/<pack-id>/`
+  1. Put raw files into `assets/hero-demo/<pack-id>/` locally
   2. Run `bun run prepare:hero-assets`
-  3. Update `components/HeroDemoAssets.js` if pack IDs or display names changed
-  4. Verify in the browser
+  3. Delete the temporary raw PNG/JPG and `video.mp4` files before commit
+  4. Update `components/HeroDemoAssets.js` if pack IDs or display names changed
+  5. Verify in the browser
 
 ## Validation Workflow
 
