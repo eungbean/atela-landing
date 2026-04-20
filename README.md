@@ -1,6 +1,45 @@
 # ATELA Landing
 
-Current ATELA landing page workspace built with `index.html` plus script-tag React/Babel components.
+Current ATELA landing workspace for a script-tag React/Babel site served with Vite.
+
+## Positioning
+
+ATELA is no longer framed as a generic self-serve tool. This landing should present ATELA as:
+
+- a design creative team for brands
+- an `AI Agentic Agency for Brands`
+- a workflow partner that turns catalog inputs into brand-safe commercial creative
+
+Future edits should reinforce service, workflow, and team language over tool-first or model-first language.
+
+## Core Message Guardrails
+
+- Emphasize text, logo, embroidery, engraving, and packaging-detail sharpness.
+- Keep the workflow story clear: connect store or source inputs, generate creative, branch by channel, learn from approvals and performance, and compound into the next batch.
+- Keep the `CompoundLoop` section aligned with the idea that approved outputs and performance signals improve future creative.
+- Preserve the current proof framing around patented technology, published research, and commercial reliability when editing the `Tech` section copy.
+
+## Active Architecture
+
+- `index.html`: active entry and inline React mount
+- `components/AtelaCopy.js`: source of truth for locale copy and page metadata
+- `components/AtelaLocale.js`: locale-first URL helpers
+- `components/*.jsx`: active landing sections loaded through `type="text/babel"`
+- `styles/extensions.css`: main active styling layer
+- `styles/base.css`: shared base styles used by the current page
+
+## Section Order
+
+`Nav` -> `Hero` -> `LogoCloud` -> `Stats` -> `Tech` -> `Integrations` -> `Showcase` -> `Marketplace` -> `CompoundLoop` -> `Compare` -> `CaseStudy` -> `Pricing` -> `FinalCta` -> `Footer`
+
+## Important Active Surfaces
+
+- `components/Tech.jsx`: proof section for text and detail preservation
+- `components/Integrations.jsx`: workflow section for ecommerce brands
+- `components/Showcase.jsx`: gallery hook before the expert and agent layer
+- `components/Marketplace.jsx`: expert marketplace and specialist layer
+- `components/CompoundLoop.jsx`: compounding system-learning section
+- `components/Pricing.jsx`: pricing story for the current offer
 
 ## Commands
 
@@ -12,50 +51,34 @@ Current ATELA landing page workspace built with `index.html` plus script-tag Rea
 - `bun run prepare:want-this-assets:cleanup`
 - `bun run build:deploy`
 
-## Active Files
+## Asset Workflow
 
-- `index.html`: active entry and inline app mount
-- `components/AtelaCopy.js`: locale-specific marketing copy and page metadata
-- `components/*.jsx`: active landing sections
-- `components/AtelaLocale.js`: locale-first URL helpers
-- `components/Integrations.jsx`: active workflow section for ecommerce brands, using a simplified left-select / center-preview / right-KPI layout with localized workflow labels
-- `components/Showcase.jsx`: active showcase hook before Expert Marketplace
-- `assets/want-this/`: raw showcase gallery drop zone for `Showcase`
-- `styles/extensions.css`: active page styling
-- `assets/workflow/`: local workflow placeholder stills captured from Presti reference videos for the current selector preview
+### Hero assets
 
-## Showcase Gallery Assets
+- Put raw source files into `assets/hero-demo/<pack-id>/`
+- Run `bun run prepare:hero-assets`
+- The live Hero reads optimized outputs such as `source.avif` and `video.optimized.mp4`
 
-- Put raw `png`, `jpg`, `jpeg`, `webp`, or `mp4` files into `assets/want-this/`.
-- Run `bun run prepare:want-this-assets`.
-- The default command optimizes the folder contents and regenerates `assets/want-this/manifest.js` without deleting the originals.
-- Existing optimized gallery items are kept in the manifest, so adding a new file does not drop previously processed assets.
-- If you explicitly want cleanup after optimization, run `bun run prepare:want-this-assets:cleanup`.
-- `components/Showcase.jsx` reads the generated manifest, so every file in that folder is included automatically in the looping gallery.
+### Showcase assets
+
+- Put raw `png`, `jpg`, `jpeg`, `webp`, `avif`, or `mp4` files into `assets/want-this/`
+- Run `bun run prepare:want-this-assets`
+- `components/Showcase.jsx` reads `assets/want-this/manifest.js`
 
 ## Locale Routing
 
-- Public URLs should use `/{locale}/{page}`.
-- Home routes are `/{locale}` such as `/ko` and `/en`.
-- Section-style landing routes already map to paths such as `/ko/pricing`, `/ko/tech`, `/ko/workflow`, `/ko/showcase`, and `/ko/marketplace`.
-- The bare root `/` is only a neutral entry that normalizes into a locale path.
-- `?lang=ko` and `?lang=en` are treated as migration helpers and are normalized back into the locale path.
+- Public URLs use `/{locale}/{page}`
+- Home routes are `/ko` and `/en`
+- Section routes include paths such as `/ko/pricing`, `/ko/tech`, `/ko/workflow`, `/ko/showcase`, and `/ko/marketplace`
+- `/` is only a neutral entry that normalizes into a locale path
 
-## Current Locale Status
+## Validation
 
-- `ko` and `en` are both content-ready locales in the current implementation.
-- `/en` now renders English marketing copy through the shared `index.html` app.
-- Browser-language auto-selection can now resolve to either `ko` or `en`.
+- Standard check: `bunx --bun vite build`
+- Production prep: `bun run build:deploy`
+- Expected build warnings about non-module script tags in `index.html` are normal for this architecture unless the build exits non-zero
 
-## Public Deploy
+## Reference Files
 
-- Recommended default: GitHub repo + Vercel deployment
-- Use `bun run build:deploy` for production output
-- `scripts/prepare-static-deploy.mjs` copies `components/`, `vendor/`, `assets/`, `styles/`, and `favicon.svg` into `dist/` because this landing still serves non-module scripts directly from the filesystem
-- The built favicon link is normalized back to `/favicon.svg` so the deployed site uses a stable root icon path
-- The deploy prep also rewrites the built stylesheet link back to `/styles/extensions.css` so the Babel/script-tag app does not lose styling when `dist/assets/` is reused for source media
-- `vercel.json` is configured for:
-  - `bun install --frozen-lockfile`
-  - `bun run build:deploy`
-  - `dist` output
-  - locale-only rewrites to `index.html` so paths like `/ko/pricing` resolve correctly without swallowing static files such as `/favicon.svg`
+- `ATELA LANDING BY CLAUDE.html`: legacy export mirror, not the live source of truth
+- `ATELA Design System/`: reference material only

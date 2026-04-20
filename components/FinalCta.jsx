@@ -29,43 +29,11 @@ window.FinalCta = FinalCta;
 
 function Footer() {
   const copy = window.atelaGetCopySection('footer');
-  const buildSectionUrl = window.atelaBuildSectionUrl || ((sectionId) => `#${sectionId}`);
-  const handleSectionNavigation = window.atelaHandleSectionNavigation;
 
   return (
     <footer className="atela-footer on-ink">
       <div className="atela-container">
-        <div className="atela-footer-grid">
-          <div>
-            <div className="atela-logo" style={{color:'#fff'}}>ATELA<span className="atela-logo-dot"/></div>
-            <p style={{color:'#888', marginTop:12, maxWidth: 260, fontSize: 13}}>{copy.description}</p>
-            <p style={{color:'#555', marginTop:16, fontSize: 11, fontFamily: 'var(--font-mono)'}}>2 patents · CVPR / ECCV · ex-Tesla / HOMI</p>
-          </div>
-          <div>
-            <h5>{copy.platformTitle}</h5>
-            <a
-              href={buildSectionUrl('tech')}
-              onClick={handleSectionNavigation ? (event) => handleSectionNavigation(event, 'tech') : undefined}
-            >
-              {copy.platformLinks.tech}
-            </a>
-            <a
-              href={buildSectionUrl('marketplace')}
-              onClick={handleSectionNavigation ? (event) => handleSectionNavigation(event, 'marketplace') : undefined}
-            >
-              {copy.platformLinks.marketplace}
-            </a>
-          </div>
-          <div>
-            <h5>{copy.companyTitle}</h5>
-            {copy.companyLinks.map((label) => <a key={label}>{label}</a>)}
-          </div>
-          <div>
-            <h5>{copy.supportTitle}</h5>
-            {copy.supportLinks.map((label) => <a key={label}>{label}</a>)}
-          </div>
-        </div>
-        <div className="atela-footer-bottom">
+        <div className="atela-footer-bottom atela-footer-line">
           <span>{copy.bottomLeft}</span>
           <span>{copy.bottomRight}</span>
         </div>

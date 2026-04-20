@@ -8,120 +8,345 @@ function CompoundChannelVisual(props) {
   }, glyph), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null));
 }
 
-function CompoundMetricKpi() {
+function CompoundMetricKpi(props) {
+  var copy = props.copy;
   return /*#__PURE__*/React.createElement("div", {
     className: "atela-compound-kpi"
   }, /*#__PURE__*/React.createElement("div", {
+    className: "atela-compound-kpi-orbit"
+  }, /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null)), /*#__PURE__*/React.createElement("div", {
     className: "atela-compound-kpi-num"
   }, "3.42", /*#__PURE__*/React.createElement("span", null, "x")), /*#__PURE__*/React.createElement("div", {
+    className: "atela-compound-kpi-meta"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "atela-compound-kpi-delta"
-  }, "\u2191 +0.38 vs baseline"), /*#__PURE__*/React.createElement("div", {
+  }, copy.delta), /*#__PURE__*/React.createElement("div", {
     className: "atela-compound-kpi-label"
-  }, "Return on ad spend"));
+  }, copy.label)), /*#__PURE__*/React.createElement("svg", {
+    className: "atela-compound-kpi-spark",
+    viewBox: "0 0 118 42",
+    preserveAspectRatio: "none",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("linearGradient", {
+    id: "compound-kpi-line",
+    x1: "0%",
+    y1: "0%",
+    x2: "100%",
+    y2: "0%"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0%",
+    stopColor: "rgba(198,255,61,0)"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "26%",
+    stopColor: "rgba(198,255,61,0.48)"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "78%",
+    stopColor: "rgba(198,255,61,0.95)"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "100%",
+    stopColor: "rgba(198,255,61,0.26)"
+  })), /*#__PURE__*/React.createElement("path", {
+    id: "compound-kpi-spark-path",
+    d: "M4 35 C 18 34, 24 28, 34 26 S 56 30, 70 20 S 92 12, 114 8"
+  })), /*#__PURE__*/React.createElement("path", {
+    className: "atela-compound-kpi-spark-shadow",
+    d: "M4 35 C 18 34, 24 28, 34 26 S 56 30, 70 20 S 92 12, 114 8"
+  }), /*#__PURE__*/React.createElement("path", {
+    className: "atela-compound-kpi-spark-line",
+    d: "M4 35 C 18 34, 24 28, 34 26 S 56 30, 70 20 S 92 12, 114 8"
+  }), /*#__PURE__*/React.createElement("circle", {
+    className: "atela-compound-kpi-spark-dot",
+    r: "3.4"
+  }, /*#__PURE__*/React.createElement("animateMotion", {
+    dur: "4.8s",
+    repeatCount: "indefinite",
+    rotate: "auto"
+  }, /*#__PURE__*/React.createElement("mpath", {
+    href: "#compound-kpi-spark-path"
+  })))));
 }
 
-function CompoundMetricLanes() {
-  var chips = [{
-    x: '10%',
-    w: '18%',
-    y: '18%'
-  }, {
-    x: '38%',
-    w: '14%',
-    y: '18%'
-  }, {
-    x: '62%',
-    w: '24%',
-    y: '18%',
-    hero: true
-  }, {
-    x: '18%',
-    w: '16%',
-    y: '48%'
-  }, {
-    x: '48%',
-    w: '18%',
-    y: '48%'
-  }, {
-    x: '28%',
-    w: '20%',
-    y: '78%'
-  }, {
-    x: '66%',
-    w: '15%',
-    y: '78%'
-  }];
+function CompoundMetricLanes(props) {
+  var labels = props.labels;
   return /*#__PURE__*/React.createElement("div", {
     className: "atela-compound-lanes"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-lane-row"
-  }, /*#__PURE__*/React.createElement("span", null, "social"), /*#__PURE__*/React.createElement("em", null)), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-lane-row"
-  }, /*#__PURE__*/React.createElement("span", null, "display"), /*#__PURE__*/React.createElement("em", null)), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-lane-row"
-  }, /*#__PURE__*/React.createElement("span", null, "reel"), /*#__PURE__*/React.createElement("em", null)), chips.map(function (chip, index) {
+  }, labels.map(function (label, rowIndex) {
     return /*#__PURE__*/React.createElement("div", {
-      key: index,
-      className: "atela-compound-chip".concat(chip.hero ? ' is-hero' : ''),
-      style: {
-        left: chip.x,
-        width: chip.w,
-        top: chip.y
-      }
-    });
+      key: label,
+      className: "atela-compound-lane-row"
+    }, /*#__PURE__*/React.createElement("span", null, label), /*#__PURE__*/React.createElement("em", null, Array.from({
+      length: rowIndex === 1 ? 2 : 3
+    }).map(function (_, packetIndex) {
+      return /*#__PURE__*/React.createElement("b", {
+        key: "".concat(label, "-").concat(packetIndex),
+        className: "atela-compound-lane-packet".concat(packetIndex === 1 ? ' is-hero' : ''),
+        style: {
+          '--packet-delay': "".concat(rowIndex * 0.48 + packetIndex * 0.72, "s"),
+          '--packet-width': "".concat(16 + packetIndex * 6, "%")
+        }
+      });
+    })));
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "atela-compound-lane-shine"
   }));
 }
 
-function CompoundMetricHistogram() {
+function CompoundMetricHistogram(props) {
+  var medianLabel = props.medianLabel;
   var bars = ['18%', '38%', '64%', '86%', '74%', '55%', '36%', '24%', '14%', '9%'];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-hist"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-hist-bars"
-  }, bars.map(function (height, index) {
-    return /*#__PURE__*/React.createElement("i", {
-      key: index,
-      style: {
-        height: height,
-        animationDelay: "".concat(index * 0.06, "s")
-      }
-    });
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-hist-median"
-  }, "median"));
+  return (
+    <div className="atela-compound-hist">
+      <div className="atela-compound-hist-grid" />
+      <div className="atela-compound-hist-bars">
+        {bars.map(function (height, index) {
+          return (
+            <i
+              key={index}
+              style={{
+                height: height,
+                animationDelay: "".concat(index * 0.06, "s")
+              }}
+            />
+          );
+        })}
+      </div>
+      <svg
+        className="atela-compound-hist-line"
+        viewBox="0 0 118 60"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <path
+            id="compound-hist-trend-path"
+            d="M4 49 C 20 46, 30 38, 42 36 S 70 18, 114 11"
+          />
+        </defs>
+        <path
+          className="atela-compound-hist-trend"
+          d="M4 49 C 20 46, 30 38, 42 36 S 70 18, 114 11"
+        />
+        <circle className="atela-compound-hist-trend-dot" r="3">
+          <animateMotion dur="5.4s" repeatCount="indefinite">
+            <mpath href="#compound-hist-trend-path" />
+          </animateMotion>
+        </circle>
+      </svg>
+      <div className="atela-compound-hist-median">{medianLabel}</div>
+    </div>
+  );
 }
 
-function CompoundMetricRank() {
-  var rows = [{
-    name: 'ad-a',
-    width: '92%',
-    hero: true
-  }, {
-    name: 'ad-c',
-    width: '61%'
-  }, {
-    name: 'ad-e',
-    width: '48%'
-  }, {
-    name: 'ad-b',
-    width: '74%'
-  }, {
-    name: 'ad-d',
-    width: '36%'
-  }];
+function CompoundMetricRank(props) {
+  var rows = props.rows;
   return /*#__PURE__*/React.createElement("div", {
     className: "atela-compound-rank"
   }, rows.map(function (row, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: row.name,
       className: "atela-compound-rank-row"
-    }, /*#__PURE__*/React.createElement("span", null, row.name), /*#__PURE__*/React.createElement("i", {
+    }, /*#__PURE__*/React.createElement("span", null, row.name), /*#__PURE__*/React.createElement("div", {
+      className: "atela-compound-rank-track"
+    }, /*#__PURE__*/React.createElement("em", null), /*#__PURE__*/React.createElement("i", {
       className: row.hero ? 'is-hero' : '',
       style: {
         width: row.width,
         animationDelay: "".concat(index * 0.08, "s")
       }
-    }));
+    })));
+  }));
+}
+
+function CompoundModelConstellation() {
+  return /*#__PURE__*/React.createElement("svg", {
+    className: "atela-compound-model-network",
+    viewBox: "0 0 180 180",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("linearGradient", {
+    id: "compound-model-link",
+    x1: "0%",
+    y1: "0%",
+    x2: "100%",
+    y2: "100%"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0%",
+    stopColor: "rgba(198,255,61,0.08)"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "45%",
+    stopColor: "rgba(198,255,61,0.78)"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "100%",
+    stopColor: "rgba(99,180,255,0.46)"
+  })), /*#__PURE__*/React.createElement("path", {
+    id: "compound-model-path-a",
+    d: "M40 126 C 62 114, 78 90, 90 64"
+  }), /*#__PURE__*/React.createElement("path", {
+    id: "compound-model-path-b",
+    d: "M90 64 C 98 44, 120 34, 142 46"
+  }), /*#__PURE__*/React.createElement("path", {
+    id: "compound-model-path-c",
+    d: "M90 64 C 100 84, 122 102, 140 118"
+  }), /*#__PURE__*/React.createElement("path", {
+    id: "compound-model-path-d",
+    d: "M90 64 C 76 84, 58 102, 46 122"
+  })), /*#__PURE__*/React.createElement("circle", {
+    cx: "90",
+    cy: "64",
+    r: "18",
+    className: "atela-compound-model-core"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "90",
+    cy: "64",
+    r: "36",
+    className: "atela-compound-model-ring"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M40 126 C 62 114, 78 90, 90 64",
+    className: "atela-compound-model-link"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M90 64 C 98 44, 120 34, 142 46",
+    className: "atela-compound-model-link"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M90 64 C 100 84, 122 102, 140 118",
+    className: "atela-compound-model-link"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M90 64 C 76 84, 58 102, 46 122",
+    className: "atela-compound-model-link"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "40",
+    cy: "126",
+    r: "7",
+    className: "atela-compound-model-node"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "142",
+    cy: "46",
+    r: "7",
+    className: "atela-compound-model-node"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "140",
+    cy: "118",
+    r: "7",
+    className: "atela-compound-model-node"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "46",
+    cy: "122",
+    r: "5.5",
+    className: "atela-compound-model-node is-soft"
+  }), /*#__PURE__*/React.createElement("circle", {
+    r: "3.2",
+    className: "atela-compound-model-packet"
+  }, /*#__PURE__*/React.createElement("animateMotion", {
+    dur: "4.4s",
+    repeatCount: "indefinite"
+  }, /*#__PURE__*/React.createElement("mpath", {
+    href: "#compound-model-path-a"
+  }))), /*#__PURE__*/React.createElement("circle", {
+    r: "3.2",
+    className: "atela-compound-model-packet"
+  }, /*#__PURE__*/React.createElement("animateMotion", {
+    dur: "4.8s",
+    begin: "1.1s",
+    repeatCount: "indefinite"
+  }, /*#__PURE__*/React.createElement("mpath", {
+    href: "#compound-model-path-b"
+  }))), /*#__PURE__*/React.createElement("circle", {
+    r: "3.2",
+    className: "atela-compound-model-packet"
+  }, /*#__PURE__*/React.createElement("animateMotion", {
+    dur: "4.9s",
+    begin: "1.9s",
+    repeatCount: "indefinite"
+  }, /*#__PURE__*/React.createElement("mpath", {
+    href: "#compound-model-path-c"
+  }))));
+}
+
+function CompoundAgentOrbit() {
+  return /*#__PURE__*/React.createElement("svg", {
+    className: "atela-compound-agent-orbit",
+    viewBox: "0 0 180 180",
+    "aria-hidden": "true"
+  }, /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("path", {
+    id: "compound-agent-path-a",
+    d: "M90 28 A62 62 0 1 1 89.9 28"
+  }), /*#__PURE__*/React.createElement("path", {
+    id: "compound-agent-path-b",
+    d: "M90 50 A40 40 0 1 1 89.9 50"
+  })), /*#__PURE__*/React.createElement("circle", {
+    cx: "90",
+    cy: "90",
+    r: "62",
+    className: "atela-compound-agent-ring"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "90",
+    cy: "90",
+    r: "40",
+    className: "atela-compound-agent-ring is-inner"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "90",
+    cy: "90",
+    r: "20",
+    className: "atela-compound-agent-core"
+  }), /*#__PURE__*/React.createElement("g", {
+    className: "atela-compound-agent-nodes"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "90",
+    cy: "28",
+    r: "6",
+    className: "atela-compound-agent-node"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "142",
+    cy: "58",
+    r: "5.5",
+    className: "atela-compound-agent-node is-soft"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "146",
+    cy: "122",
+    r: "6.2",
+    className: "atela-compound-agent-node"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "90",
+    cy: "152",
+    r: "5.5",
+    className: "atela-compound-agent-node is-soft"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "36",
+    cy: "122",
+    r: "6.2",
+    className: "atela-compound-agent-node"
+  }), /*#__PURE__*/React.createElement("circle", {
+    cx: "38",
+    cy: "58",
+    r: "5.5",
+    className: "atela-compound-agent-node is-soft"
+  })), /*#__PURE__*/React.createElement("circle", {
+    r: "3.2",
+    className: "atela-compound-agent-packet"
+  }, /*#__PURE__*/React.createElement("animateMotion", {
+    dur: "6.2s",
+    repeatCount: "indefinite"
+  }, /*#__PURE__*/React.createElement("mpath", {
+    href: "#compound-agent-path-a"
+  }))), /*#__PURE__*/React.createElement("circle", {
+    r: "2.8",
+    className: "atela-compound-agent-packet is-second"
+  }, /*#__PURE__*/React.createElement("animateMotion", {
+    dur: "4.8s",
+    begin: "0.9s",
+    repeatCount: "indefinite"
+  }, /*#__PURE__*/React.createElement("mpath", {
+    href: "#compound-agent-path-b"
+  }))), /*#__PURE__*/React.createElement("path", {
+    d: "M90 90 C 114 72, 128 66, 142 58",
+    className: "atela-compound-agent-link"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M90 90 C 110 106, 126 114, 146 122",
+    className: "atela-compound-agent-link"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M90 90 C 72 108, 56 114, 36 122",
+    className: "atela-compound-agent-link"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M90 90 C 70 72, 56 64, 38 58",
+    className: "atela-compound-agent-link"
   }));
 }
 
@@ -141,169 +366,18 @@ function CompoundThumb(props) {
 function CompoundLoop() {
   var copy = window.atelaGetCopySection ? window.atelaGetCopySection('compound') : null;
   var channelCards = copy.channelCards;
+  var metrics = copy.metrics;
   var modelCards = copy.modelCards;
-  var v1Cards = [{
-    kicker: 'SERUM',
-    title: 'Hero Cut',
-    tone: 'pink'
-  }, {
-    kicker: 'PDP',
-    title: 'Launch Tile',
-    tone: 'sand'
-  }, {
-    kicker: 'META',
-    title: 'CTR Variant',
-    tone: 'lime'
-  }, {
-    kicker: 'UGC',
-    title: 'Story Angle',
-    tone: 'blue'
-  }, {
-    kicker: 'NAVER',
-    title: 'Search Frame',
-    tone: 'ink'
-  }, {
-    kicker: '29CM',
-    title: 'Mood Spread',
-    tone: 'violet'
-  }, {
-    kicker: 'REEL',
-    title: 'Hook Frame',
-    tone: 'pink'
-  }, {
-    kicker: 'PROMO',
-    title: 'Offer Cut',
-    tone: 'lime'
-  }, {
-    kicker: 'LIFE',
-    title: 'Scene Shot',
-    tone: 'blue'
-  }, {
-    kicker: 'BANNER',
-    title: 'Flash Sale',
-    tone: 'sand'
-  }, {
-    kicker: 'COUPANG',
-    title: 'Thumb Pack',
-    tone: 'ink'
-  }, {
-    kicker: 'EMAIL',
-    title: 'CRM Tile',
-    tone: 'violet'
-  }];
-  var optimizedCards = [{
-    kicker: 'A1',
-    title: 'ROAS Up',
-    tone: 'lime'
-  }, {
-    kicker: 'A2',
-    title: 'Kakao',
-    tone: 'pink'
-  }, {
-    kicker: 'A3',
-    title: 'Meta',
-    tone: 'blue'
-  }, {
-    kicker: 'A4',
-    title: 'Naver',
-    tone: 'sand'
-  }, {
-    kicker: 'A5',
-    title: 'PDP',
-    tone: 'ink'
-  }, {
-    kicker: 'A6',
-    title: 'Reel',
-    tone: 'violet'
-  }, {
-    kicker: 'A7',
-    title: 'OOH',
-    tone: 'pink'
-  }, {
-    kicker: 'A8',
-    title: 'Review',
-    tone: 'blue'
-  }, {
-    kicker: 'A9',
-    title: 'Boost',
-    tone: 'lime'
-  }, {
-    kicker: 'B1',
-    title: 'Launch',
-    tone: 'sand'
-  }, {
-    kicker: 'B2',
-    title: 'Click',
-    tone: 'ink'
-  }, {
-    kicker: 'B3',
-    title: 'Promo',
-    tone: 'violet'
-  }, {
-    kicker: 'B4',
-    title: 'SKU',
-    tone: 'pink'
-  }, {
-    kicker: 'B5',
-    title: 'UGC',
-    tone: 'blue'
-  }, {
-    kicker: 'B6',
-    title: 'Offer',
-    tone: 'lime'
-  }, {
-    kicker: 'B7',
-    title: 'Mood',
-    tone: 'sand'
-  }, {
-    kicker: 'B8',
-    title: 'Scene',
-    tone: 'ink'
-  }, {
-    kicker: 'B9',
-    title: 'Grid',
-    tone: 'violet'
-  }, {
-    kicker: 'C1',
-    title: 'Scale',
-    tone: 'pink'
-  }, {
-    kicker: 'C2',
-    title: 'Loop',
-    tone: 'blue'
-  }];
-  var outputCards = [{
-    kicker: 'PDP',
-    title: 'Launch Ready',
-    tone: 'lime'
-  }, {
-    kicker: 'META',
-    title: 'Ad Set',
-    tone: 'pink'
-  }, {
-    kicker: 'REEL',
-    title: 'Short-form',
-    tone: 'blue'
-  }, {
-    kicker: 'NAVER',
-    title: 'Search Pack',
-    tone: 'sand'
-  }, {
-    kicker: 'CRM',
-    title: 'Retention',
-    tone: 'ink'
-  }, {
-    kicker: 'SKU',
-    title: 'Market Mix',
-    tone: 'violet'
-  }];
+  var v1Cards = copy.v1Cards;
+  var optimizedCards = copy.optimizedCards;
+  var outputCards = copy.outputCards;
   var wrapperRef = React.useRef(null);
   var sectionRef = React.useRef(null);
   var spacerRef = React.useRef(null);
   var trackRef = React.useRef(null);
   var svgRef = React.useRef(null);
   var colRefs = React.useRef([]);
-  var featuredCols = React.useRef(new Set([2, 5]));
+  var featuredCols = React.useRef(new Set([3, 5]));
 
   React.useEffect(function () {
     var wrapper = wrapperRef.current;
@@ -311,28 +385,89 @@ function CompoundLoop() {
     var spacer = spacerRef.current;
     var track = trackRef.current;
     var svg = svgRef.current;
+    var layoutSnapshot = [];
+    var trackPaddingX = 150;
+    var desktopLayout = [{
+      width: 246,
+      gap: 128
+    }, {
+      width: 228,
+      gap: 392
+    }, {
+      width: 392,
+      gap: 210
+    }, {
+      width: 236,
+      gap: 150
+    }, {
+      width: 236,
+      gap: 290
+    }, {
+      width: 244,
+      gap: 210
+    }, {
+      width: 236,
+      gap: 248
+    }, {
+      width: 264,
+      gap: 0
+    }];
     if (!wrapper || !section || !spacer || !track || !svg) return;
 
-    function columnCenters() {
-      return colRefs.current.map(function (node) {
-        return node ? node.offsetLeft + node.offsetWidth / 2 : 0;
+    function measureLayout() {
+      var left = trackPaddingX;
+      layoutSnapshot = desktopLayout.map(function (slot) {
+        var next = {
+          left: left,
+          width: slot.width,
+          center: left + slot.width / 2
+        };
+        left += slot.width + slot.gap;
+        return next;
       });
+    }
+
+    function columnCenters() {
+      return layoutSnapshot.map(function (node) {
+        return node ? node.center : 0;
+      });
+    }
+
+    function columnRange(startIndex, endIndex) {
+      var first = layoutSnapshot[startIndex];
+      var last = layoutSnapshot[endIndex];
+      if (!first || !last) return null;
+      return {
+        left: first.left,
+        right: last.left + last.width
+      };
+    }
+
+    function fitRange(range, sectionWidth, leadRatio, leadMin, leadMax, trailRatio, trailMin, trailMax) {
+      if (!range) return 0;
+      var lead = Math.max(leadMin, Math.min(sectionWidth * leadRatio, leadMax));
+      var trail = Math.max(trailMin, Math.min(sectionWidth * trailRatio, trailMax));
+      var minOffset = lead - range.left;
+      var maxOffset = sectionWidth - trail - range.right;
+      return (minOffset + maxOffset) / 2;
     }
 
     function desktopMetrics(sectionWidth) {
       var centers = columnCenters();
       var start = centers[0] || 0;
       var end = centers[centers.length - 1] || 0;
-      var entryAnchor = Math.max(320, Math.min(sectionWidth * 0.34, 520));
-      var exitAnchor = Math.max(sectionWidth * 0.64, sectionWidth - 420);
-      var travel = Math.max(0, end - start + entryAnchor - exitAnchor);
+      var entryRange = columnRange(0, 2);
+      var exitRange = columnRange(5, 7);
+      var entryOffset = entryRange ? fitRange(entryRange, sectionWidth, 0.04, 40, 72, 0.08, 64, 140) + 104 : Math.max(280, Math.min(sectionWidth * 0.28, 400)) - start;
+      var exitOffset = exitRange ? fitRange(exitRange, sectionWidth, 0.14, 140, 220, 0.04, 40, 84) : Math.max(sectionWidth * 0.64, sectionWidth - 420) - end;
+      var travel = Math.max(0, entryOffset - exitOffset);
       return {
         centers: centers,
         start: start,
         end: end,
         travel: travel,
-        entryAnchor: entryAnchor,
-        exitAnchor: exitAnchor
+        entryOffset: entryOffset,
+        exitOffset: exitOffset
       };
     }
 
@@ -341,9 +476,10 @@ function CompoundLoop() {
         spacer.style.height = '0px';
         return;
       }
+      measureLayout();
       var travel = desktopMetrics(section.clientWidth).travel;
-      var extra = Math.max(0, window.innerHeight - section.offsetHeight - 60);
-      spacer.style.height = "".concat(travel + extra, "px");
+      var extra = Math.max(window.innerHeight * 0.34, 280);
+      spacer.style.height = "".concat(Math.ceil(travel + extra), "px");
     }
 
     function pointFromSide(node, side, bounds) {
@@ -370,7 +506,9 @@ function CompoundLoop() {
       var control = 0.45 * (to.x - from.x);
       var d = "M".concat(from.x, ",").concat(from.y, " C").concat(from.x + control, ",").concat(from.y, " ").concat(to.x - control, ",").concat(to.y, " ").concat(to.x, ",").concat(to.y);
       var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      var pathId = "compound-flow-".concat(stage, "-").concat(Math.round(from.x), "-").concat(Math.round(to.x), "-").concat(Math.round(from.y), "-").concat(Math.round(to.y));
       path.setAttribute('d', d);
+      path.setAttribute('id', pathId);
       path.setAttribute('fill', 'none');
       path.setAttribute('stroke-linecap', 'round');
       svgRoot.appendChild(path);
@@ -381,11 +519,31 @@ function CompoundLoop() {
       path.setAttribute('stroke-dasharray', String(length));
       path.setAttribute('stroke-dashoffset', String(length * (1 - local)));
       if (local >= 1) {
-        path.setAttribute('stroke', 'rgb(36,83,198)');
-        path.setAttribute('stroke-width', '2');
+        path.setAttribute('stroke', 'rgb(198,255,61)');
+        path.setAttribute('stroke-width', '2.2');
       } else {
-        path.setAttribute('stroke', "rgba(36,83,198,".concat((0.16 + 0.48 * local).toFixed(2), ")"));
-        path.setAttribute('stroke-width', '1.5');
+        path.setAttribute('stroke', "rgba(198,255,61,".concat((0.14 + 0.54 * local).toFixed(2), ")"));
+        path.setAttribute('stroke-width', '1.6');
+      }
+      if (local > 0.34) {
+        Array.from({
+          length: stage >= 4 ? 2 : 1
+        }).forEach(function (_, index) {
+          var packet = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          var motion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+          var mpath = document.createElementNS('http://www.w3.org/2000/svg', 'mpath');
+          packet.setAttribute('r', index === 0 ? '2.9' : '2.3');
+          packet.setAttribute('class', 'atela-compound-flow-packet'.concat(index === 1 ? ' is-soft' : ''));
+          motion.setAttribute('dur', "".concat(4.8 + stage * 0.42, "s"));
+          motion.setAttribute('repeatCount', 'indefinite');
+          motion.setAttribute('rotate', 'auto');
+          if (index > 0) motion.setAttribute('begin', "".concat(0.72 + stage * 0.08, "s"));
+          mpath.setAttributeNS('http://www.w3.org/1999/xlink', 'href', "#".concat(pathId));
+          mpath.setAttribute('href', "#".concat(pathId));
+          motion.appendChild(mpath);
+          packet.appendChild(motion);
+          svgRoot.appendChild(packet);
+        });
       }
     }
 
@@ -430,14 +588,15 @@ function CompoundLoop() {
         return;
       }
       var spacerHeight = spacer.offsetHeight || 1;
-      var progress = Math.max(0, Math.min(1, (60 - wrapper.getBoundingClientRect().top) / spacerHeight));
+      var wrapperPaddingTop = parseFloat(window.getComputedStyle(wrapper).paddingTop || '0');
+      var progress = Math.max(0, Math.min(1, (60 - (wrapper.getBoundingClientRect().top + wrapperPaddingTop)) / spacerHeight));
       var sectionWidth = section.clientWidth;
       var metrics = desktopMetrics(sectionWidth);
       var centers = metrics.centers;
-      var offset = metrics.entryAnchor - metrics.start - progress * metrics.travel;
+      var offset = metrics.entryOffset - progress * metrics.travel;
       track.style.transform = "translateX(".concat(offset, "px)");
 
-      var focusWidth = 0.22 * sectionWidth;
+      var focusWidth = 0.26 * sectionWidth;
       function fanProgress(anchorIndex) {
         var local = centers[anchorIndex] + offset - sectionWidth / 2;
         if (local >= 0) return 0;
@@ -448,9 +607,9 @@ function CompoundLoop() {
       colRefs.current.forEach(function (col, index) {
         if (!col) return;
         var emphasis = Math.max(0, 1 - Math.abs(centers[index] + offset - sectionWidth / 2) / focusWidth);
-        var targetScale = featuredCols.current.has(index) ? 1.3 : 1.55;
-        var scale = 0.8 + emphasis * (targetScale - 0.8);
-        var opacity = 0.45 + 0.55 * emphasis;
+        var targetScale = featuredCols.current.has(index) ? 1.16 : 1.08;
+        var scale = 0.92 + emphasis * (targetScale - 0.92);
+        var opacity = 0.32 + 0.68 * emphasis;
         col.style.transform = "scale(".concat(scale.toFixed(3), ")");
         col.style.opacity = opacity.toFixed(3);
         col.style.setProperty('--col-t', emphasis.toFixed(3));
@@ -472,10 +631,12 @@ function CompoundLoop() {
     }
 
     function handleResize() {
+      measureLayout();
       updateSpacer();
       updateDesktop();
     }
 
+    measureLayout();
     updateSpacer();
     updateDesktop();
     window.addEventListener('scroll', requestTick, {
@@ -489,233 +650,249 @@ function CompoundLoop() {
     };
   }, []);
 
-  return /*#__PURE__*/React.createElement("div", {
-    ref: wrapperRef,
-    id: "compound-loop",
-    className: "atela-compound-wrapper"
-  }, /*#__PURE__*/React.createElement("section", {
-    ref: sectionRef,
-    className: "atela-compound-section"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-header"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "atela-eyebrow atela-compound-eyebrow"
-  }, copy.eyebrow), /*#__PURE__*/React.createElement("h2", {
-    className: "atela-compound-headline"
-  }, copy.headlineLead, " ", /*#__PURE__*/React.createElement("em", null, copy.headlineEmphasis)), /*#__PURE__*/React.createElement("p", {
-    className: "atela-compound-sub"
-  }, copy.sub)), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-desk"
-  }, /*#__PURE__*/React.createElement("svg", {
-    ref: svgRef,
-    className: "atela-compound-svg",
-    preserveAspectRatio: "none"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-hscroll"
-  }, /*#__PURE__*/React.createElement("div", {
-    ref: trackRef,
-    className: "atela-compound-track"
-  }, /*#__PURE__*/React.createElement("div", {
-    ref: function ref(node) {
-      colRefs.current[0] = node;
-    },
-    className: "atela-compound-col atela-compound-col-input"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-colhead"
-  }, copy.labels.creative), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-input-card",
-    "data-node": "input",
-    "data-card": true
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-input-shell"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "atela-compound-input-kicker"
-  }, "BRIEF"), /*#__PURE__*/React.createElement("strong", {
-    className: "atela-compound-input-title"
-  }, copy.briefTitle), /*#__PURE__*/React.createElement("p", {
-    className: "atela-compound-input-copy"
-  }, copy.briefCopy), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-input-tags"
-  }, /*#__PURE__*/React.createElement("span", null, "Beauty"), /*#__PURE__*/React.createElement("span", null, "SKU"), /*#__PURE__*/React.createElement("span", null, "Spring"))))), /*#__PURE__*/React.createElement("div", {
-    ref: function ref(node) {
-      colRefs.current[1] = node;
-    },
-    className: "atela-compound-col atela-compound-col-v1"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-output-label"
-  }, copy.labels.v1), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-fan atela-compound-fan-small"
-  }, v1Cards.map(function (card, index) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: "".concat(card.kicker, "-").concat(index),
-      className: "atela-compound-fan-card",
-      "data-node": index === 0 ? 'fan1' : undefined,
-      "data-card": index === 0 ? true : undefined
-    }, /*#__PURE__*/React.createElement(CompoundThumb, {
-      card: card
-    }));
-  }))), /*#__PURE__*/React.createElement("div", {
-    ref: function ref(node) {
-      colRefs.current[2] = node;
-    },
-    className: "atela-compound-col atela-compound-col-content"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-colhead"
-  }, copy.labels.distribution), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-channel-grid",
-    "data-stack": "content"
-  }, channelCards.map(function (card) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: card.title,
-      className: "atela-compound-channel-card",
-      "data-node": "content",
-      "data-card": true
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "atela-compound-channel-media"
-    }, /*#__PURE__*/React.createElement(CompoundChannelVisual, {
-      glyph: card.glyph,
-      tone: card.tone
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "atela-compound-channel-body"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "atela-compound-channel-title"
-    }, card.title), /*#__PURE__*/React.createElement("div", {
-      className: "atela-compound-channel-desc"
-    }, card.desc)));
-  }))), /*#__PURE__*/React.createElement("div", {
-    ref: function ref(node) {
-      colRefs.current[3] = node;
-    },
-    className: "atela-compound-col atela-compound-col-data"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-colhead"
-  }, copy.labels.performance), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-perf-card",
-    "data-node": "variant",
-    "data-card": true
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-perf-grid"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-perf-box"
-  }, /*#__PURE__*/React.createElement(CompoundMetricKpi, null)), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-perf-box"
-  }, /*#__PURE__*/React.createElement(CompoundMetricLanes, null)), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-perf-box"
-  }, /*#__PURE__*/React.createElement(CompoundMetricHistogram, null)), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-perf-box"
-  }, /*#__PURE__*/React.createElement(CompoundMetricRank, null))))), /*#__PURE__*/React.createElement("div", {
-    ref: function ref(node) {
-      colRefs.current[4] = node;
-    },
-    className: "atela-compound-col atela-compound-col-variants"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-colhead"
-  }, copy.labels.variants), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-variant-wrap"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-variant-base",
-    "data-node": "perf",
-    "data-card": true
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-variant-pulse"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-variant-grid"
-  }, /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null))), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-fan atela-compound-fan-small atela-compound-fan-overlay"
-  }, optimizedCards.map(function (card, index) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: "".concat(card.kicker, "-").concat(index),
-      className: "atela-compound-fan-card"
-    }, /*#__PURE__*/React.createElement(CompoundThumb, {
-      card: card
-    }));
-  })))), /*#__PURE__*/React.createElement("div", {
-    ref: function ref(node) {
-      colRefs.current[5] = node;
-    },
-    className: "atela-compound-col atela-compound-col-model"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-colhead"
-  }, copy.labels.training), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-model-stack"
-  }, modelCards.map(function (card) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: card.title,
-      className: "atela-compound-model-card",
-      "data-node": "model",
-      "data-card": true
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "atela-compound-model-visual ".concat(card.icon === 'agent' ? 'is-agent' : 'is-model')
-    }, card.icon === 'agent' ? /*#__PURE__*/React.createElement("div", {
-      className: "atela-compound-model-beam"
-    }) : /*#__PURE__*/React.createElement("div", {
-      className: "atela-compound-model-dots"
-    }, Array.from({
-      length: 24
-    }).map(function (_, index) {
-      return /*#__PURE__*/React.createElement("i", {
-        key: index
-      });
-    }))), /*#__PURE__*/React.createElement("div", {
-      className: "atela-compound-model-copy"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "atela-compound-model-title"
-    }, card.title), /*#__PURE__*/React.createElement("div", {
-      className: "atela-compound-model-desc"
-    }, card.desc)));
-  }))), /*#__PURE__*/React.createElement("div", {
-    ref: function ref(node) {
-      colRefs.current[6] = node;
-    },
-    className: "atela-compound-col atela-compound-col-ideation"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-colhead"
-  }, copy.labels.ideation), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-ideation-card",
-    "data-node": "ideation",
-    "data-card": true
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-ideation-grid"
-  }, ['Angle', 'Copy', 'Mood', 'Offer', 'SKU', 'Hook'].map(function (label) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: label,
-      className: "atela-compound-ideation-cell"
-    }, /*#__PURE__*/React.createElement("span", null, label), /*#__PURE__*/React.createElement("i", null));
-  })))), /*#__PURE__*/React.createElement("div", {
-    ref: function ref(node) {
-      colRefs.current[7] = node;
-    },
-    className: "atela-compound-col atela-compound-col-output"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-output-label atela-compound-output-label-final"
-  }, "YOUR NEXT CREATIVE IS", /*#__PURE__*/React.createElement("br", null), "DATA INFORMED", /*#__PURE__*/React.createElement("br", null), "AND AGENT ASSISTED"), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-fan"
-  }, outputCards.map(function (card, index) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: "".concat(card.kicker, "-").concat(index),
-      className: "atela-compound-fan-card",
-      "data-node": index === 0 ? 'output' : undefined,
-      "data-card": index === 0 ? true : undefined
-    }, /*#__PURE__*/React.createElement(CompoundThumb, {
-      card: card
-    }));
-  })))))), /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-mobile"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "atela-compound-mobile-grid"
-  }, /*#__PURE__*/React.createElement("article", {
-    className: "atela-compound-mobile-card"
-  }, /*#__PURE__*/React.createElement("h3", null, copy.mobileCards[0].title), /*#__PURE__*/React.createElement("p", null, copy.mobileCards[0].body)), /*#__PURE__*/React.createElement("article", {
-    className: "atela-compound-mobile-card"
-  }, /*#__PURE__*/React.createElement("h3", null, copy.mobileCards[1].title), /*#__PURE__*/React.createElement("p", null, copy.mobileCards[1].body)), /*#__PURE__*/React.createElement("article", {
-    className: "atela-compound-mobile-card"
-  }, /*#__PURE__*/React.createElement("h3", null, copy.mobileCards[2].title), /*#__PURE__*/React.createElement("p", null, copy.mobileCards[2].body)), /*#__PURE__*/React.createElement("article", {
-    className: "atela-compound-mobile-card is-highlight"
-  }, /*#__PURE__*/React.createElement("h3", null, copy.mobileCards[3].title), /*#__PURE__*/React.createElement("p", null, copy.mobileCards[3].body))))), /*#__PURE__*/React.createElement("div", {
-    ref: spacerRef,
-    className: "atela-compound-spacer",
-    "aria-hidden": "true"
-  }));
+  return (
+    <div ref={wrapperRef} id="compound-loop" className="atela-compound-wrapper">
+      <section ref={sectionRef} className="atela-compound-section">
+        <div className="atela-compound-header">
+          <span className="atela-eyebrow atela-compound-eyebrow">{copy.eyebrow}</span>
+          <h2 className="atela-compound-headline">
+            {copy.headlineLead} <em>{copy.headlineEmphasis}</em>
+          </h2>
+          <p className="atela-compound-sub">{copy.sub}</p>
+        </div>
+
+        <div className="atela-compound-desk">
+          <svg ref={svgRef} className="atela-compound-svg" preserveAspectRatio="none" />
+
+          <div className="atela-compound-hscroll">
+            <div ref={trackRef} className="atela-compound-track">
+              <div
+                ref={function ref(node) {
+                  colRefs.current[0] = node;
+                }}
+                className="atela-compound-col atela-compound-col-input"
+              >
+                <div className="atela-compound-colhead">{copy.labels.creative}</div>
+                <div className="atela-compound-input-card" data-node="input" data-card>
+                  <div className="atela-compound-input-shell">
+                    <span className="atela-compound-input-kicker">{copy.inputKicker}</span>
+                    <strong className="atela-compound-input-title">{copy.briefTitle}</strong>
+                    <p className="atela-compound-input-copy">{copy.briefCopy}</p>
+                    <div className="atela-compound-input-tags">
+                      {copy.inputTags.map(function (tag) {
+                        return <span key={tag}>{tag}</span>;
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                ref={function ref(node) {
+                  colRefs.current[1] = node;
+                }}
+                className="atela-compound-col atela-compound-col-v1"
+              >
+                <div className="atela-compound-output-label">{copy.labels.v1}</div>
+                <div className="atela-compound-fan atela-compound-fan-small">
+                  {v1Cards.map(function (card, index) {
+                    return (
+                      <div
+                        key={"".concat(card.kicker, "-").concat(index)}
+                        className="atela-compound-fan-card"
+                        data-node={index === 0 ? 'fan1' : undefined}
+                        data-card={index === 0 ? true : undefined}
+                      >
+                        <CompoundThumb card={card} />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div
+                ref={function ref(node) {
+                  colRefs.current[2] = node;
+                }}
+                className="atela-compound-col atela-compound-col-content"
+              >
+                <div className="atela-compound-colhead">{copy.labels.distribution}</div>
+                <div className="atela-compound-channel-grid" data-stack="content">
+                  {channelCards.map(function (card) {
+                    return (
+                      <div key={card.title} className="atela-compound-channel-card" data-node="content" data-card>
+                        <div className="atela-compound-channel-media">
+                          <CompoundChannelVisual glyph={card.glyph} tone={card.tone} />
+                        </div>
+                        <div className="atela-compound-channel-body">
+                          <div className="atela-compound-channel-title">{card.title}</div>
+                          <div className="atela-compound-channel-desc">{card.desc}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div
+                ref={function ref(node) {
+                  colRefs.current[3] = node;
+                }}
+                className="atela-compound-col atela-compound-col-data"
+              >
+                <div className="atela-compound-colhead">{copy.labels.performance}</div>
+                <div className="atela-compound-perf-card" data-node="variant" data-card>
+                  <div className="atela-compound-perf-grid">
+                    <div className="atela-compound-perf-box">
+                      <CompoundMetricKpi copy={metrics} />
+                    </div>
+                    <div className="atela-compound-perf-box">
+                      <CompoundMetricLanes labels={metrics.lanes} />
+                    </div>
+                    <div className="atela-compound-perf-box">
+                      <CompoundMetricHistogram medianLabel={metrics.median} />
+                    </div>
+                    <div className="atela-compound-perf-box">
+                      <CompoundMetricRank rows={metrics.rankRows} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                ref={function ref(node) {
+                  colRefs.current[4] = node;
+                }}
+                className="atela-compound-col atela-compound-col-variants"
+              >
+                <div className="atela-compound-colhead">{copy.labels.variants}</div>
+                <div className="atela-compound-variant-wrap">
+                  <div className="atela-compound-variant-base" data-node="perf" data-card>
+                    <div className="atela-compound-variant-pulse" />
+                    <div className="atela-compound-variant-grid">
+                      <span />
+                      <span />
+                      <span />
+                      <span />
+                    </div>
+                  </div>
+                  <div className="atela-compound-fan atela-compound-fan-small atela-compound-fan-overlay">
+                    {optimizedCards.map(function (card, index) {
+                      return (
+                        <div key={"".concat(card.kicker, "-").concat(index)} className="atela-compound-fan-card">
+                          <CompoundThumb card={card} />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              <div
+                ref={function ref(node) {
+                  colRefs.current[5] = node;
+                }}
+                className="atela-compound-col atela-compound-col-model"
+              >
+                <div className="atela-compound-colhead">{copy.labels.training}</div>
+                <div className="atela-compound-model-stack">
+                  {modelCards.map(function (card) {
+                    return (
+                      <div key={card.title} className="atela-compound-model-card" data-node="model" data-card>
+                        <div className={"atela-compound-model-visual ".concat(card.icon === 'agent' ? 'is-agent' : 'is-model')}>
+                          {card.icon === 'agent' ? <CompoundAgentOrbit /> : <CompoundModelConstellation />}
+                        </div>
+                        <div className="atela-compound-model-copy">
+                          <div className="atela-compound-model-title">{card.title}</div>
+                          <div className="atela-compound-model-desc">{card.desc}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div
+                ref={function ref(node) {
+                  colRefs.current[6] = node;
+                }}
+                className="atela-compound-col atela-compound-col-ideation"
+              >
+                <div className="atela-compound-colhead">{copy.labels.ideation}</div>
+                <div className="atela-compound-ideation-card" data-node="ideation" data-card>
+                  <div className="atela-compound-ideation-grid">
+                    {copy.ideationCells.map(function (label) {
+                      return (
+                        <div key={label} className="atela-compound-ideation-cell">
+                          <span>{label}</span>
+                          <i />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              <div
+                ref={function ref(node) {
+                  colRefs.current[7] = node;
+                }}
+                className="atela-compound-col atela-compound-col-output"
+              >
+                <div className="atela-compound-output-label atela-compound-output-label-final">
+                  {copy.outputLabelLines.map(function (line, index) {
+                    return (
+                      <React.Fragment key={"".concat(line, "-").concat(index)}>
+                        {index > 0 ? <br /> : null}
+                        {line}
+                      </React.Fragment>
+                    );
+                  })}
+                </div>
+                <div className="atela-compound-fan">
+                  {outputCards.map(function (card, index) {
+                    return (
+                      <div
+                        key={"".concat(card.kicker, "-").concat(index)}
+                        className="atela-compound-fan-card"
+                        data-node={index === 0 ? 'output' : undefined}
+                        data-card={index === 0 ? true : undefined}
+                      >
+                        <CompoundThumb card={card} />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="atela-compound-mobile">
+          <div className="atela-compound-mobile-grid">
+            <article className="atela-compound-mobile-card">
+              <h3>{copy.mobileCards[0].title}</h3>
+              <p>{copy.mobileCards[0].body}</p>
+            </article>
+            <article className="atela-compound-mobile-card">
+              <h3>{copy.mobileCards[1].title}</h3>
+              <p>{copy.mobileCards[1].body}</p>
+            </article>
+            <article className="atela-compound-mobile-card">
+              <h3>{copy.mobileCards[2].title}</h3>
+              <p>{copy.mobileCards[2].body}</p>
+            </article>
+            <article className="atela-compound-mobile-card is-highlight">
+              <h3>{copy.mobileCards[3].title}</h3>
+              <p>{copy.mobileCards[3].body}</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <div ref={spacerRef} className="atela-compound-spacer" aria-hidden="true" />
+    </div>
+  );
 }
 
 window.CompoundLoop = CompoundLoop;

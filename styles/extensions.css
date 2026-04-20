@@ -2142,16 +2142,22 @@
 
 /* ============ COMPOUND LOOP section ============ */
 .atela-compound-wrapper {
-  --compound-bg: #f6f4ed;
-  --compound-accent: #2453c6;
-  --compound-accent-soft: rgba(36, 83, 198, 0.08);
-  --compound-border: rgba(36, 83, 198, 0.2);
-  --compound-border-strong: rgba(36, 83, 198, 0.34);
+  --compound-bg: var(--atela-ink);
+  --compound-surface: rgba(255, 255, 255, 0.88);
+  --compound-surface-strong: rgba(255, 255, 255, 0.96);
+  --compound-accent: #C6FF3D;
+  --compound-accent-ink: #607c12;
+  --compound-accent-soft: rgba(198, 255, 61, 0.12);
+  --compound-border: rgba(255, 255, 255, 0.1);
+  --compound-border-strong: rgba(198, 255, 61, 0.28);
   --compound-text: #0c101a;
-  --compound-dim: rgba(12, 16, 26, 0.56);
+  --compound-dim: rgba(12, 16, 26, 0.6);
   position: relative;
   overflow-x: clip;
-  background: var(--compound-bg);
+  background:
+    radial-gradient(circle at 10% 72%, rgba(198, 255, 61, 0.18) 0, rgba(198, 255, 61, 0) 28%),
+    radial-gradient(circle at 88% 14%, rgba(61, 168, 255, 0.18) 0, rgba(61, 168, 255, 0) 24%),
+    linear-gradient(180deg, #0A0A0A 0%, #0A0A0A 100%);
 }
 .atela-compound-spacer { pointer-events: none; }
 .atela-compound-section {
@@ -2163,19 +2169,19 @@
   flex-direction: column;
   overflow: clip;
   background:
-    radial-gradient(circle at 12% 20%, rgba(255, 255, 255, 0.9), transparent 26%),
-    radial-gradient(circle at 88% 18%, rgba(36, 83, 198, 0.08), transparent 22%),
-    linear-gradient(180deg, rgba(255,255,255,0.9), rgba(246,244,237,0.96));
-  border-top: 1px solid rgba(36, 83, 198, 0.12);
-  border-bottom: 1px solid rgba(36, 83, 198, 0.12);
+    radial-gradient(circle at 50% 22%, rgba(198, 255, 61, 0.08) 0, rgba(198, 255, 61, 0) 26%),
+    linear-gradient(180deg, rgba(10,10,10,0.96), rgba(10,10,10,0.98));
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
 }
 .atela-compound-section::before {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(rgba(36, 83, 198, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(36, 83, 198, 0.035) 1px, transparent 1px);
+    linear-gradient(rgba(198, 255, 61, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(198, 255, 61, 0.035) 1px, transparent 1px);
   background-size: 30px 30px;
   mask-image: linear-gradient(180deg, rgba(0,0,0,0.4), transparent 92%);
   pointer-events: none;
@@ -2183,29 +2189,40 @@
 .atela-compound-header {
   position: relative;
   z-index: 3;
-  padding: 22px clamp(20px, 4vw, 56px) 10px;
-  text-align: center;
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 30px 0 18px;
+  text-align: left;
 }
 .atela-compound-eyebrow { color: var(--compound-accent); }
 .atela-compound-headline {
-  margin: 10px auto 12px;
-  max-width: 980px;
-  color: var(--compound-text);
+  margin: 10px 0 12px;
+  max-width: 840px;
+  color: #fff;
   font-size: clamp(34px, 4vw, 60px);
   line-height: 1.02;
   letter-spacing: -0.04em;
   font-weight: 700;
 }
-.atela-compound-headline em { font-style: italic; font-weight: 300; }
+.atela-compound-headline em {
+  display: inline-block;
+  margin-top: 0.14em;
+  padding: 0 0.12em;
+  border-radius: 6px;
+  background: var(--compound-accent);
+  color: #0A0A0A;
+  font-style: normal;
+  font-weight: 800;
+}
 .atela-compound-sub {
-  margin: 0 auto;
-  max-width: 860px;
-  color: var(--compound-dim);
+  margin: 0;
+  max-width: 620px;
+  color: rgba(255,255,255,0.68);
   font-size: 16px;
   line-height: 1.6;
 }
 
-.atela-compound-desk { display: block; flex: 1 1; min-height: 0; position: relative; margin-top: 4px; overflow: hidden; }
+.atela-compound-desk { display: block; flex: 1 1; min-height: 0; position: relative; margin-top: 12px; overflow: hidden; }
 .atela-compound-mobile { display: none; }
 .atela-compound-hscroll { height: 100%; position: relative; overflow: visible; z-index: 2; }
 .atela-compound-track {
@@ -2240,17 +2257,21 @@
   margin-bottom: 14px;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(36, 83, 198, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   text-align: center;
   white-space: nowrap;
-  color: rgba(36, 83, 198, calc(0.5 + var(--col-t, 0) * 0.5));
+  color: rgba(198, 255, 61, calc(0.54 + var(--col-t, 0) * 0.46));
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 12px 24px rgba(0,0,0,0.18);
 }
 .atela-compound-col-input { width: 230px; align-items: center; margin-right: 100px; }
 .atela-compound-col-v1 { width: 216px; align-items: center; margin-right: 360px; }
@@ -2267,11 +2288,11 @@
 .atela-compound-variant-base,
 .atela-compound-model-card,
 .atela-compound-ideation-card {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid var(--compound-border);
-  border-radius: 12px;
+  background: var(--compound-surface);
+  border: 1px solid rgba(10,10,10,0.08);
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04), 0 20px 44px rgba(19, 40, 104, 0.08);
+  box-shadow: 0 16px 34px rgba(64,77,22,0.14);
 }
 .atela-compound-input-card {
   width: 196px;
@@ -2284,14 +2305,14 @@
   border-radius: 10px;
   border: 1px dashed var(--compound-border-strong);
   background:
-    linear-gradient(145deg, rgba(36, 83, 198, 0.08), rgba(255,255,255,0.9)),
+    linear-gradient(145deg, rgba(198,255,61,0.18), rgba(255,255,255,0.96)),
     #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .atela-compound-input-kicker {
-  color: var(--compound-accent);
+  color: var(--compound-accent-ink);
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
@@ -2314,8 +2335,8 @@
 .atela-compound-input-tags span {
   padding: 5px 8px;
   border-radius: 999px;
-  background: rgba(36, 83, 198, 0.08);
-  color: var(--compound-accent);
+  background: rgba(198, 255, 61, 0.16);
+  color: var(--compound-accent-ink);
   font-size: 10px;
   font-weight: 700;
 }
@@ -2325,7 +2346,7 @@
   z-index: 30;
   margin-bottom: 10px;
   padding: 6px 12px;
-  border-radius: 3px;
+  border-radius: 999px;
   text-align: center;
   white-space: nowrap;
   color: var(--compound-accent);
@@ -2335,7 +2356,13 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   line-height: 1.55;
-  background: rgba(246, 244, 237, 0.9);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 12px 24px rgba(0,0,0,0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 .atela-compound-output-label-final { font-size: 12px; line-height: 1.6; }
 
@@ -2350,15 +2377,15 @@
   inset: 0;
   width: 192px;
   height: 192px;
-  border-radius: 10px;
-  border: 1px solid rgba(36, 83, 198, 0.2);
-  background-color: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(10,10,10,0.08);
+  background-color: var(--compound-surface-strong);
   overflow: hidden;
   transform-origin: 0 50%;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.16), 0 12px 32px rgba(0,0,0,0.18);
+  box-shadow: 0 18px 38px rgba(64,77,22,0.16);
 }
 .atela-compound-fan-card:not(:first-child) { opacity: var(--fan-t, 0); }
-.atela-compound-fan-card:first-child { transform: none; z-index: 10; border-color: rgba(36, 83, 198, 0.32); }
+.atela-compound-fan-card:first-child { transform: none; z-index: 10; border-color: rgba(10,10,10,0.08); }
 .atela-compound-fan-card:nth-child(2) { transform: translateX(calc(var(--fan-t, 0) * 120px)) translateY(calc(var(--fan-t, 0) * -40px)) rotate(calc(var(--fan-t, 0) * -16deg)); z-index: 8; }
 .atela-compound-fan-card:nth-child(3) { transform: translateX(calc(var(--fan-t, 0) * 240px)) translateY(calc(var(--fan-t, 0) * -70px)) rotate(calc(var(--fan-t, 0) * -30deg)); z-index: 6; }
 .atela-compound-fan-card:nth-child(4) { transform: translateX(calc(var(--fan-t, 0) * 260px)); z-index: 7; }
@@ -2436,8 +2463,8 @@
   left: 0;
   right: 0;
   bottom: 38%;
-  background: rgba(36, 83, 198, 0.05);
-  border-bottom: 1px solid rgba(36, 83, 198, 0.08);
+  background: rgba(198,255,61,0.08);
+  border-bottom: 1px solid rgba(10,10,10,0.06);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2448,7 +2475,7 @@
   right: 0;
   bottom: 0;
   padding: 8px 10px 10px;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.96);
 }
 .atela-compound-channel-title { font-size: 11px; font-weight: 700; color: var(--compound-text); }
 .atela-compound-channel-desc { margin-top: 2px; font-size: 9.5px; line-height: 1.4; color: var(--compound-dim); }
@@ -2511,8 +2538,8 @@
   position: relative;
   overflow: hidden;
   border-radius: 5px;
-  border: 1px solid rgba(36, 83, 198, 0.12);
-  background: rgba(36, 83, 198, 0.04);
+  border: 1px solid rgba(10,10,10,0.08);
+  background: rgba(198,255,61,0.1);
 }
 .atela-compound-kpi {
   height: 100%;
@@ -2520,7 +2547,7 @@
   flex-direction: column;
   justify-content: center;
   padding: 10px;
-  color: var(--compound-accent);
+  color: var(--compound-accent-ink);
 }
 .atela-compound-kpi-num {
   font-size: 22px;
@@ -2534,7 +2561,7 @@
   font-size: 8px;
   font-family: var(--font-mono);
 }
-.atela-compound-kpi-delta { margin-top: 6px; color: rgba(36, 83, 198, 0.75); }
+.atela-compound-kpi-delta { margin-top: 6px; color: rgba(96, 124, 18, 0.86); }
 .atela-compound-kpi-label { margin-top: 4px; color: rgba(12, 16, 26, 0.5); }
 
 .atela-compound-lanes { position: relative; height: 100%; padding: 12px 8px 8px 34px; }
@@ -2550,13 +2577,13 @@
   display: block;
   width: 100%;
   height: 1px;
-  background: rgba(36, 83, 198, 0.18);
+  background: rgba(198, 255, 61, 0.24);
 }
 .atela-compound-chip {
   position: absolute;
   height: 8px;
   border-radius: 999px;
-  background: rgba(36, 83, 198, 0.36);
+  background: rgba(198, 255, 61, 0.34);
   animation: compound-chip 2.4s ease-in-out infinite alternate;
 }
 .atela-compound-chip.is-hero { background: var(--compound-accent); }
@@ -2576,7 +2603,7 @@
 .atela-compound-hist-bars i {
   flex: 1 1 0;
   border-radius: 3px 3px 0 0;
-  background: linear-gradient(180deg, rgba(36,83,198,0.95), rgba(36,83,198,0.38));
+  background: linear-gradient(180deg, rgba(198,255,61,0.95), rgba(198,255,61,0.32));
   transform-origin: bottom;
   animation: compound-grow 1.3s ease both;
 }
@@ -2595,7 +2622,7 @@
   top: 10px;
   bottom: 14px;
   width: 1px;
-  background: rgba(36, 83, 198, 0.4);
+  background: rgba(198, 255, 61, 0.4);
 }
 @keyframes compound-grow {
   from { transform: scaleY(0.2); }
@@ -2621,7 +2648,7 @@
   display: block;
   height: 8px;
   border-radius: 999px;
-  background: rgba(36, 83, 198, 0.34);
+  background: rgba(198, 255, 61, 0.3);
   animation: compound-slidebar 1.15s ease both;
 }
 .atela-compound-rank-row i.is-hero { background: var(--compound-accent); }
@@ -2635,8 +2662,8 @@
   width: 100%;
   aspect-ratio: 1 / 1;
   background:
-    radial-gradient(circle at 50% 50%, rgba(36,83,198,0.18), transparent 44%),
-    linear-gradient(180deg, rgba(36,83,198,0.08), rgba(255,255,255,0.88));
+    radial-gradient(circle at 50% 50%, rgba(198,255,61,0.18), transparent 44%),
+    linear-gradient(180deg, rgba(198,255,61,0.1), rgba(255,255,255,0.92));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2645,8 +2672,8 @@
   width: 58%;
   height: 58%;
   border-radius: 50%;
-  border: 1px solid rgba(36, 83, 198, 0.18);
-  box-shadow: 0 0 0 28px rgba(36,83,198,0.04), 0 0 0 56px rgba(36,83,198,0.025);
+  border: 1px solid rgba(198, 255, 61, 0.22);
+  box-shadow: 0 0 0 28px rgba(198,255,61,0.06), 0 0 0 56px rgba(198,255,61,0.03);
 }
 .atela-compound-variant-grid {
   position: absolute;
@@ -2657,7 +2684,7 @@
 }
 .atela-compound-variant-grid span {
   border-radius: 50%;
-  border: 1px solid rgba(36, 83, 198, 0.16);
+  border: 1px solid rgba(198, 255, 61, 0.18);
 }
 .atela-compound-fan-overlay {
   position: absolute;
@@ -2695,7 +2722,7 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: rgba(36, 83, 198, 0.45);
+  background: rgba(198, 255, 61, 0.52);
   animation: compound-float 2.8s ease-in-out infinite;
 }
 .atela-compound-model-dots i:nth-child(odd) { animation-delay: 0.2s; }
@@ -2709,7 +2736,7 @@
   inset: 0;
   background:
     radial-gradient(circle at 50% 25%, rgba(255,255,255,0.28), transparent 28%),
-    linear-gradient(180deg, rgba(36,83,198,0.22), transparent 55%);
+    linear-gradient(180deg, rgba(198,255,61,0.22), transparent 55%);
 }
 .atela-compound-model-beam::after {
   content: "";
@@ -2719,7 +2746,7 @@
   top: 18%;
   bottom: 18%;
   border-radius: 50%;
-  border: 1px solid rgba(36, 83, 198, 0.18);
+  border: 1px solid rgba(198, 255, 61, 0.2);
 }
 .atela-compound-model-copy {
   position: relative;
@@ -2753,8 +2780,8 @@
 .atela-compound-ideation-cell {
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid rgba(36, 83, 198, 0.12);
-  background: rgba(36, 83, 198, 0.04);
+  border: 1px solid rgba(10,10,10,0.08);
+  background: rgba(198,255,61,0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -2771,7 +2798,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, var(--compound-accent), rgba(36,83,198,0.12));
+  background: radial-gradient(circle at 40% 35%, var(--compound-accent), rgba(198,255,61,0.12));
   opacity: 0.85;
 }
 
@@ -2782,11 +2809,12 @@
   padding: 0 clamp(20px, 4vw, 56px) 36px;
 }
 .atela-compound-mobile-card {
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid var(--compound-border);
+  background: var(--compound-surface);
+  border: 1px solid rgba(10,10,10,0.08);
   border-radius: 18px;
   padding: 18px;
   color: var(--compound-text);
+  box-shadow: 0 16px 34px rgba(64,77,22,0.14);
 }
 .atela-compound-mobile-card h3 {
   margin: 0 0 8px;
@@ -2800,11 +2828,1067 @@
   line-height: 1.55;
 }
 .atela-compound-mobile-card.is-highlight {
-  background: linear-gradient(180deg, rgba(36,83,198,0.92), rgba(17,35,86,0.96));
-  border-color: rgba(36, 83, 198, 0.55);
+  background: rgba(10,10,10,0.96);
+  border-color: rgba(255,255,255,0.08);
   color: #fff;
 }
-.atela-compound-mobile-card.is-highlight p { color: rgba(255,255,255,0.78); }
+.atela-compound-mobile-card.is-highlight h3 { color: var(--compound-accent); }
+.atela-compound-mobile-card.is-highlight p { color: rgba(255,255,255,0.72); }
+
+/* ============ COMPOUND LOOP refresh ============ */
+.atela-compound-wrapper {
+  --compound-surface: rgba(17, 19, 24, 0.88);
+  --compound-surface-strong: rgba(14, 16, 20, 0.96);
+  --compound-surface-soft: rgba(244, 239, 228, 0.08);
+  --compound-surface-paper: rgba(244, 239, 228, 0.9);
+  --compound-card-edge: rgba(255, 255, 255, 0.08);
+  --compound-card-glow: rgba(198, 255, 61, 0.18);
+  padding: 26px 0 52px;
+  background:
+    radial-gradient(circle at 12% 68%, rgba(198, 255, 61, 0.18) 0, rgba(198, 255, 61, 0) 30%),
+    radial-gradient(circle at 82% 14%, rgba(61, 168, 255, 0.15) 0, rgba(61, 168, 255, 0) 24%),
+    radial-gradient(circle at 50% 34%, rgba(255, 255, 255, 0.04) 0, rgba(255, 255, 255, 0) 36%),
+    linear-gradient(180deg, #080808 0%, #090b0d 100%);
+}
+
+.atela-compound-section {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(198, 255, 61, 0.1) 0, rgba(198, 255, 61, 0) 24%),
+    radial-gradient(circle at 16% 76%, rgba(244, 239, 228, 0.03) 0, rgba(244, 239, 228, 0) 30%),
+    linear-gradient(180deg, rgba(9, 10, 12, 0.98), rgba(10, 10, 10, 0.99));
+}
+
+.atela-compound-section::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 170px;
+  background: linear-gradient(180deg, rgba(198, 255, 61, 0), rgba(198, 255, 61, 0.05));
+  pointer-events: none;
+}
+
+.atela-compound-header {
+  width: min(1220px, calc(100% - 64px));
+  padding: 48px 0 30px;
+}
+
+.atela-compound-headline {
+  max-width: 920px;
+  font-size: clamp(38px, 4.4vw, 66px);
+}
+
+.atela-compound-headline em {
+  margin-top: 0.18em;
+  padding: 0.02em 0.16em 0.06em;
+  border-radius: 12px;
+  box-shadow: 0 16px 34px rgba(198, 255, 61, 0.18);
+}
+
+.atela-compound-sub {
+  max-width: 680px;
+  color: rgba(255,255,255,0.74);
+}
+
+.atela-compound-desk {
+  margin-top: 18px;
+  padding-bottom: 56px;
+}
+
+.atela-compound-track {
+  align-items: flex-start;
+  padding: 28px 150px 88px;
+}
+
+.atela-compound-col {
+  opacity: 0.42;
+  filter: saturate(calc(0.74 + var(--col-t, 0) * 0.4));
+}
+
+.atela-compound-colhead,
+.atela-compound-output-label {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, calc(0.07 + var(--col-t, 0) * 0.08));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 18px 30px rgba(0,0,0,0.22);
+}
+
+.atela-compound-colhead {
+  transform: translateY(calc((1 - var(--col-t, 0)) * 8px));
+}
+
+.atela-compound-col-input { width: 246px; margin-right: 128px; }
+.atela-compound-col-v1 { width: 228px; margin-right: 392px; }
+.atela-compound-col-content { width: 392px; margin-right: 210px; }
+.atela-compound-col-data { width: 236px; margin-right: 150px; }
+.atela-compound-col-variants { width: 236px; margin-right: 290px; }
+.atela-compound-col-model { width: 244px; margin-right: 210px; }
+.atela-compound-col-ideation { width: 236px; margin-right: 248px; }
+.atela-compound-col-output { width: 264px; }
+
+.atela-compound-input-card,
+.atela-compound-channel-card,
+.atela-compound-perf-card,
+.atela-compound-variant-base,
+.atela-compound-model-card,
+.atela-compound-ideation-card,
+.atela-compound-mobile-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(18, 20, 25, 0.92), rgba(10, 10, 10, 0.98));
+  border: 1px solid var(--compound-card-edge);
+  box-shadow:
+    0 26px 60px rgba(0,0,0,0.34),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 0 0 1px rgba(255,255,255,0.02);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.atela-compound-input-card::before,
+.atela-compound-channel-card::before,
+.atela-compound-perf-card::before,
+.atela-compound-variant-base::before,
+.atela-compound-model-card::before,
+.atela-compound-ideation-card::before,
+.atela-compound-mobile-card::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0) 22%),
+    radial-gradient(circle at 12% 0%, rgba(198,255,61,0.1), rgba(198,255,61,0) 34%);
+  pointer-events: none;
+}
+
+.atela-compound-input-card {
+  width: 212px;
+  height: 212px;
+  padding: 12px;
+}
+
+.atela-compound-input-shell {
+  border-style: solid;
+  border-color: rgba(198,255,61,0.22);
+  background:
+    linear-gradient(180deg, rgba(246, 243, 234, 0.98), rgba(227, 232, 210, 0.84)),
+    radial-gradient(circle at 18% 14%, rgba(255,255,255,0.75), rgba(255,255,255,0) 34%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.8),
+    0 12px 24px rgba(10,10,10,0.08);
+}
+
+.atela-compound-input-copy {
+  color: rgba(12,16,26,0.62);
+}
+
+.atela-compound-input-tags span {
+  background: rgba(198,255,61,0.22);
+}
+
+.atela-compound-fan-card {
+  border-color: rgba(255,255,255,0.12);
+  background-color: rgba(18, 19, 25, 0.94);
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.32),
+    0 0 0 1px rgba(255,255,255,0.03);
+}
+
+.atela-compound-thumb {
+  padding: 12px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04)),
+    radial-gradient(circle at 18% 14%, rgba(255,255,255,0.26), rgba(255,255,255,0) 24%),
+    var(--compound-thumb-grad, linear-gradient(135deg, #242734, #0a0a0a));
+}
+
+.atela-compound-thumb::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.12);
+  transform: rotate(12deg);
+}
+
+.atela-compound-thumb.tone-pink {
+  --compound-thumb-grad: linear-gradient(145deg, #8d1d57, #ff4ca9 58%, #ffd3ea);
+  color: #fff;
+}
+
+.atela-compound-thumb.tone-blue {
+  --compound-thumb-grad: linear-gradient(145deg, #183c8b, #3f7fff 58%, #d7e6ff);
+  color: #fff;
+}
+
+.atela-compound-thumb.tone-lime {
+  --compound-thumb-grad: linear-gradient(145deg, #556f0a, #c6ff3d 54%, #f3ffd1);
+  color: #0a0a0a;
+}
+
+.atela-compound-thumb.tone-sand {
+  --compound-thumb-grad: linear-gradient(145deg, #8d7448, #e8d5b0 56%, #fff6e3);
+  color: #0a0a0a;
+}
+
+.atela-compound-thumb.tone-ink {
+  --compound-thumb-grad: linear-gradient(145deg, #1a1e2a, #090a0c 58%, #4a5367);
+  color: #fff;
+}
+
+.atela-compound-thumb.tone-violet {
+  --compound-thumb-grad: linear-gradient(145deg, #3e249d, #6b3dff 58%, #dbd0ff);
+  color: #fff;
+}
+
+.atela-compound-thumb-tag {
+  position: relative;
+  z-index: 1;
+  opacity: 0.82;
+}
+
+.atela-compound-thumb-title {
+  position: relative;
+  z-index: 1;
+  font-size: 16px;
+}
+
+.atela-compound-thumb-lines {
+  position: relative;
+  z-index: 1;
+}
+
+.atela-compound-channel-card {
+  border-radius: 18px;
+}
+
+.atela-compound-channel-media {
+  bottom: 36%;
+  background:
+    radial-gradient(circle at 50% 24%, rgba(255,255,255,0.06), rgba(255,255,255,0) 52%),
+    rgba(255,255,255,0.02);
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+
+.atela-compound-channel-body {
+  background: linear-gradient(180deg, rgba(13,14,18,0.72), rgba(10,10,10,0.96));
+}
+
+.atela-compound-channel-title {
+  color: rgba(244, 241, 236, 0.96);
+}
+
+.atela-compound-channel-desc {
+  color: rgba(255,255,255,0.56);
+}
+
+.atela-compound-channel-visual {
+  border-color: rgba(255,255,255,0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.24),
+    0 14px 30px rgba(0,0,0,0.18);
+}
+
+.atela-compound-perf-card {
+  width: 224px;
+  height: 224px;
+  padding: 10px;
+}
+
+.atela-compound-perf-grid {
+  gap: 10px;
+}
+
+.atela-compound-perf-box {
+  border-radius: 14px;
+  border-color: rgba(198,255,61,0.14);
+  background:
+    linear-gradient(180deg, rgba(244,239,228,0.1), rgba(244,239,228,0.03)),
+    rgba(255,255,255,0.02);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 10px 24px rgba(0,0,0,0.12);
+}
+
+.atela-compound-kpi {
+  padding: 12px 12px 10px;
+  color: #f6f8ef;
+}
+
+.atela-compound-kpi-orbit {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.atela-compound-kpi-orbit i {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(198,255,61,0.22);
+  animation: compound-kpi-orbit 2.6s ease-in-out infinite;
+}
+
+.atela-compound-kpi-orbit i:nth-child(2) { animation-delay: 0.22s; }
+.atela-compound-kpi-orbit i:nth-child(3) { animation-delay: 0.44s; }
+
+.atela-compound-kpi-num {
+  color: #f8fbef;
+  font-size: 24px;
+}
+
+.atela-compound-kpi-meta {
+  margin-top: 6px;
+}
+
+.atela-compound-kpi-delta {
+  color: rgba(198,255,61,0.88);
+}
+
+.atela-compound-kpi-label {
+  color: rgba(255,255,255,0.52);
+}
+
+.atela-compound-kpi-spark {
+  display: block;
+  width: 100%;
+  height: 44px;
+  margin-top: 10px;
+  overflow: visible;
+}
+
+.atela-compound-kpi-spark-shadow {
+  fill: none;
+  stroke: rgba(198,255,61,0.18);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.atela-compound-kpi-spark-line {
+  fill: none;
+  stroke: url(#compound-kpi-line);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.atela-compound-kpi-spark-dot {
+  fill: #C6FF3D;
+  filter: drop-shadow(0 0 10px rgba(198,255,61,0.52));
+}
+
+.atela-compound-lanes {
+  padding: 12px 10px 10px 38px;
+}
+
+.atela-compound-lane-row {
+  height: 31%;
+}
+
+.atela-compound-lane-row span {
+  left: -28px;
+  color: rgba(255,255,255,0.44);
+}
+
+.atela-compound-lane-row em {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+}
+
+.atela-compound-lane-row em::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(198,255,61,0.12), rgba(198,255,61,0.04));
+}
+
+.atela-compound-lane-packet {
+  position: absolute;
+  left: -24%;
+  top: 50%;
+  width: var(--packet-width, 18%);
+  height: 9px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(198,255,61,0), rgba(99,180,255,0.92), rgba(198,255,61,0));
+  filter: drop-shadow(0 0 10px rgba(99,180,255,0.28));
+  animation: compound-lane-flow 4s linear infinite var(--packet-delay, 0s);
+}
+
+.atela-compound-lane-packet.is-hero {
+  height: 11px;
+  background: linear-gradient(90deg, rgba(198,255,61,0), rgba(198,255,61,0.98), rgba(198,255,61,0));
+  filter: drop-shadow(0 0 14px rgba(198,255,61,0.42));
+}
+
+.atela-compound-lane-shine {
+  position: absolute;
+  right: 10px;
+  top: 14px;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(198,255,61,0.48), rgba(198,255,61,0));
+  filter: blur(6px);
+}
+
+.atela-compound-hist {
+  overflow: hidden;
+  padding: 10px 10px 12px;
+}
+
+.atela-compound-hist-grid {
+  position: absolute;
+  inset: 10px;
+  border-radius: 10px;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0.45;
+}
+
+.atela-compound-hist-bars {
+  inset: 18px 14px 18px;
+  gap: 4px;
+}
+
+.atela-compound-hist-bars i {
+  background: linear-gradient(180deg, rgba(198,255,61,1), rgba(198,255,61,0.14));
+  box-shadow: 0 10px 20px rgba(198,255,61,0.12);
+}
+
+.atela-compound-hist-line {
+  position: absolute;
+  inset: 10px 12px 14px;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  overflow: visible;
+}
+
+.atela-compound-hist-trend {
+  fill: none;
+  stroke: rgba(99,180,255,0.86);
+  stroke-width: 2;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 10px rgba(99,180,255,0.24));
+}
+
+.atela-compound-hist-trend-dot {
+  fill: #C6FF3D;
+  filter: drop-shadow(0 0 8px rgba(198,255,61,0.4));
+}
+
+.atela-compound-hist-median {
+  left: 42%;
+  top: 8px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.54);
+}
+
+.atela-compound-hist::after {
+  left: 50%;
+  top: 12px;
+  bottom: 16px;
+  background: linear-gradient(180deg, rgba(198,255,61,0.54), rgba(198,255,61,0.08));
+}
+
+.atela-compound-rank {
+  padding: 12px;
+  gap: 8px;
+}
+
+.atela-compound-rank-row {
+  gap: 10px;
+}
+
+.atela-compound-rank-row span {
+  width: 34px;
+  color: rgba(255,255,255,0.54);
+}
+
+.atela-compound-rank-track {
+  position: relative;
+  flex: 1 1 auto;
+  height: 10px;
+}
+
+.atela-compound-rank-track em {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+}
+
+.atela-compound-rank-row i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.18), rgba(99,180,255,0.84));
+  box-shadow: 0 0 18px rgba(99,180,255,0.14);
+}
+
+.atela-compound-rank-row i.is-hero {
+  background: linear-gradient(90deg, rgba(255,255,255,0.18), rgba(198,255,61,0.96));
+  box-shadow: 0 0 18px rgba(198,255,61,0.2);
+}
+
+.atela-compound-variant-base {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(198,255,61,0.18), transparent 44%),
+    linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+}
+
+.atela-compound-variant-pulse {
+  border-color: rgba(198,255,61,0.24);
+  box-shadow:
+    0 0 0 18px rgba(198,255,61,0.06),
+    0 0 0 42px rgba(198,255,61,0.03);
+  animation: compound-variant-breathe 4.8s ease-in-out infinite;
+}
+
+.atela-compound-variant-grid span {
+  background: radial-gradient(circle at 50% 50%, rgba(99,180,255,0.52), rgba(99,180,255,0) 66%);
+  border-color: rgba(255,255,255,0.12);
+  animation: compound-variant-node 4.4s ease-in-out infinite;
+}
+
+.atela-compound-variant-grid span:nth-child(2) { animation-delay: 0.18s; }
+.atela-compound-variant-grid span:nth-child(3) { animation-delay: 0.36s; }
+.atela-compound-variant-grid span:nth-child(4) { animation-delay: 0.54s; }
+
+.atela-compound-fan-overlay {
+  left: 8px;
+  top: 56%;
+}
+
+.atela-compound-model-stack {
+  gap: 16px;
+}
+
+.atela-compound-model-card {
+  padding: 18px;
+}
+
+.atela-compound-model-visual {
+  inset: 14px 14px auto 14px;
+  height: 62%;
+  display: grid;
+  place-items: center;
+}
+
+.atela-compound-model-network,
+.atela-compound-agent-orbit {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.atela-compound-model-core {
+  fill: rgba(198,255,61,0.18);
+  stroke: rgba(198,255,61,0.62);
+  stroke-width: 1.4;
+}
+
+.atela-compound-model-ring {
+  fill: none;
+  stroke: rgba(255,255,255,0.08);
+  stroke-width: 1.2;
+}
+
+.atela-compound-model-link {
+  fill: none;
+  stroke: url(#compound-model-link);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.atela-compound-model-node {
+  fill: rgba(198,255,61,0.92);
+  filter: drop-shadow(0 0 10px rgba(198,255,61,0.38));
+}
+
+.atela-compound-model-node.is-soft {
+  fill: rgba(99,180,255,0.76);
+  filter: drop-shadow(0 0 10px rgba(99,180,255,0.28));
+}
+
+.atela-compound-model-packet {
+  fill: #fff;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.34));
+}
+
+.atela-compound-agent-ring {
+  fill: none;
+  stroke: rgba(255,255,255,0.12);
+  stroke-width: 1.2;
+}
+
+.atela-compound-agent-ring.is-inner {
+  stroke: rgba(198,255,61,0.22);
+  stroke-dasharray: 4 6;
+}
+
+.atela-compound-agent-core {
+  fill: rgba(255,255,255,0.06);
+  stroke: rgba(198,255,61,0.48);
+  stroke-width: 1.2;
+}
+
+.atela-compound-agent-nodes {
+  transform-origin: 90px 90px;
+  animation: compound-rotate-slow 16s linear infinite;
+}
+
+.atela-compound-agent-node {
+  fill: rgba(198,255,61,0.96);
+  filter: drop-shadow(0 0 10px rgba(198,255,61,0.32));
+}
+
+.atela-compound-agent-node.is-soft {
+  fill: rgba(99,180,255,0.82);
+  filter: drop-shadow(0 0 10px rgba(99,180,255,0.28));
+}
+
+.atela-compound-agent-link {
+  fill: none;
+  stroke: rgba(255,255,255,0.14);
+  stroke-width: 1.2;
+}
+
+.atela-compound-agent-packet {
+  fill: #C6FF3D;
+  filter: drop-shadow(0 0 8px rgba(198,255,61,0.42));
+}
+
+.atela-compound-agent-packet.is-second {
+  fill: rgba(99,180,255,0.92);
+  filter: drop-shadow(0 0 8px rgba(99,180,255,0.34));
+}
+
+.atela-compound-model-title {
+  color: rgba(244,241,236,0.96);
+}
+
+.atela-compound-model-desc {
+  color: rgba(255,255,255,0.58);
+}
+
+.atela-compound-ideation-card {
+  padding: 12px;
+}
+
+.atela-compound-ideation-card::after {
+  content: "";
+  position: absolute;
+  inset: -20% auto 0 -12%;
+  width: 44%;
+  background: linear-gradient(90deg, rgba(198,255,61,0), rgba(198,255,61,0.12), rgba(198,255,61,0));
+  transform: skewX(-18deg);
+  animation: compound-ideation-scan 5.8s linear infinite;
+  pointer-events: none;
+}
+
+.atela-compound-ideation-grid {
+  gap: 8px;
+}
+
+.atela-compound-ideation-cell {
+  min-height: 54px;
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(244,239,228,0.1), rgba(244,239,228,0.03)),
+    rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.09);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.atela-compound-ideation-cell span {
+  color: rgba(255,255,255,0.72);
+}
+
+.atela-compound-ideation-cell i {
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 0 18px rgba(198,255,61,0.22);
+  animation: compound-ideation-pulse 2.8s ease-in-out infinite;
+}
+
+.atela-compound-ideation-cell:nth-child(2) i { animation-delay: 0.18s; }
+.atela-compound-ideation-cell:nth-child(3) i { animation-delay: 0.36s; }
+.atela-compound-ideation-cell:nth-child(4) i { animation-delay: 0.54s; }
+.atela-compound-ideation-cell:nth-child(5) i { animation-delay: 0.72s; }
+.atela-compound-ideation-cell:nth-child(6) i { animation-delay: 0.9s; }
+
+.atela-compound-output-label-final {
+  line-height: 1.55;
+  letter-spacing: 0.08em;
+}
+
+.atela-compound-flow-packet {
+  fill: #C6FF3D;
+  opacity: 0.92;
+  filter: drop-shadow(0 0 10px rgba(198,255,61,0.42));
+}
+
+.atela-compound-flow-packet.is-soft {
+  fill: rgba(255,255,255,0.84);
+  opacity: 0.68;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.22));
+}
+
+.atela-compound-mobile-card {
+  background: linear-gradient(180deg, rgba(18,20,25,0.94), rgba(10,10,10,0.98));
+  border-color: rgba(255,255,255,0.08);
+  color: rgba(244,241,236,0.96);
+}
+
+.atela-compound-mobile-card h3 {
+  color: rgba(244,241,236,0.96);
+}
+
+.atela-compound-mobile-card p {
+  color: rgba(255,255,255,0.62);
+}
+
+.atela-compound-mobile-card.is-highlight {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(198,255,61,0.16), rgba(198,255,61,0) 36%),
+    linear-gradient(180deg, rgba(18,20,25,0.96), rgba(10,10,10,1));
+}
+
+/* ============ COMPOUND LOOP atelier alignment pass ============ */
+.atela-compound-wrapper {
+  --compound-card-edge: rgba(198, 255, 61, 0.12);
+  --compound-card-glow: rgba(198, 255, 61, 0.14);
+}
+
+.atela-compound-header {
+  padding: 42px 0 18px;
+}
+
+.atela-compound-sub {
+  max-width: 640px;
+}
+
+.atela-compound-desk {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 0;
+  padding: 16px 0 12px;
+}
+
+.atela-compound-desk::before,
+.atela-compound-desk::after {
+  content: "";
+  position: absolute;
+  width: 188px;
+  height: 188px;
+  border-radius: 999px;
+  filter: blur(18px);
+  opacity: 0.26;
+  pointer-events: none;
+}
+
+.atela-compound-desk::before {
+  left: 5%;
+  bottom: 10%;
+  background: radial-gradient(circle, rgba(198,255,61,0.52) 0, rgba(198,255,61,0) 74%);
+}
+
+.atela-compound-desk::after {
+  right: 6%;
+  top: 6%;
+  background: radial-gradient(circle, rgba(61,168,255,0.36) 0, rgba(61,168,255,0) 76%);
+}
+
+.atela-compound-hscroll {
+  width: 100%;
+  height: auto;
+}
+
+.atela-compound-track {
+  min-height: 372px;
+  align-items: center;
+  padding: 8px 146px 0;
+}
+
+.atela-compound-col {
+  gap: 14px;
+  opacity: 0.48;
+}
+
+.atela-compound-colhead,
+.atela-compound-output-label {
+  display: inline-flex;
+  align-self: center;
+  justify-content: center;
+  width: max-content;
+  max-width: 100%;
+  min-height: 34px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(14, 15, 18, 0.84);
+  border: 1px solid rgba(198, 255, 61, calc(0.08 + var(--col-t, 0) * 0.12));
+  box-shadow:
+    0 0 0 6px rgba(198,255,61,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 14px 26px rgba(0,0,0,0.16);
+}
+
+.atela-compound-colhead {
+  transform: translateY(calc((1 - var(--col-t, 0)) * 4px));
+}
+
+.atela-compound-output-label-final {
+  min-height: 40px;
+  padding: 8px 16px;
+}
+
+.atela-compound-input-card,
+.atela-compound-channel-card,
+.atela-compound-perf-card,
+.atela-compound-variant-base,
+.atela-compound-model-card,
+.atela-compound-ideation-card,
+.atela-compound-mobile-card {
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(17, 19, 24, 0.76), rgba(10, 10, 10, 0.84));
+  border-color: rgba(198,255,61,0.1);
+  box-shadow:
+    0 16px 34px rgba(0,0,0,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 0 0 1px rgba(255,255,255,0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.atela-compound-input-card::before,
+.atela-compound-channel-card::before,
+.atela-compound-perf-card::before,
+.atela-compound-variant-base::before,
+.atela-compound-model-card::before,
+.atela-compound-ideation-card::before,
+.atela-compound-mobile-card::before {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0) 22%),
+    radial-gradient(circle at 10% 0%, rgba(198,255,61,0.08), rgba(198,255,61,0) 38%);
+}
+
+.atela-compound-input-shell {
+  border-radius: 18px;
+}
+
+.atela-compound-fan-small {
+  transform: scale(0.8);
+  transform-origin: left center;
+}
+
+.atela-compound-fan-card {
+  border-radius: 18px;
+  box-shadow:
+    0 16px 36px rgba(0,0,0,0.18),
+    0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.atela-compound-thumb {
+  padding: 11px;
+}
+
+.atela-compound-thumb::after {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  opacity: 0.56;
+}
+
+.atela-compound-channel-card {
+  border-radius: 20px;
+}
+
+.atela-compound-channel-media {
+  bottom: 37%;
+}
+
+.atela-compound-channel-visual {
+  border-radius: 16px;
+}
+
+.atela-compound-perf-card {
+  width: 230px;
+  height: 230px;
+  padding: 12px;
+}
+
+.atela-compound-perf-box {
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(17,20,24,0.76), rgba(17,20,24,0.56)),
+    rgba(255,255,255,0.02);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    0 8px 18px rgba(0,0,0,0.1);
+}
+
+.atela-compound-kpi {
+  padding: 13px 13px 11px;
+}
+
+.atela-compound-lanes {
+  padding: 12px 10px 10px 34px;
+}
+
+.atela-compound-lane-row span {
+  left: -24px;
+}
+
+.atela-compound-lane-row em,
+.atela-compound-rank-track,
+.atela-compound-rank-row i {
+  height: 8px;
+}
+
+.atela-compound-lane-packet {
+  height: 8px;
+}
+
+.atela-compound-lane-packet.is-hero {
+  height: 10px;
+}
+
+.atela-compound-hist-median {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10px;
+}
+
+.atela-compound-hist::after {
+  left: 50%;
+}
+
+.atela-compound-variant-wrap {
+  display: grid;
+  place-items: center;
+}
+
+.atela-compound-variant-base {
+  display: grid;
+  place-items: center;
+}
+
+.atela-compound-variant-pulse {
+  width: 50%;
+  height: 50%;
+  box-shadow:
+    0 0 0 14px rgba(198,255,61,0.05),
+    0 0 0 30px rgba(198,255,61,0.025);
+}
+
+.atela-compound-fan-overlay {
+  left: 50%;
+  top: 50%;
+  transform: translate(-48%, -50%) scale(0.74);
+  transform-origin: center center;
+}
+
+.atela-compound-model-stack {
+  justify-content: center;
+  gap: 12px;
+}
+
+.atela-compound-model-card {
+  min-height: 184px;
+  padding: 16px 16px 14px;
+}
+
+.atela-compound-model-visual {
+  inset: 12px 16px 54px 16px;
+  height: auto;
+}
+
+.atela-compound-model-title {
+  font-size: 12px;
+}
+
+.atela-compound-model-desc {
+  font-size: 9.5px;
+  line-height: 1.45;
+}
+
+.atela-compound-ideation-card {
+  padding: 10px;
+}
+
+.atela-compound-ideation-grid {
+  gap: 7px;
+}
+
+.atela-compound-ideation-cell {
+  min-height: 50px;
+  border-radius: 14px;
+}
+
+.atela-compound-flow-packet {
+  filter: drop-shadow(0 0 7px rgba(198,255,61,0.34));
+}
+
+.atela-compound-flow-packet.is-soft {
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.18));
+}
+
+@keyframes compound-kpi-orbit {
+  0%, 100% { transform: scale(0.8); opacity: 0.42; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes compound-lane-flow {
+  from { left: -24%; }
+  to { left: 110%; }
+}
+
+@keyframes compound-variant-breathe {
+  0%, 100% { transform: scale(0.92); opacity: 0.78; }
+  50% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes compound-variant-node {
+  0%, 100% { transform: scale(0.72); opacity: 0.4; }
+  50% { transform: scale(1); opacity: 0.96; }
+}
+
+@keyframes compound-rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes compound-ideation-scan {
+  from { transform: translateX(-22%) skewX(-18deg); opacity: 0; }
+  18%, 82% { opacity: 1; }
+  to { transform: translateX(290%) skewX(-18deg); opacity: 0; }
+}
+
+@keyframes compound-ideation-pulse {
+  0%, 100% { transform: scale(0.78); opacity: 0.5; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
 
 /* ============ MARKETPLACE section ============ */
 .atela-market { background: var(--atela-ink); color: #fff; padding: 120px 0; }
