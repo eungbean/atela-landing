@@ -13,5 +13,12 @@ window.atelaWantThisGallery = Object.freeze([
     "src": "/assets/want-this/optimized/chamo.mp4",
     "poster": "/assets/want-this/optimized/chamo.poster.avif",
     "alt": "ATELA want-this gallery video 2"
+  },
+  {
+    "id": "dr-pepper",
+    "type": "video",
+    "src": "/assets/want-this/optimized/dr-pepper.mp4",
+    "poster": "/assets/want-this/optimized/dr-pepper.poster.avif",
+    "alt": "ATELA want-this gallery video 3"
   }
 ]);
