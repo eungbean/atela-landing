@@ -1,14 +1,32 @@
 (function initAtelaLocaleRouting() {
   const SUPPORTED_LOCALES = ['ko', 'en'];
   const CONTENT_READY_LOCALES = ['ko', 'en'];
-  const SECTION_ROUTE_IDS = new Set([
+  const DEFAULT_LOCALE = 'en';
+  const HOME_SECTION_ROUTE_IDS = new Set([
     'tech',
     'integrations',
     'workflow',
-    'showcase',
-    'marketplace',
-    'pricing',
-    'cases',
+  ]);
+  const PAGE_ROUTE_IDS = new Set([
+    'atelier',
+    'privacy',
+    'terms',
+  ]);
+  const PAGE_SECTION_ROUTE_IDS = {
+    atelier: new Set([
+      'showcase',
+      'marketplace',
+      'compound-loop',
+      'compare',
+      'pricing',
+      'cases',
+    ]),
+    privacy: new Set([]),
+    terms: new Set([]),
+  };
+  const ANY_SECTION_ROUTE_IDS = new Set([
+    ...HOME_SECTION_ROUTE_IDS,
+    ...Object.values(PAGE_SECTION_ROUTE_IDS).flatMap((sectionIds) => [...sectionIds]),
   ]);
   const SECTION_ROUTE_ALIASES = {
     integrations: 'workflow',
@@ -73,21 +91,46 @@
       return detectedLocale;
     }
 
-    return CONTENT_READY_LOCALES[0] || SUPPORTED_LOCALES[0];
+    return DEFAULT_LOCALE;
+  }
+
+  function getPageSectionIds(pageId) {
+    if (pageId && PAGE_SECTION_ROUTE_IDS[pageId]) return PAGE_SECTION_ROUTE_IDS[pageId];
+    return HOME_SECTION_ROUTE_IDS;
+  }
+
+  function getPageForSection(sectionId) {
+    if (HOME_SECTION_ROUTE_IDS.has(sectionId)) return 'home';
+
+    for (const [pageId, sectionIds] of Object.entries(PAGE_SECTION_ROUTE_IDS)) {
+      if (sectionIds.has(sectionId)) return pageId;
+    }
+
+    return 'home';
   }
 
   function getRouteState(pathname = window.location.pathname, hash = window.location.hash) {
     const segments = splitPath(pathname);
     const pathLocale = normalizeLocale(segments[0]);
     const pathSegments = cleanPathSegments(pathLocale ? segments.slice(1) : segments);
+    const firstSegment = pathSegments[0] || '';
+    const pageId = PAGE_ROUTE_IDS.has(firstSegment) ? firstSegment : getPageForSection(firstSegment);
+    const pageSegments = PAGE_ROUTE_IDS.has(firstSegment)
+      ? pathSegments.slice(1)
+      : pageId === 'home'
+        ? pathSegments
+        : pathSegments;
     const hashValue = String(hash || '');
     const hashId = hashValue.replace(/^#/, '');
-    const pathSectionId = SECTION_ROUTE_IDS.has(pathSegments[0]) ? pathSegments[0] : '';
-    const hashSectionId = SECTION_ROUTE_IDS.has(hashId) ? hashId : '';
+    const pageSectionIds = getPageSectionIds(pageId);
+    const pathSectionId = pageSectionIds.has(pageSegments[0]) ? pageSegments[0] : '';
+    const hashSectionId = ANY_SECTION_ROUTE_IDS.has(hashId) ? hashId : '';
 
     return {
       pathLocale,
       pathSegments,
+      pageId,
+      pageSegments,
       hash: hashValue,
       hashId,
       pathSectionId,
@@ -106,8 +149,15 @@
   }
 
   function getEffectivePathSegments(route = getRouteState()) {
-    if (route.pathSegments.length) return route.pathSegments;
-    if (route.hashSectionId) return [route.hashSectionId];
+    const pagePrefix = route.pageId && route.pageId !== 'home' ? [route.pageId] : [];
+
+    if (route.pathSectionId) return [...pagePrefix, route.pathSectionId];
+    if (route.hashSectionId) {
+      const hashPageId = route.pageId !== 'home' ? route.pageId : getPageForSection(route.hashSectionId);
+      const hashPagePrefix = hashPageId && hashPageId !== 'home' ? [hashPageId] : [];
+      return [...hashPagePrefix, route.hashSectionId];
+    }
+    if (pagePrefix.length) return pagePrefix;
     return [];
   }
 
@@ -124,6 +174,7 @@
       supportedLocales: [...SUPPORTED_LOCALES],
       contentReadyLocales: [...CONTENT_READY_LOCALES],
       currentLocale,
+      currentPageId: route.pageId,
       currentPathSegments: [...route.pathSegments],
       currentSectionId: route.sectionId,
       isContentReady: contentReady,
@@ -131,7 +182,7 @@
 
     document.documentElement.dataset.atelaLocale = currentLocale;
     document.documentElement.dataset.atelaLocaleReady = String(contentReady);
-    document.documentElement.lang = contentReady ? currentLocale : CONTENT_READY_LOCALES[0] || 'ko';
+    document.documentElement.lang = contentReady ? currentLocale : DEFAULT_LOCALE;
 
     return window.ATELA_LOCALE_ROUTING;
   }
@@ -181,7 +232,7 @@
     const targetLocale = queryLocale || route.pathLocale || getDefaultLocale();
     const targetSegments = getEffectivePathSegments(route);
     const targetPathname = buildPathname(targetLocale, targetSegments);
-    const shouldDropHash = !route.pathSegments.length && Boolean(route.hashSectionId);
+    const shouldDropHash = Boolean(route.hashSectionId);
     const normalizedHash = shouldDropHash ? '' : route.hash;
 
     if (url.pathname !== targetPathname || url.hash !== normalizedHash || queryLocale) {
@@ -212,6 +263,30 @@
   function buildSectionUrl(sectionId, locale = updateRouteSnapshot().currentLocale) {
     const normalizedLocale = normalizeLocale(locale) || getDefaultLocale();
     const targetSegments = sectionId ? [sectionId] : [];
+    const url = new URL(window.location.href);
+    url.searchParams.delete('lang');
+
+    return buildLocationFromPath(buildPathname(normalizedLocale, targetSegments), {
+      search: url.search,
+    });
+  }
+
+  function buildPageUrl(pageId, locale = updateRouteSnapshot().currentLocale) {
+    const normalizedLocale = normalizeLocale(locale) || getDefaultLocale();
+    const targetSegments = pageId && pageId !== 'home' ? [pageId] : [];
+    const url = new URL(window.location.href);
+    url.searchParams.delete('lang');
+
+    return buildLocationFromPath(buildPathname(normalizedLocale, targetSegments), {
+      search: url.search,
+    });
+  }
+
+  function buildPageSectionUrl(pageId, sectionId, locale = updateRouteSnapshot().currentLocale) {
+    const normalizedLocale = normalizeLocale(locale) || getDefaultLocale();
+    const targetSegments = pageId && pageId !== 'home' ? [pageId] : [];
+    if (sectionId) targetSegments.push(sectionId);
+
     const url = new URL(window.location.href);
     url.searchParams.delete('lang');
 
@@ -258,10 +333,13 @@
 
   window.atelaGetRouteState = getRouteState;
   window.atelaGetCurrentLocale = () => updateRouteSnapshot().currentLocale;
+  window.atelaGetCurrentPage = () => updateRouteSnapshot().currentPageId || 'home';
   window.atelaSetPreferredLocale = setPreferredLocale;
   window.atelaBuildLocaleUrl = buildLocaleUrl;
   window.atelaBuildSectionUrl = buildSectionUrl;
   window.atelaBuildHomeUrl = (locale) => buildSectionUrl('', locale);
+  window.atelaBuildPageUrl = buildPageUrl;
+  window.atelaBuildPageSectionUrl = buildPageSectionUrl;
   window.atelaHandleSectionNavigation = handleSectionNavigation;
   window.atelaApplyCurrentRoute = applyRoutePosition;
 

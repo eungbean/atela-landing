@@ -10,6 +10,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/:page(privacy|terms)",
+      "destination": "/index.html"
+    },
+    {
       "source": "/:locale(ko|en)",
       "destination": "/index.html"
     },

@@ -1,6 +1,20 @@
-function Showcase() {
+function Showcase(props) {
+  const variant = props.variant || 'default';
+  const isHero = variant === 'hero';
   const copy = window.atelaGetCopySection('showcase');
-  const titleLines = Array.isArray(copy.titleLines) ? copy.titleLines : [copy.title];
+  const heroCopy = isHero ? window.atelaGetCopySection('atelierHero') : null;
+  const titleLines = Array.isArray((isHero ? heroCopy?.titleLines : copy.titleLines))
+    ? (isHero ? heroCopy.titleLines : copy.titleLines)
+    : [isHero ? heroCopy?.title : copy.title];
+  const currentLocale = window.atelaGetCurrentLocale ? window.atelaGetCurrentLocale() : 'ko';
+  const buildHomeUrl = window.atelaBuildHomeUrl || ((locale) => `/${locale}`);
+  const buildPageSectionUrl = window.atelaBuildPageSectionUrl || ((pageId, sectionId, locale) => {
+    const parts = [locale];
+    if (pageId && pageId !== 'home') parts.push(pageId);
+    if (sectionId) parts.push(sectionId);
+    return `/${parts.join('/')}`;
+  });
+  const trackCtaClick = window.atelaTrackCtaClick;
   const manifestItems = Array.isArray(window.atelaWantThisGallery) ? window.atelaWantThisGallery : [];
   const galleryItems = manifestItems.length
     ? manifestItems
@@ -22,12 +36,37 @@ function Showcase() {
     }
   }
 
+  const primaryHref = buildPageSectionUrl('atelier', 'pricing', currentLocale);
+  const secondaryHref = buildHomeUrl(currentLocale);
+
+  const handlePrimaryClick = () => {
+    if (trackCtaClick && heroCopy) {
+      trackCtaClick({
+        sectionId: 'showcase',
+        ctaId: 'atelier_hero_primary',
+        ctaLabel: heroCopy.primaryCta,
+        destination: primaryHref,
+      });
+    }
+  };
+
+  const handleSecondaryClick = () => {
+    if (trackCtaClick && heroCopy) {
+      trackCtaClick({
+        sectionId: 'showcase',
+        ctaId: 'atelier_hero_secondary',
+        ctaLabel: heroCopy.secondaryCta,
+        destination: secondaryHref,
+      });
+    }
+  };
+
   return (
-    <section id="showcase" className="atela-showcase">
+    <section id="showcase" className={`atela-showcase${isHero ? ' is-hero' : ''}`}>
       <div className="atela-container">
         <div className="atela-showcase-head">
           <div className="atela-showcase-heading">
-            <span className="atela-eyebrow">{copy.eyebrow}</span>
+            <span className="atela-eyebrow">{isHero ? heroCopy.eyebrow : copy.eyebrow}</span>
             <h2 className="atela-h2">
               {titleLines.map((line, index) => (
                 <React.Fragment key={`${line}-${index}`}>
@@ -37,9 +76,27 @@ function Showcase() {
               ))}
             </h2>
           </div>
+          {isHero ? (
+            <div className="atelier-hero-copy">
+              <p>{heroCopy.body}</p>
+              <ul className="atelier-hero-points" aria-label={heroCopy.eyebrow}>
+                {heroCopy.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+              <div className="atela-hero-cta atelier-hero-actions">
+                <a className="atela-btn-ink" href={primaryHref} onClick={handlePrimaryClick}>
+                  {heroCopy.primaryCta}
+                </a>
+                <a className="atela-btn-outline" href={secondaryHref} onClick={handleSecondaryClick}>
+                  {heroCopy.secondaryCta}
+                </a>
+              </div>
+            </div>
+          ) : null}
         </div>
 
-        <div className="showcase-gallery" aria-label={copy.galleryLabel || copy.eyebrow}>
+        <div className="showcase-gallery" aria-label={(isHero ? heroCopy.eyebrow : copy.galleryLabel) || copy.eyebrow}>
           <div className="showcase-loop-track">
             {[0, 1].map((groupIndex) => (
               <div

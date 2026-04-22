@@ -224,8 +224,133 @@
         title: 'ATELA · 브랜드를 위한 에이전틱 크리에이티브 팀',
         description: '텍스트와 로고 선명도를 지키며 상세페이지, 광고, 숏폼, 마켓플레이스 비주얼을 운영하는 AI Agentic Agency for Brands.',
       },
+      atelierPage: {
+        title: 'ATELA Atelier · 브랜드 크리에이티브 운영을 직접 실행하는 팀',
+        description: 'PDP, 광고, 릴스, CRM까지 브랜드 크리에이티브 운영을 직접 실행하는 ATELA Atelier.',
+      },
+      privacyPage: {
+        title: 'ATELA 개인정보처리방침',
+        description: 'ATELA 서비스와 Google OAuth 로그인에 적용되는 개인정보 처리방침입니다.',
+        eyebrow: 'PRIVACY POLICY',
+        heading: '개인정보처리방침',
+        summary: 'ATELA는 서비스 제공과 Google OAuth 로그인을 위해 필요한 범위의 개인정보만 처리합니다.',
+        effectiveDateLabel: '시행일',
+        effectiveDate: '2026년 4월 22일',
+        homeLabel: '홈으로',
+        otherPageLabel: '서비스 약관 보기',
+        sections: [
+          {
+            title: '1. 수집하는 정보',
+            items: [
+              'Google OAuth 또는 제3자 인증 연동 과정에서 사용자가 동의한 범위의 계정 정보(예: 이메일 주소, 이름, 프로필 이미지)',
+              '로그인 상태, 접속 시간, 브라우저 및 기기 정보, 쿠키 등 서비스 운영과 보안에 필요한 기술 정보',
+              '문의, 지원 요청, 운영 상담 과정에서 사용자가 직접 제공한 정보',
+            ],
+          },
+          {
+            title: '2. 개인정보 이용 목적',
+            items: [
+              '사용자 식별, 계정 생성, 로그인 및 인증 제공',
+              '서비스 운영, 보안 유지, 비정상 이용 방지, 기능 개선',
+              '문의 응대, 공지 전달, 계정 및 서비스 관련 커뮤니케이션',
+            ],
+          },
+          {
+            title: '3. 보관 기간',
+            items: [
+              '개인정보는 서비스 이용 기간 동안 보관되며, 목적 달성 또는 계정 삭제 요청 후 합리적인 기간 내 파기합니다.',
+              '관계 법령에 따라 별도 보관이 필요한 정보는 해당 법령이 정한 기간 동안 보관할 수 있습니다.',
+            ],
+          },
+          {
+            title: '4. 제3자 제공 및 외부 서비스',
+            items: [
+              'ATELA는 법령상 요구되는 경우를 제외하고 사용자의 개인정보를 판매하거나 임의로 제3자에게 제공하지 않습니다.',
+              '로그인 및 계정 운영을 위해 Google OAuth, Clerk 등 외부 서비스 사업자를 사용할 수 있으며, 이들은 서비스 제공에 필요한 범위에서 정보를 처리할 수 있습니다.',
+            ],
+          },
+          {
+            title: '5. 이용자의 권리',
+            items: [
+              '사용자는 자신의 개인정보에 대해 열람, 정정, 삭제, 처리 정지를 요청할 수 있습니다.',
+              'Google 계정 연동 권한은 사용자가 Google 계정 설정에서 직접 해제할 수 있습니다.',
+            ],
+          },
+          {
+            title: '6. 운영 주체 및 문의',
+            items: [
+              '운영 주체: ATELA Inc.',
+              '개인정보 및 계정 관련 요청은 ATELA의 공식 문의 채널을 통해 접수할 수 있습니다.',
+            ],
+          },
+        ],
+      },
+      termsPage: {
+        title: 'ATELA 서비스 약관',
+        description: 'ATELA 웹사이트와 Google OAuth 로그인을 포함한 관련 서비스 이용 약관입니다.',
+        eyebrow: 'TERMS OF SERVICE',
+        heading: '서비스 약관',
+        summary: '이 약관은 ATELA 웹사이트 및 관련 서비스 이용에 적용되는 기본 조건을 설명합니다.',
+        effectiveDateLabel: '시행일',
+        effectiveDate: '2026년 4월 22일',
+        homeLabel: '홈으로',
+        otherPageLabel: '개인정보처리방침 보기',
+        sections: [
+          {
+            title: '1. 서비스 안내',
+            items: [
+              'ATELA는 브랜드 크리에이티브 운영과 관련된 웹사이트, 로그인 기능, 안내 페이지 및 연계 서비스를 제공합니다.',
+              '서비스의 일부 기능은 예고 없이 변경, 추가, 중단될 수 있습니다.',
+            ],
+          },
+          {
+            title: '2. 계정 및 로그인',
+            items: [
+              '사용자는 Google OAuth 등 ATELA가 제공하는 인증 수단을 통해 로그인할 수 있습니다.',
+              '사용자는 자신의 계정 정보와 인증 수단을 안전하게 관리할 책임이 있습니다.',
+            ],
+          },
+          {
+            title: '3. 금지 행위',
+            items: [
+              '관련 법령 위반, 타인 사칭, 서비스 방해, 비정상적 접근 시도, 무단 수집 또는 악용 행위는 금지됩니다.',
+              'ATELA는 서비스 안전성과 운영을 해치는 행위가 확인될 경우 접근 제한 또는 계정 조치를 할 수 있습니다.',
+            ],
+          },
+          {
+            title: '4. 지식재산권',
+            items: [
+              'ATELA 웹사이트, 상표, 로고, 문구, 디자인 및 관련 콘텐츠에 대한 권리는 ATELA 또는 정당한 권리자에게 있습니다.',
+              '사전 승인 없이 이를 복제, 배포, 수정하거나 상업적으로 이용할 수 없습니다.',
+            ],
+          },
+          {
+            title: '5. 책임 제한',
+            items: [
+              'ATELA는 관련 법령이 허용하는 범위 내에서 서비스의 지속성, 특정 목적 적합성, 무오류 상태를 보증하지 않습니다.',
+              '사용자는 자신의 계정 사용, 제3자 인증 수단, 외부 서비스 이용에 대해 스스로 책임을 부담합니다.',
+            ],
+          },
+          {
+            title: '6. 준거 및 문의',
+            items: [
+              '본 약관은 적용 가능한 법률에 따라 해석됩니다.',
+              '서비스 이용과 관련한 문의는 ATELA의 공식 문의 채널을 통해 접수할 수 있습니다.',
+            ],
+          },
+        ],
+      },
       nav: {
         cta: '무료로 시작하기',
+        menuHome: 'STUDIO',
+        menuAtelier: 'ATELIER',
+        menuContact: 'CONTACT',
+      },
+      atelierNav: {
+        cta: '무료로 시작하기',
+        menuHome: 'STUDIO',
+        menuAtelier: 'ATELIER',
+        menuContact: 'CONTACT',
       },
       hero: {
         titleLead: '이커머스 · 브랜드를 위한',
@@ -557,6 +682,31 @@
           },
         ],
       },
+      atelierHero: {
+        eyebrow: 'ATELA ATELIER',
+        titleLines: ['브랜드 크리에이티브 운영,', 'ATELA가 직접 실행합니다.'],
+        body: 'PDP, 광고, 릴스, CRM은 같은 템플릿으로 끝나지 않습니다. ATELA Atelier는 브랜드와 채널 맥락을 읽고, Showcase 품질의 결과물까지 직접 운영합니다.',
+        primaryCta: '가격 보기 →',
+        secondaryCta: '생성 툴 먼저 보기 ↗',
+        points: [
+          'PDP · 광고 · 릴스 · CRM까지',
+          '브랜드 디테일 보존',
+          '48시간 내 빠른 전달',
+        ],
+      },
+      atelierBridge: {
+        eyebrow: 'ATELA ATELIER',
+        titleLines: ['직접 돌리기보다,', '바로 실행이 필요한 팀이라면.'],
+        body: '툴은 내부 팀이 빠르게 제작할 때 좋습니다. 하지만 채널별 기획부터 결과물 전달까지 맡길 파트너가 필요하다면, Atelier가 더 빠릅니다.',
+        points: [
+          '광고, PDP, 릴스, CRM까지 한 번에 운영',
+          '브랜드 톤과 디테일을 지키며 반복',
+          'Showcase 품질로 바로 시작',
+        ],
+        primaryCta: 'ATELIER 보기 ↗',
+        secondaryCta: '운영 방식 보기 ↗',
+        galleryLabel: 'ATELA Atelier 미리보기',
+      },
       marketplace: {
         eyebrow: 'AI AGENTIC AGENCY',
         titlePrefix: '브랜드 크리에이티브 운영,',
@@ -671,11 +821,13 @@
         titleLines: ['오늘 상품 연결,', '내일 아침 50장\n+ 채널별 실행 결과물.'],
         body: '지금 무료로 시작하세요.',
         primaryCta: '무료로 시작하기 →',
-        secondaryCta: '세일즈에 문의 ↗',
+        secondaryCta: 'ATELIER 보기 ↗',
       },
       footer: {
         bottomLeft: '© 2026 ATELA Inc.',
         bottomRight: '이용약관 · 개인정보처리방침 · 쿠키',
+        termsLabel: '이용약관',
+        privacyLabel: '개인정보처리방침',
       },
     },
     en: {
@@ -683,8 +835,133 @@
         title: 'ATELA · The Agentic Creative Team for Brands',
         description: 'An AI agentic agency for brands that preserves text, logos, and brand detail across PDPs, ads, reels, and marketplace creative.',
       },
+      atelierPage: {
+        title: 'ATELA Atelier · Creative Operations Executed for Brands',
+        description: 'ATELA Atelier executes PDP, ad, reels, and CRM creative operations for brands with showcase-ready quality.',
+      },
+      privacyPage: {
+        title: 'ATELA Privacy Policy',
+        description: 'This Privacy Policy explains how ATELA handles personal information for its service and Google OAuth sign-in.',
+        eyebrow: 'PRIVACY POLICY',
+        heading: 'Privacy Policy',
+        summary: 'ATELA only processes the personal information needed to operate the service and support Google OAuth sign-in.',
+        effectiveDateLabel: 'Effective date',
+        effectiveDate: 'April 22, 2026',
+        homeLabel: 'Back home',
+        otherPageLabel: 'View Terms of Service',
+        sections: [
+          {
+            title: '1. Information we collect',
+            items: [
+              'Account information shared with your consent through Google OAuth or another third-party sign-in flow, such as email address, name, and profile image',
+              'Technical information needed for operations and security, including sign-in status, access time, browser and device details, and cookies',
+              'Information you provide directly when you contact ATELA for support, onboarding, or service inquiries',
+            ],
+          },
+          {
+            title: '2. How we use information',
+            items: [
+              'To identify users, create accounts, and provide sign-in and authentication',
+              'To operate the service, maintain security, prevent misuse, and improve the experience',
+              'To respond to inquiries and send important account or service-related notices',
+            ],
+          },
+          {
+            title: '3. Retention',
+            items: [
+              'Personal information is kept while your account or service relationship remains active and deleted within a reasonable period after the purpose ends or deletion is requested.',
+              'Some information may be retained longer when required by applicable law.',
+            ],
+          },
+          {
+            title: '4. Third parties and service providers',
+            items: [
+              'ATELA does not sell personal information or disclose it to unrelated third parties except when required by law.',
+              'ATELA may use outside providers such as Google OAuth and Clerk to support sign-in and account operations, and those providers may process information as needed to deliver the service.',
+            ],
+          },
+          {
+            title: '5. Your choices',
+            items: [
+              'You may request access, correction, deletion, or restriction of your personal information where applicable.',
+              'Permissions connected to your Google account can also be revoked from your Google account settings.',
+            ],
+          },
+          {
+            title: '6. Operator and contact',
+            items: [
+              'Operator: ATELA Inc.',
+              "Privacy and account-related requests can be submitted through ATELA's official contact channel.",
+            ],
+          },
+        ],
+      },
+      termsPage: {
+        title: 'ATELA Terms of Service',
+        description: 'These Terms of Service apply to the ATELA website and related services, including Google OAuth sign-in.',
+        eyebrow: 'TERMS OF SERVICE',
+        heading: 'Terms of Service',
+        summary: 'These terms describe the basic conditions for using the ATELA website and related services.',
+        effectiveDateLabel: 'Effective date',
+        effectiveDate: 'April 22, 2026',
+        homeLabel: 'Back home',
+        otherPageLabel: 'View Privacy Policy',
+        sections: [
+          {
+            title: '1. Service scope',
+            items: [
+              'ATELA provides a website, sign-in flow, information pages, and related services connected to brand creative operations.',
+              'Parts of the service may change, be added, or be discontinued at any time.',
+            ],
+          },
+          {
+            title: '2. Accounts and sign-in',
+            items: [
+              'Users may sign in with Google OAuth or another authentication method made available by ATELA.',
+              'You are responsible for maintaining the security of your account and authentication methods.',
+            ],
+          },
+          {
+            title: '3. Prohibited conduct',
+            items: [
+              'You may not violate applicable law, impersonate others, interfere with the service, attempt unauthorized access, or misuse data obtained from the service.',
+              'ATELA may limit access or take account action when conduct harms service safety or operations.',
+            ],
+          },
+          {
+            title: '4. Intellectual property',
+            items: [
+              'Rights in the ATELA website, trademarks, logos, copy, design, and related content belong to ATELA or the applicable rights holder.',
+              'You may not copy, distribute, modify, or commercially exploit those materials without prior permission.',
+            ],
+          },
+          {
+            title: '5. Disclaimer and limitation of liability',
+            items: [
+              'To the maximum extent allowed by law, ATELA does not guarantee uninterrupted availability, fitness for a particular purpose, or error-free operation.',
+              'You are responsible for your own use of the account, connected third-party authentication, and outside services.',
+            ],
+          },
+          {
+            title: '6. Governing law and contact',
+            items: [
+              'These terms are interpreted under applicable law.',
+              "Service-related questions may be submitted through ATELA's official contact channel.",
+            ],
+          },
+        ],
+      },
       nav: {
         cta: 'Start free',
+        menuHome: 'STUDIO',
+        menuAtelier: 'ATELIER',
+        menuContact: 'CONTACT',
+      },
+      atelierNav: {
+        cta: 'Start free',
+        menuHome: 'STUDIO',
+        menuAtelier: 'ATELIER',
+        menuContact: 'CONTACT',
       },
       hero: {
         titleLead: 'For ecommerce brands',
@@ -882,7 +1159,7 @@
       },
       tech: {
         eyebrow: 'TECH · TEXT & DETAIL PRESERVATION',
-        titleLines: ['Commercial content creation', 'that preserves text and detail'],
+        titleLines: ['Commercial content creation that preserves text and detail'],
         lede: 'A product image cannot just look good. Brand copy, logos, embroidery, engravings, and packaging text all affect conversion, and they need to stay intact. ',
         ledeStrong: 'Built on patented technology and published research, ATELA keeps brand assets and product detail sharp all the way through.',
         selectorAriaLabel: 'Tech example selector',
@@ -892,7 +1169,7 @@
       integrations: {
         eyebrow: 'WORKFLOW FOR ECOMMERCE BRANDS',
         titlePrefix: 'Every visual',
-        titleHighlight: 'your catalog needs',
+        titleHighlight: 'your brand needs',
         titleSuffix: ', all at once.',
         ledeLines: [
           'Raise the quality and completeness of visuals across your entire catalog.',
@@ -1015,6 +1292,31 @@
           },
         ],
       },
+      atelierHero: {
+        eyebrow: 'ATELA ATELIER',
+        titleLines: ['Creative operations for brands,', 'executed by ATELA.'],
+        body: 'PDP, ads, reels, and CRM do not run on the same template. ATELA Atelier reads brand and channel context, then carries execution through to showcase-ready output.',
+        primaryCta: 'View pricing →',
+        secondaryCta: 'See the tool first ↗',
+        points: [
+          'PDP, ads, reels, and CRM together',
+          'Brand detail stays intact',
+          'Fast delivery within 48 hours',
+        ],
+      },
+      atelierBridge: {
+        eyebrow: 'ATELA ATELIER',
+        titleLines: ['If you do not need another tool,', 'but execution right away.'],
+        body: 'The tool is for teams who want to produce fast in-house. Atelier is for brands that need one partner to plan, make, and operate creative across channels.',
+        points: [
+          'Run ads, PDP, reels, and CRM together',
+          'Iterate while keeping brand tone and detail',
+          'Start with showcase-level output immediately',
+        ],
+        primaryCta: 'Explore ATELIER ↗',
+        secondaryCta: 'See how it works ↗',
+        galleryLabel: 'ATELA Atelier preview',
+      },
       marketplace: {
         eyebrow: 'AI AGENTIC AGENCY',
         titlePrefix: 'Creative operations for brands,',
@@ -1129,18 +1431,33 @@
         titleLines: ['Connect products today,', 'wake up to 50 images\n+ channel-ready outputs.'],
         body: 'Start free today.',
         primaryCta: 'Start free →',
-        secondaryCta: 'Talk to sales ↗',
+        secondaryCta: 'Explore ATELIER ↗',
       },
       footer: {
         bottomLeft: '© 2026 ATELA Inc.',
         bottomRight: 'Terms · Privacy · Cookies',
+        termsLabel: 'Terms',
+        privacyLabel: 'Privacy',
       },
     },
+  };
+
+  const PAGE_COPY_BY_ROUTE = {
+    home: 'page',
+    atelier: 'atelierPage',
+    privacy: 'privacyPage',
+    terms: 'termsPage',
   };
 
   function getLocale() {
     if (window.atelaGetCurrentLocale) return window.atelaGetCurrentLocale();
     return 'ko';
+  }
+
+  function getCurrentPage() {
+    if (window.atelaGetCurrentPage) return window.atelaGetCurrentPage();
+    if (window.atelaGetRouteState) return window.atelaGetRouteState().pageId || 'home';
+    return 'home';
   }
 
   function getCopySection(section) {
@@ -1149,7 +1466,7 @@
   }
 
   function syncPageMeta() {
-    const page = getCopySection('page');
+    const page = getCopySection(PAGE_COPY_BY_ROUTE[getCurrentPage()] || 'page');
     if (!page) return;
 
     document.title = page.title;

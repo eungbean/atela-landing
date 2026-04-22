@@ -22,9 +22,14 @@ function FinalCta() {
   const authCopy = window.atelaGetCopySection('auth');
   const openStartFlow = window.atelaOpenStartFlow;
   const trackCtaClick = window.atelaTrackCtaClick;
+  const currentLocale = window.atelaGetCurrentLocale ? window.atelaGetCurrentLocale() : 'ko';
+  const buildPageUrl = window.atelaBuildPageUrl || ((pageId, locale) => (
+    pageId && pageId !== 'home' ? `/${locale}/${pageId}` : `/${locale}`
+  ));
   const isStartFlowComplete = useFinalStartFlowComplete();
   const highlightLines = String(copy.titleLines[1] || '').split('\n');
   const primaryCtaLabel = isStartFlowComplete ? (authCopy?.completedCta || copy.primaryCta) : copy.primaryCta;
+  const secondaryHref = buildPageUrl('atelier', currentLocale);
   const completedIcon = isStartFlowComplete ? (
     <span className="atela-cta-complete-check" aria-hidden="true">
       <svg viewBox="0 0 16 16" focusable="false">
@@ -53,9 +58,9 @@ function FinalCta() {
     if (trackCtaClick) {
       trackCtaClick({
         sectionId: 'final-cta',
-        ctaId: 'final_secondary',
+        ctaId: 'final_atelier',
         ctaLabel: copy.secondaryCta,
-        destination: '#',
+        destination: secondaryHref,
       });
     }
   };
@@ -84,7 +89,7 @@ function FinalCta() {
               {primaryCtaLabel}
               {completedIcon}
             </a>
-            <a className="atela-btn-ghost" href="#" onClick={handleSecondaryCtaClick}>{copy.secondaryCta}</a>
+            <a className="atela-btn-ghost" href={secondaryHref} onClick={handleSecondaryCtaClick}>{copy.secondaryCta}</a>
           </div>
         </div>
       </div>
@@ -95,13 +100,23 @@ window.FinalCta = FinalCta;
 
 function Footer() {
   const copy = window.atelaGetCopySection('footer');
+  const currentLocale = window.atelaGetCurrentLocale ? window.atelaGetCurrentLocale() : 'ko';
+  const buildPageUrl = window.atelaBuildPageUrl || ((pageId, locale) => (
+    pageId && pageId !== 'home' ? `/${locale}/${pageId}` : `/${locale}`
+  ));
+  const termsHref = buildPageUrl('terms', currentLocale);
+  const privacyHref = buildPageUrl('privacy', currentLocale);
 
   return (
     <footer className="atela-footer on-ink">
       <div className="atela-container">
         <div className="atela-footer-bottom atela-footer-line">
           <span>{copy.bottomLeft}</span>
-          <span>{copy.bottomRight}</span>
+          <span className="atela-footer-links">
+            <a href={termsHref}>{copy.termsLabel || 'Terms'}</a>
+            <span aria-hidden="true">·</span>
+            <a href={privacyHref}>{copy.privacyLabel || 'Privacy'}</a>
+          </span>
         </div>
       </div>
     </footer>
